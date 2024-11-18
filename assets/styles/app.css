@@ -1,3 +1,16 @@
+/* Color Theme Swatches in Hex */
 body {
-    background-color: skyblue;
+  background-color: #253C59;
 }
+
+#login-form {
+  background-color: #5D7A8C;
+  color: #99B4BF;
+  width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 10px;
+  color: white;
+}
+
+/*# sourceMappingURL=app.css.map */
