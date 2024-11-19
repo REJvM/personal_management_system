@@ -1,0 +1,22 @@
+@import '_variables';
+
+header {
+    background-color: $gray-1;
+    color: $primary-2;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+
+    div.header-left {
+        display: flex;
+        flex-direction: column;
+        .breathcrumbs {
+            font-size: 0.7em;
+        }
+    }
+    div.header-right {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+}

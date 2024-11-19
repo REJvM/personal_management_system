@@ -1,0 +1,71 @@
+@import '_variables';
+
+body {
+    background-color: $gray-2;
+    color: $gray-6;
+    font-family: 'FunnelSans';
+    font-weight: 400;
+}
+
+button.primary {
+    color: $gray-1;
+    border: 1px solid $primary-1;
+    background-color: $primary-1;
+
+    &:hover {
+        color: $primary-1;
+        background-color: transparent;
+    }
+}
+
+button.secondary {
+    color: $primary-1;
+    border: 1px solid $primary-1;
+    background-color: transparent;
+
+    &:hover {
+        color: $gray-1;
+        background-color: $primary-1;
+    }
+}
+
+a, a:link, a:visited, a:active {
+    text-decoration: none;
+    color: inherit;
+}
+
+nav div#logo {
+    padding: 20px;
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+section {
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+button {
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+
+div#container {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    width: 100%;
+    min-height: 100vh;
+
+    div#content-container {
+        width: 100%;
+    }
+    
+    div#content {
+        padding: 20px;
+        width: inherit;
+    }
+}

@@ -1,0 +1,27 @@
+@font-face {
+  font-family: "FunnelSans";
+  font-style: normal;
+  font-weight: 400;
+  src: url(../../fonts/FunnelSans-VariableFont_wght.ttf) format("truetype");
+}
+header {
+  background-color: #FDFDFD;
+  color: #FF936B;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+}
+header div.header-left {
+  display: flex;
+  flex-direction: column;
+}
+header div.header-left .breathcrumbs {
+  font-size: 0.7em;
+}
+header div.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/*# sourceMappingURL=header.css.map */

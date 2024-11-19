@@ -1,11 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello LoginController!{% endblock %}
+{% block title %}Login{% endblock %}
 
 {% block body %}
 <section id="login-form">
-    <div>{{ error }}</div>
-
+    {% if error %}
+        <div>{{ error.message }}</div>
+    {% endif %}
     <form action="{{ path('app_login') }}" method="POST">
         <div>
             <label >Email</label>
@@ -17,7 +18,7 @@
             <input type="password" name="_password" />
         </div>
 
-        <input type="hidden" name="_target_path" value="/" />
+        {# <input type="hidden" name="_target_path" value="/" /> #}
 
         
         <div>

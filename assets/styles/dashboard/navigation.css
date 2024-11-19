@@ -1,0 +1,21 @@
+@font-face {
+  font-family: "FunnelSans";
+  font-style: normal;
+  font-weight: 400;
+  src: url(../../fonts/FunnelSans-VariableFont_wght.ttf) format("truetype");
+}
+nav {
+  background-color: #FF6F39;
+  color: #FDFDFD;
+}
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+nav li {
+  padding: 10px;
+  border-bottom: 1px solid #FDFDFD;
+}
+
+/*# sourceMappingURL=navigation.css.map */
