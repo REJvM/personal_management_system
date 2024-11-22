@@ -1,0 +1,10 @@
+<li>
+    {% set activeRoute = app.request.get('_route') %}
+
+    <a href="{{ path(route) }}"  class="{{ active_route(route, activeRoute) }}">
+        <svg class="icon" viewBox="0 0 16 16" width="16" height="16">
+            <use href="{{ asset('/svg/dashboard-icons.svg') }}#{{ icon }}"></use>
+        </svg>
+        {{ content }}
+    </a>
+</li>

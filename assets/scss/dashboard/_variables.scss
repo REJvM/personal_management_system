@@ -3,7 +3,7 @@
     font-style: normal;
     font-weight: 400;
     src: 
-        url(../../fonts/FunnelSans-VariableFont_wght.ttf) format("truetype");
+        url(../fonts/FunnelSans-VariableFont_wght.ttf) format("truetype");
 }
 
 $gray-1: #FDFDFD;
@@ -12,6 +12,15 @@ $gray-3: #DBDBDB;
 $gray-4: #AAAAAA;
 $gray-5: #555555;
 $gray-6: #0C0C0C;
+
 $primary-1: #FF6F39;
 $primary-2: #FF936B;
 $primary-3: #FCE8E1;
+
+$success-1: #4dff39;
+$success-2: #89ff6b;
+$success-3: #e2fce1;
+
+$error-1: #ff3939;
+$error-2: #ff6b6b;
+$error-3: #fce1e1;

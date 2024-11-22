@@ -1,0 +1,58 @@
+table {
+    width: 100%;
+    overflow: hidden;
+    border-radius: inherit;
+    border-collapse: collapse;
+}
+
+thead {
+    background-color: $gray-4;
+    color: white;
+}
+
+th, td {
+    padding: 5px 10px;
+    text-align: left;
+    border: 1px solid $gray-2;
+}
+
+// remove outside borders
+table {
+    tr:first-child th {
+        border-top: 0;
+    }
+    tr:last-child td {
+        border-bottom: 0;
+    }
+    tr {
+        td:first-child,
+            th:first-child {
+            border-left: 0;
+        }
+        td:last-child,
+        th:last-child {
+            border-right: 0;
+        }   
+    }
+}
+
+td div.items {
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+}
+
+div.actions {
+    display: flex;
+    gap: 10px;
+    justify-content: end;
+}
+
+div.small-tag {
+    background-color: $gray-4;
+    border-radius: 10px;
+    padding: 1px 5px;
+    color: white;
+    width: fit-content;
+    font-size: small;
+}

@@ -1,0 +1,14 @@
+<nav>
+    <ul>
+        {% embed 'dashboard/shared/_navigationItem.html.twig' with { 
+                route: 'app_dashboard_home',
+                content: 'Dashboard',
+                icon: 'icon-home'
+        } %}{% endembed %}
+        {% embed 'dashboard/shared/_navigationItem.html.twig' with { 
+                route: 'app_dashboard_user',
+                content: 'Users',
+                icon: 'icon-users'
+        } %}{% endembed %}
+    </ul>
+</nav>

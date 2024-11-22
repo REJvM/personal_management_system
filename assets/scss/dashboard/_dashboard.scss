@@ -1,5 +1,3 @@
-@import '_variables';
-
 body {
     background-color: $gray-2;
     color: $gray-6;
@@ -7,31 +5,72 @@ body {
     font-weight: 400;
 }
 
-button.primary {
+p {
+    margin-bottom: 20px;
+}
+
+a {
+    color: $primary-1;
+    text-decoration: underline;
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+svg.icon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    stroke-width: 0;
+    stroke: $primary-1;
+    fill: $primary-1;
+}
+
+.button {
+    padding: 5px 10px;
+    border-radius: 10px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+button.button-primary, a.button-primary {
     color: $gray-1;
     border: 1px solid $primary-1;
     background-color: $primary-1;
 
+    svg {
+        fill: $gray-1;
+    }
+
     &:hover {
         color: $primary-1;
         background-color: transparent;
+
+        svg {
+            fill: $primary-1;
+        }
     }
 }
 
-button.secondary {
+button.button-secondary, a.button-secondary {
     color: $primary-1;
     border: 1px solid $primary-1;
     background-color: transparent;
 
+    svg {
+        fill: $primary-1;
+    }
+
     &:hover {
         color: $gray-1;
         background-color: $primary-1;
+        
+        svg {
+            fill: $gray-1;
+        }
     }
-}
-
-a, a:link, a:visited, a:active {
-    text-decoration: none;
-    color: inherit;
 }
 
 nav div#logo {
@@ -41,10 +80,12 @@ nav div#logo {
 }
 
 section {
-    padding: 20px;
     background: white;
     border-radius: 10px;
     margin-bottom: 20px;
+    div.content {
+        padding: 10px;
+    }
 }
 
 button {

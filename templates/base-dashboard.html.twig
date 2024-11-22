@@ -9,9 +9,6 @@
             viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text>
             <text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>"
         > #}
-        
-        {% block stylesheets %}
-        {% endblock %}
 
         {% block javascripts %}
             {% block importmap %}{{ importmap('dashboard') }}{% endblock %}
@@ -19,25 +16,26 @@
     </head>
     <body>
         <div id="container">
-            <nav>
-                <div id="logo"> Logo </div>
-                <ul>
-                    <a href="{{ path('app_dashboard') }}"><li>Dashboard</li></a>
-                    {# <li><a href="#" >Blog Posts</a></li> #}
-                    <a href="{{ path('app_dashboard_users') }}"><li>Users</li></a>
-                <ul>
-            </nav>
+
+            {{ include('/dashboard/shared/_navigation.html.twig') }}
+
             <div id="content-container">
                 <header>
                     <div class="header-left">
                         {{ block('title') }}
                         <span class="breathcrumbs">
-                            <a href="{{ path('app_dashboard') }}">Dashboard</a> {% block breathcrumbs %}{% endblock %}
+                            <a href="{{ path('app_dashboard_home') }}">Dashboard</a> {% block breathcrumbs %}{% endblock %}
                         </span>
                     </div>
+                    
                     <div class="header-right">
                         <div>{{ app.user.email }}</div>
-                        <a href="{{ path('app_logout') }}"><button type="button" class="secondary">Logout</button></a>
+                        <a href="{{ path('app_logout') }}" class="button button-secondary">
+                            <svg class="icon" viewBox="0 0 16 16" width="16" height="16">
+                                <use href="{{ asset('/svg/dashboard-icons.svg') }}#icon-exit"></use>
+                            </svg>
+                            Logout
+                        </a>
                     </div>
                 </header>
                 <div id="content">

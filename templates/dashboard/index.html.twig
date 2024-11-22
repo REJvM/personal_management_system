@@ -3,7 +3,8 @@
 {% block title %}All HTML Elements{% endblock %}
 
 {% block bodyDashboard %}
-    <section>
+  <section>
+    <div class="content">
       <h1>First Header h1</h1>
       <p>
         At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
@@ -49,15 +50,19 @@
         At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
         praesentium voluptatum deleniti atque corrupti quos.
       </p>
-    </section>
-    <hr />
-    <section>
+    </div>
+  </section>
+
+  <section>
+    <div class="content">
       <h1>Links</h1>
       <a href="#">Sample text link</a>
-      <a href="#">Sample button link</a>
-    </section>
-    <hr />
-    <section>
+      <a href="#" class="button button-primary">Sample button link</a>
+    </div>
+  </section>
+
+  <section>
+    <div class="content">
       <h1>Lists</h1>
       <h2>Unordered list</h2>
       <ul>
@@ -121,9 +126,11 @@
         Parthenon and many medieval manuscripts.
         </dd>
       </dl>
-    </section>
+    </div>
+  </section>
 
-    <section>
+  <section>
+    <div class="content">
       <h1>Forms</h1>
       <form>
         <fieldset>
@@ -133,35 +140,35 @@
           -->
           <legend>Legend Example</legend>
 
-          <div>
+          <div class="field-row">
             <label>Text Input Label</label>
             <input type="text" />
-            <p>Helper text if necessary.</p>
+            <small>Helper text if necessary.</small>
           </div>
 
-          <div>
+          <div class="field-row">
             <label>Password</label>
             <input type="password" />
             <p>Error messages when appropriate.</p>
           </div>
 
-          <div>
+          <div class="field-row">
             <label for="first-name">First Name</label>
             <input type="text" id="first-name" />
           </div>
 
-          <div>
+          <div class="field-row">
             <label for="last-name">Last Name</label>
             <input type="text" id="last-name" />
           </div>
 
-          <div>
+          <div class="field-row">
             <label for="email">Email</label>
             <input type="email" id="email" />
           </div>
 
 
-          <div>
+          <div class="field-row">
             <label for="gender">Dropdown</label>
             <select>
               <option>Option 1</option>
@@ -170,7 +177,7 @@
             </select>
           </div>
 
-          <div>
+          <div class="field-row">
             <label>Radio Buttons</label>
             <ul>
               <li><label><input type="radio" /> Label 1</label></li>
@@ -179,35 +186,45 @@
             </ul>
           </div>
 
-          <div>
+          <div class="field-row">
             <label for="url">URL Input</label>
             <input type="url" placeholder="http://mrmrs.cc" />
           </div>
 
-          <div>
+          <div class="field-row">
             <label>Text area</label>
             <textarea></textarea>
           </div>
 
-          <div>
-            <label><input type="checkbox" /> This is a checkbox.</label>
+          <div class="field-row">
+            <div>
+              <input type="checkbox" />
+              <label>This is a checkbox.</label>
+              <input type="checkbox" /> 
+              <label>This is a checkbox.</label>
+            </div>
           </div>
-
+          
           <div>
             <input type="submit" value="Submit" />
           </div>
 
         </fieldset>
       </form>
-    </section>
-    <section>
+    </div>
+  </section>
+
+  <section>
+    <div class="content">
       <h1>Buttons</h1>
-      <button class="primary">A primary button</button>
-      <button class="secondary">A secondary button</button>
-      <button>A large button</button>
-    </section>
-    <hr />
-    <section>
+      <button class="button-primary">A primary button</button>
+      <button class="button-secondary">A secondary button</button>
+      <button class="button-primary button-large">A large button</button>
+    </div>
+  </section>
+
+  <section>
+    <div class="content">
       <h1>An Example Article</h1>
       <article>
         <h1>Title</h1>
@@ -242,91 +259,102 @@
           fuga. Et harum quidem rerum facilis est et expedita distinctio.
         </p>
       </article>
-    </section>
-    <hr />
+    </div>
+  </section>
 
-    <section>
+  <section>
+    <div class="content">
       <h1>Code examples</h1>
       <code>
-        <pre>
-      sudo ipfw pipe 1 config bw 256KByte/s
-      sudo ipfw add 1 pipe 1 src-port 3000
-    </pre>
-    </code>
+          <pre>
+        sudo ipfw pipe 1 config bw 256KByte/s
+        sudo ipfw add 1 pipe 1 src-port 3000
+      </pre>
+      </code>
+    </div>
   </section>
-    <hr />
-    <section>
+
+  <section>
+    <div class="content">
       <h1>Footer</h1>
       <footer>
         <p>Copyright 2013. Made with love by <a href="http://mrmrs.cc" title="MRMRS - Designer">mrmrs</a>.</p>
         <ul>
-           <li>
-             <a href="#">Home</a>
-           </li>
-           <li>
-             <a href="#">Contact</a>
-           </li>
-           <li>
-             <a href="#">Jobs</a>
-           </li>
+            <li>
+              <a href="#">Home</a>
+            </li>
+            <li>
+              <a href="#">Contact</a>
+            </li>
+            <li>
+              <a href="#">Jobs</a>
+            </li>
         </ul>
         <ul>
-           <li>
-             <a href="http://twitter.com" title=" on Twitter">Twitter</a>
-           </li>
-           <li>
-             <a href="http://pinterest.com" title=" on Pinterest">Pinterest</a>
-           </li>
-           <li>
-             <a href="http://instagram.com" title=" on Instagram">Instagram</a>
-           </li>
-           <li>
-             <a href="http://dribbbble.com" title=" on Dribbble">Dribbble</a>
-           </li>
-           <li>
-             <a href="http://github.com" title=" on Github">Github</a>
-           </li>
+            <li>
+              <a href="http://twitter.com" title=" on Twitter">Twitter</a>
+            </li>
+            <li>
+              <a href="http://pinterest.com" title=" on Pinterest">Pinterest</a>
+            </li>
+            <li>
+              <a href="http://instagram.com" title=" on Instagram">Instagram</a>
+            </li>
+            <li>
+              <a href="http://dribbbble.com" title=" on Dribbble">Dribbble</a>
+            </li>
+            <li>
+              <a href="http://github.com" title=" on Github">Github</a>
+            </li>
         </ul>
       </footer>
-    </section>
-
-  <section>
-    <h1>New hawtness</h1>
-    <progress value="80" max="100">80 %</progress>
-    <p>We are this close to the goal: <meter min="0" max="1000" value="824">$824</meter>.</p>
+    </div>
   </section>
 
   <section>
-    <header>
-      <h1>Random Stuff</h1>
-    </header>
-    <small>This is for things like copyright info</small>
-    <s>Content that isn't accurate or relevant anymore.</s>
-    <span>Generic span wrapper</span>
-    <abbr>HTML How to meet ladies</abbr>
-    <p>This is inline text with <sub>subscript</sub> and <sup>superscript</sup> elements.</p>
-    <p>
-      <var>f</var>(<var>x</var>) = <var>a</var><sub>0</sub> + <var>a</var><sub>1</sub><var>x</var> +
-      <var>a</var><sub>2</sub><var>x</var><sup>2</sup>, where <var>a</var><sup>2</sup> ≠ 0
-    </p>
-    <time datetime="2013-09-07" pubdate>07 September 2013</time>
+    <div class="content">
+      <h1>New hawtness</h1>
+      <progress value="80" max="100">80 %</progress>
+      <p>We are this close to the goal: <meter min="0" max="1000" value="824">$824</meter>.</p>
+    </div>
   </section>
 
   <section>
-    <figure>
-      <img src="http://placekitten.com/g/960/320" alt="Figure Example">
-      <figcaption>
-        Photo of the sky at night. Original by <a href="http://flickr.com/photos/heyitsadam/">@mrmrs</a>
-      </figcaption>
-    </figure>
+    <div class="content">
+      <header>
+        <h1>Random Stuff</h1>
+      </header>
+      <small>This is for things like copyright info</small>
+      <s>Content that isn't accurate or relevant anymore.</s>
+      <span>Generic span wrapper</span>
+      <abbr>HTML How to meet ladies</abbr>
+      <p>This is inline text with <sub>subscript</sub> and <sup>superscript</sup> elements.</p>
+      <p>
+        <var>f</var>(<var>x</var>) = <var>a</var><sub>0</sub> + <var>a</var><sub>1</sub><var>x</var> +
+        <var>a</var><sub>2</sub><var>x</var><sup>2</sup>, where <var>a</var><sup>2</sup> ≠ 0
+      </p>
+      <time datetime="2013-09-07" pubdate>07 September 2013</time>
+    </div>
   </section>
 
   <section>
-    <!--
-    http://www.w3.org/html/wg/drafts/html/master/text-level-semantics.html#the-samp-element
-    -->
-    <samp>
-      <pre>
+    <div class="content">
+      <figure>
+        <img src="http://placekitten.com/g/960/320" alt="Figure Example">
+        <figcaption>
+          Photo of the sky at night. Original by <a href="http://flickr.com/photos/heyitsadam/">@mrmrs</a>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section>
+    <div class="content">
+      <!--
+      http://www.w3.org/html/wg/drafts/html/master/text-level-semantics.html#the-samp-element
+      -->
+      <samp>
+        <pre>
           /Sites/html master  ☠ ☢
           $  <kbd>ls -gto</kbd>
 
@@ -349,63 +377,49 @@
           -rw-r--r--   1    1779 Jun  4 15:59 touch-icon-iphone-retina-precomposed.png
         </pre>
       </samp>
-    </section>
-    <section>
-      <h1>Tables</h1>
-        <!--
-        From the HTML spec (http://www.w3.org/TR/html401/struct/tables.html)
+    </div>
+  </section>
 
-        TFOOT must appear before TBODY within a TABLE definition so that user agents can
-        render the foot before receiving all of the (potentially numerous) rows of data.
-        The following summarizes which tags are required and which may be omitted:
+  <section>
+    <table>
+      <caption>This is a caption for a table</caption>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Date</th>
+          <th>Address</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td>Table footer info</td>
+        </tr>
+      </tfoot>
+      <tbody>
+        <tr>
+          <td>#999-32ac</td>
+          <td>First Name</td>
+          <td>13 May, 2013</td>
+          <td>999 Spruce Lane, Somewhere, CA 94101</td>
+        </tr>
+        <tr>
+          <td>#888-32dd</td>
+          <td>Sample Name</td>
+          <td>17 May, 1984</td>
+          <td>999 Spruce Lane, Somewhere, CA 94101</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
 
-        The TBODY start tag is always required except when the table contains only one
-        table body and no table head or foot sections. The TBODY end tag may always be
-        safely omitted.
-
-        The start tags for THEAD and TFOOT are required when the table head and foot sections
-        are present respectively, but the corresponding end tags may always be safely
-        omitted.
-
-        Conforming user agent parsers must obey these rules for reasons of backward
-        compatibility.
-        -->
-      <table>
-        <caption>This is a caption for a table</caption>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Date</th>
-            <th>Address</th>
-          </tr>
-        </thead>
-        <tfoot>
-          <tr>
-            <td>Table footer info</td>
-          </tr>
-        </tfoot>
-        <tbody>
-          <tr>
-            <td>#999-32ac</td>
-            <td>First Name</td>
-            <td>13 May, 2013</td>
-            <td>999 Spruce Lane, Somewhere, CA 94101</td>
-          </tr>
-          <tr>
-            <td>#888-32dd</td>
-            <td>Sample Name</td>
-            <td>17 May, 1984</td>
-            <td>999 Spruce Lane, Somewhere, CA 94101</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-    <section>
+  <section>
+    <div class="content">
       <h1>Footer</h1>
       <footer>
         <small>© 2014 Some company name</small>
         <address>email@email.com</address>
       </footer>
-    </section>
+    <div class="content">
+  </section>
 {% endblock %}

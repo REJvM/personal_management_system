@@ -1,0 +1,344 @@
+@font-face {
+  font-family: "FunnelSans";
+  font-style: normal;
+  font-weight: 400;
+  src: url(../fonts/FunnelSans-VariableFont_wght.ttf) format("truetype");
+}
+/* 1. Use a more-intuitive box-sizing model */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* 2. Remove default margin */
+* {
+  margin: 0;
+}
+
+body {
+  /* 3. Add accessible line-height */
+  line-height: 1.5;
+  /* 4. Improve text rendering */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 5. Improve media defaults */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* 6. Inherit fonts for form controls */
+input, button, textarea, select {
+  font: inherit;
+}
+
+/* 7. Avoid text overflows */
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+/* 8. Improve line wrapping */
+p {
+  text-wrap: pretty;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+/*
+9. Create a root stacking context
+*/
+#root, #__next {
+  isolation: isolate;
+}
+
+body {
+  background-color: #F3F3F3;
+  color: #0C0C0C;
+  font-family: "FunnelSans";
+  font-weight: 400;
+}
+
+p {
+  margin-bottom: 20px;
+}
+
+a {
+  color: #FF6F39;
+  text-decoration: underline;
+}
+a:hover {
+  text-decoration: none;
+}
+
+svg.icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  stroke-width: 0;
+  stroke: #FF6F39;
+  fill: #FF6F39;
+}
+
+.button {
+  padding: 5px 10px;
+  border-radius: 10px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+button.button-primary, a.button-primary {
+  color: #FDFDFD;
+  border: 1px solid #FF6F39;
+  background-color: #FF6F39;
+}
+button.button-primary svg, a.button-primary svg {
+  fill: #FDFDFD;
+}
+button.button-primary:hover, a.button-primary:hover {
+  color: #FF6F39;
+  background-color: transparent;
+}
+button.button-primary:hover svg, a.button-primary:hover svg {
+  fill: #FF6F39;
+}
+
+button.button-secondary, a.button-secondary {
+  color: #FF6F39;
+  border: 1px solid #FF6F39;
+  background-color: transparent;
+}
+button.button-secondary svg, a.button-secondary svg {
+  fill: #FF6F39;
+}
+button.button-secondary:hover, a.button-secondary:hover {
+  color: #FDFDFD;
+  background-color: #FF6F39;
+}
+button.button-secondary:hover svg, a.button-secondary:hover svg {
+  fill: #FDFDFD;
+}
+
+nav div#logo {
+  padding: 20px;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+section {
+  background: white;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+section div.content {
+  padding: 10px;
+}
+
+button {
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+
+div#container {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  width: 100%;
+  min-height: 100vh;
+}
+div#container div#content-container {
+  width: 100%;
+}
+div#container div#content {
+  padding: 20px;
+  width: inherit;
+}
+
+section.flash {
+  padding: 10px;
+}
+
+section.flash-success {
+  background-color: #89ff6b;
+  color: #0C0C0C;
+}
+
+section.flash-error {
+  background-color: #ff6b6b;
+  color: white;
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+}
+
+legend {
+  margin-bottom: 20px;
+  width: 100%;
+  border-bottom: 1px solid #FF6F39;
+}
+
+label, small {
+  margin-left: 10px;
+}
+
+input, textarea {
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: 1px solid gray;
+}
+
+input[type=checkbox] + label {
+  cursor: pointer;
+}
+
+select {
+  border-radius: 8px;
+  border: 1px solid gray;
+}
+
+div.field-row {
+  display: flex;
+  flex-direction: column;
+  margin: 0 10px 20px 10px;
+}
+div.field-row div:not(.field-errors) label {
+  margin: 0 10px;
+}
+
+div.field-errors ul {
+  margin-left: 10px;
+  padding: 0;
+  list-style-type: none;
+  color: #ff3939;
+}
+div.field-errors ul li::before {
+  content: "Error: ";
+  background-color: #ff3939;
+  color: white;
+  padding: 4px;
+  border-radius: 8px;
+  font-size: 0.7em;
+  margin-right: 10px;
+}
+
+header {
+  background-color: #FDFDFD;
+  color: #FF936B;
+  padding: 20px 30px;
+  display: flex;
+  justify-content: space-between;
+}
+header div.header-left {
+  display: flex;
+  flex-direction: column;
+}
+header div.header-left .breathcrumbs {
+  font-size: 0.7em;
+}
+header div.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+nav {
+  padding-top: 80px;
+  background-color: #FF6F39;
+  color: #FDFDFD;
+  min-width: 120px;
+}
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+nav li {
+  border-bottom: 1px solid #FDFDFD;
+}
+nav a {
+  padding: 10px;
+  color: #FDFDFD;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+nav a.active {
+  color: #FF6F39;
+  background-color: #FDFDFD;
+}
+nav a.active svg.icon {
+  fill: #FF6F39;
+}
+nav a.active:hover svg.icon {
+  fill: #FF6F39;
+}
+nav a svg.icon {
+  fill: #FDFDFD;
+}
+nav a:hover svg.icon {
+  fill: #FDFDFD;
+}
+
+table {
+  width: 100%;
+  overflow: hidden;
+  border-radius: inherit;
+  border-collapse: collapse;
+}
+
+thead {
+  background-color: #AAAAAA;
+  color: white;
+}
+
+th, td {
+  padding: 5px 10px;
+  text-align: left;
+  border: 1px solid #F3F3F3;
+}
+
+table tr:first-child th {
+  border-top: 0;
+}
+table tr:last-child td {
+  border-bottom: 0;
+}
+table tr td:first-child,
+table tr th:first-child {
+  border-left: 0;
+}
+table tr td:last-child,
+table tr th:last-child {
+  border-right: 0;
+}
+
+td div.items {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+}
+
+div.actions {
+  display: flex;
+  gap: 10px;
+  justify-content: end;
+}
+
+div.small-tag {
+  background-color: #AAAAAA;
+  border-radius: 10px;
+  padding: 1px 5px;
+  color: white;
+  width: fit-content;
+  font-size: small;
+}
+
+/*# sourceMappingURL=dashboard.css.map */

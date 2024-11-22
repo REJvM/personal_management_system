@@ -1,0 +1,16 @@
+<div class="field-row">
+
+    {{ form_label(field, label) }}
+
+    {{ form_widget(field) }}
+
+    {% if form_help(field) %}
+        <small>{{ form_help(field) }}</small>
+    {% endif %}
+
+    {% if  form_errors(field) %}    
+        <div class="field-errors">
+            {{ form_errors(field) }}
+        </div>
+    {% endif %}
+</div>

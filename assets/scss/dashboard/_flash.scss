@@ -1,0 +1,13 @@
+section.flash {
+    padding: 10px;
+}
+
+section.flash-success {
+    background-color: $success-2 ;
+    color: $gray-6;
+}
+
+section.flash-error {
+    background-color: $error-2;
+    color: white;
+}

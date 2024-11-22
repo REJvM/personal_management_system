@@ -1,0 +1,59 @@
+fieldset {
+    border: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+}
+
+legend {
+    margin-bottom: 20px;
+    width: 100%;
+    border-bottom: 1px solid $primary-1;
+}
+
+label, small {
+    margin-left: 10px;
+}
+
+input, textarea {
+    padding: 5px 10px;
+    border-radius: 8px;
+    border: 1px solid gray;
+}
+
+input[type=checkbox] + label {
+    cursor: pointer;
+}
+
+select {
+    border-radius: 8px;
+    border: 1px solid gray;
+}
+
+div.field-row {
+    display: flex;
+    flex-direction: column; 
+    margin: 0 10px 20px 10px;
+
+    div:not(.field-errors) label {
+        margin: 0 10px;
+    }
+}
+
+div.field-errors {
+    ul {
+        margin-left: 10px;
+        padding: 0;
+        list-style-type: none;
+        color: $error-1;
+        
+        li::before {
+            content:"Error: ";
+            background-color: $error-1;
+            color: white;
+            padding: 4px;
+            border-radius: 8px;
+            font-size: 0.7em;
+            margin-right: 10px;
+        }
+    }
+}

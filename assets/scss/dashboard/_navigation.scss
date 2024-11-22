@@ -1,0 +1,49 @@
+nav {
+    padding-top: 80px;
+    background-color: $primary-1;
+    color: $gray-1;
+    min-width: 120px;
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    li {
+        border-bottom: 1px solid $gray-1;                
+    }
+    
+    a {
+        padding: 10px;        
+        color: $gray-1;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        &.active {
+            color: $primary-1;
+            background-color: $gray-1;
+            
+            svg.icon {
+                fill: $primary-1;
+            }
+            &:hover {
+                svg.icon {
+                    fill: $primary-1;
+                }
+            }
+        }
+
+        svg.icon {
+            fill: $gray-1;
+        }
+
+        &:hover {
+            svg.icon {
+                fill: $gray-1;
+            }
+        }
+    }
+}

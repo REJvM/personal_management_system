@@ -1,0 +1,41 @@
+{% extends 'base-dashboard.html.twig' %}
+
+{% block title %}Backend Users{% endblock %}
+
+{% block breathcrumbs %}/ <a href="{{ path('app_dashboard_user') }}">Users</a> / Edit User{% endblock %}
+
+{% block bodyDashboard %}
+    <section>
+        <div class="content">
+
+            {{ form_start(form) }}
+        
+            <fieldset>
+                <legend>Edit Users {{ user.email }}</legend>
+                {% embed 'dashboard/shared/_field.html.twig' with { 
+                        field: form.roles,
+                        label: 'Select Roles',
+                } %}{% endembed %}
+                
+                <div>
+                    {% embed 'dashboard/shared/_field.html.twig' with { 
+                            field: form.plainPassword.first,
+                            label: 'Password',
+                    } %}{% endembed %}
+                    
+                    {% embed 'dashboard/shared/_field.html.twig' with { 
+                            field: form.plainPassword.second,
+                            label: 'Repeated Password',
+                    } %}{% endembed %}
+                </div>
+            </fieldset>
+
+            <div class="actions">
+                <a class="button button-secondary" href="{{ path('app_dashboard_user') }}">Cancel</a>
+                <button type="submit" class="button-primary">Save User</button>
+            </div>
+
+            {{ form_end(form) }}
+        </div>
+    </section>
+{% endblock %}
