@@ -16,12 +16,6 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            // ->add('roles', ChoiceType::class, [
-            //     'choices' => User::class::AVAILABLE_ROLES,
-            //     'multiple' => true,
-            //     'expanded' => true
-            // ])
-            
             ->add('roles', ChoiceType::class, [
                 'choices' => User::class::AVAILABLE_ROLES,
                 'multiple' => true,
@@ -51,7 +45,8 @@ class UserType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
-            ]);
+            ])
+            ->add('userProfile', UserProfileType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -3,6 +3,7 @@
 namespace App\Command;
 
 use App\Entity\User;
+use App\Entity\UserProfile;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -40,7 +41,7 @@ class CreateUserCommand extends Command
         $email = $input->getArgument('email');
         $password = $input->getArgument('password');
 
-        
+        $newUserProfile = new UserProfile();
 
         $newUser = new User();
         $newUser->setEmail($email);
@@ -50,6 +51,7 @@ class CreateUserCommand extends Command
                 $password
             )
         );
+        $newUser->setUserProfile($newUserProfile);
         $this->entityManager->persist($newUser);
         $this->entityManager->flush();
 

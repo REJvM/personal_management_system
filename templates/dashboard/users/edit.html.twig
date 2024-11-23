@@ -12,11 +12,14 @@
         
             <fieldset>
                 <legend>Edit Users {{ user.email }}</legend>
+
+                {{ include('dashboard/users/_profile.html.twig', {form: form.userProfile}) }}
+                
                 {% embed 'dashboard/shared/_field.html.twig' with { 
                         field: form.roles,
                         label: 'Select Roles',
                 } %}{% endembed %}
-                
+
                 <div>
                     {% embed 'dashboard/shared/_field.html.twig' with { 
                             field: form.plainPassword.first,

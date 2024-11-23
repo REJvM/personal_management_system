@@ -1,0 +1,35 @@
+{% extends 'base-dashboard.html.twig' %}
+
+{% block title %}Blog Posts{% endblock %}
+
+{% block breathcrumbs %}/ <a href="{{ path('app_dashboard_blog_post') }}">Blog Posts</a> / Create Blog Post{% endblock %}
+
+{% block bodyDashboard %}
+    <section>
+        <div class="content">
+            
+            {{ form_start(form) }}
+        
+            <fieldset>
+                <legend>Create Blog Post</legend>
+                
+                {% embed 'dashboard/shared/_field.html.twig' with { 
+                        field: form.title,
+                        label: 'Title',
+                } %}{% endembed %}
+
+                {% embed 'dashboard/shared/_field.html.twig' with { 
+                        field: form.content,
+                        label: 'Content',
+                } %}{% endembed %}
+            </fieldset>
+
+            <div class="actions">
+                <a class="button button-secondary" href="{{ path('app_dashboard_blog_post') }}">Cancel</a>
+                <button type="submit" class="button-primary">Save Post</button>
+            </div>
+
+            {{ form_end(form) }}
+        </div>
+    </section>
+{% endblock %}

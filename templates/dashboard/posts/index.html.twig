@@ -1,39 +1,51 @@
 {% extends 'base-dashboard.html.twig' %}
 
-{% block title %}Backend Users{% endblock %}
+{% block title %}Blog Posts{% endblock %}
 
-{% block breathcrumbs %}/ Users{% endblock %}
+{% block breathcrumbs %}/ Blog Posts{% endblock %}
 
 {% block bodyDashboard %}
 
     {{ include('/dashboard/shared/_flash.html.twig') }}
 
     <section>
+        <div class="content">
+            <div class="test">
+                {# search form or filters for the table #}
+            </div>
+
+            <a 
+                href="{{ path('app_dashboard_blog_post_create') }}"
+                class="button button-secondary"
+            >  
+                <svg class="icon" viewBox="0 0 16 16" width="16" height="16">
+                    <use href="{{ asset('/svg/dashboard-icons.svg') }}#icon-plus"></use>
+                </svg>
+                Create
+            </a>
+        </div>
+    </section>
+
+    <section>
         <table>
             <thead>
                 <tr>
-                    <th>Email</th>
-                    <th>Name</th>
-                    <th>Roles</th>
+                    <th>Title</th>
+                    <th>Last Changed on</th>
+                    <th>Last Changed by</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                {% for user in users %}
+                {% for post in posts %}
                 <tr>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.userProfile.name ?? '' }}</td>
-                    <td>
-                        <div class="items">
-                        {% for role in user.roles %}     
-                            <div class="small-tag">{{ role }}</div>
-                        {% endfor %}
-                        </div>
-                    </td>
+                    <td>{{ post.title }}</td>
+                    <td>{{ post.modifiedOn != null ? post.modifiedOn|date("d/m/Y") : post.createdOn|date("d/m/Y") }}</td>
+                    <td>{{ post.modifiedBy != null ? post.modifiedBy.email : post.createdBy.email }}</td>
                     <td>
                         <div class="items">
                             <a 
-                                href="{{ path('app_dashboard_user_edit', { id: user.id }) }}"
+                                href="{{ path('app_dashboard_blog_post_edit', { id: post.id }) }}"
                                 class="button button-secondary"
                             >
                                 <svg class="icon" viewBox="0 0 16 16" width="16" height="16">
@@ -43,11 +55,8 @@
                             </a>
                             
                             <a 
-                                href="{{ path('app_dashboard_user_delete', { id: user.id }) }}"
+                                href="{{ path('app_dashboard_blog_post_delete', { id: post.id }) }}"
                                 class="button button-secondary"
-                                {# {% if app.user.id != user.id and 'ROLE_ADMIN' in app.user.roles %}
-                                    disabled="disabled"
-                                {% endif %} #}
                             >
                                 <svg class="icon" viewBox="0 0 16 16" width="16" height="16">
                                     <use href="{{ asset('/svg/dashboard-icons.svg') }}#icon-bin2"></use>

@@ -44,7 +44,6 @@ class UserController extends AbstractController
 
             /** @var string $plainPassword */
             $plainPassword = $form->get('plainPassword')->getData();
-
             
             $user->setRoles($roles);
             
@@ -56,7 +55,7 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $this->addFlash('success', sprintf('User %s has been edited.', $user->getEmail()));
+            $this->addFlash('success', sprintf('User "%s" has been edited.', $user->getEmail()));
 
             return $this->redirectToRoute('app_dashboard_user', [
                 'users' => $users->findAll()
@@ -81,7 +80,7 @@ class UserController extends AbstractController
         $entityManager->remove($user);
         $entityManager->flush();
 
-        $this->addFlash('success', sprintf('User %s has been deleted.', $user->getEmail()));
+        $this->addFlash('success', sprintf('User "%s" has been deleted.', $user->getEmail()));
 
         return $this->redirect($request->headers->get('referer'));
     }

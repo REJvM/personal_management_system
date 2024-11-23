@@ -47,10 +47,10 @@ div.field-errors {
         color: $error-1;
         
         li::before {
-            content:"Error: ";
+            content:"Error";
             background-color: $error-1;
             color: white;
-            padding: 4px;
+            padding: 2px 4px;
             border-radius: 8px;
             font-size: 0.7em;
             margin-right: 10px;
