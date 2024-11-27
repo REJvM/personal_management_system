@@ -1,6 +1,8 @@
+@use 'variables';
+
 header {
-    background-color: $gray-1;
-    color: $primary-2;
+    background-color: variables.$gray-1;
+    color: variables.$primary-2;
     padding: 20px 30px;
     display: flex;
     justify-content: space-between;

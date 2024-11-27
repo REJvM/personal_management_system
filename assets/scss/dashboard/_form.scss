@@ -1,3 +1,5 @@
+@use 'variables';
+
 fieldset {
     border: none;
     padding: 0;
@@ -7,7 +9,7 @@ fieldset {
 legend {
     margin-bottom: 20px;
     width: 100%;
-    border-bottom: 1px solid $primary-1;
+    border-bottom: 1px solid variables.$primary-1;
 }
 
 label, small {
@@ -17,7 +19,7 @@ label, small {
 input, textarea {
     padding: 5px 10px;
     border-radius: 8px;
-    border: 1px solid gray;
+    border: 1px solid variables.$gray-4;
 }
 
 input[type=checkbox] + label {
@@ -26,7 +28,7 @@ input[type=checkbox] + label {
 
 select {
     border-radius: 8px;
-    border: 1px solid gray;
+    border: 1px solid variables.$gray-4;
 }
 
 div.field-row {
@@ -44,11 +46,11 @@ div.field-errors {
         margin-left: 10px;
         padding: 0;
         list-style-type: none;
-        color: $error-1;
+        color: variables.$error-1;
         
         li::before {
-            content:"Error";
-            background-color: $error-1;
+            content:"Invalid";
+            background-color: variables.$error-1;
             color: white;
             padding: 2px 4px;
             border-radius: 8px;

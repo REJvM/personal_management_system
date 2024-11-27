@@ -1,6 +1,8 @@
+@use 'variables';
+
 body {
-    background-color: $gray-2;
-    color: $gray-6;
+    background-color: variables.$gray-2;
+    color: variables.$gray-6;
     font-family: 'FunnelSans';
     font-weight: 400;
 }
@@ -10,7 +12,7 @@ p {
 }
 
 a {
-    color: $primary-1;
+    color: variables.$primary-1;
     text-decoration: underline;
     &:hover {
         text-decoration: none;
@@ -22,8 +24,8 @@ svg.icon {
     width: 1em;
     height: 1em;
     stroke-width: 0;
-    stroke: $primary-1;
-    fill: $primary-1;
+    stroke: variables.$primary-1;
+    fill: variables.$primary-1;
 }
 
 .button {
@@ -37,39 +39,39 @@ svg.icon {
 }
 
 button.button-primary, a.button-primary {
-    color: $gray-1;
-    border: 1px solid $primary-1;
-    background-color: $primary-1;
+    color: variables.$gray-1;
+    border: 1px solid variables.$primary-1;
+    background-color: variables.$primary-1;
 
     svg {
-        fill: $gray-1;
+        fill: variables.$gray-1;
     }
 
     &:hover {
-        color: $primary-1;
+        color: variables.$primary-1;
         background-color: transparent;
 
         svg {
-            fill: $primary-1;
+            fill: variables.$primary-1;
         }
     }
 }
 
 button.button-secondary, a.button-secondary {
-    color: $primary-1;
-    border: 1px solid $primary-1;
+    color: variables.$primary-1;
+    border: 1px solid variables.$primary-1;
     background-color: transparent;
 
     svg {
-        fill: $primary-1;
+        fill: variables.$primary-1;
     }
 
     &:hover {
-        color: $gray-1;
-        background-color: $primary-1;
+        color: variables.$gray-1;
+        background-color: variables.$primary-1;
         
         svg {
-            fill: $gray-1;
+            fill: variables.$gray-1;
         }
     }
 }

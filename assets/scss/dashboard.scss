@@ -1,8 +1,8 @@
-@import 'dashboard/variables';
-@import 'reset';
-@import 'dashboard/dashboard';
-@import 'dashboard/flash';
-@import 'dashboard/form';
-@import 'dashboard/header';
-@import 'dashboard/navigation';
-@import 'dashboard/table';
+@use 'reset';
+@use 'dashboard/dashboard';
+@use 'dashboard/flash';
+@use 'dashboard/form';
+@use 'dashboard/ckeditor-style';
+@use 'dashboard/header';
+@use 'dashboard/navigation';
+@use 'dashboard/table';
