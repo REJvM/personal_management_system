@@ -19,8 +19,8 @@ class BlogPost
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
-    #[ORM\Column(length: 1000)]
-    private ?string $content = null;
+    #[ORM\Column(type: Types::BLOB, nullable: true)]
+    private $content = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdOn = null;
@@ -52,12 +52,12 @@ class BlogPost
         return $this;
     }
 
-    public function getContent(): ?string
+    public function getContent()
     {
-        return $this->content;
+        return $this->content == null ? $this->content : stream_get_contents($this->content);
     }
 
-    public function setContent(string $content): static
+    public function setContent($content): static
     {
         $this->content = $content;
 

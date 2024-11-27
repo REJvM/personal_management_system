@@ -5,6 +5,7 @@ namespace App\Controller;
 use DateTime;
 use App\Entity\BlogPost;
 use App\Form\BlogPostType;
+use App\Form\Type\CkeditorType;
 use App\Repository\BlogPostRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,7 +40,11 @@ class BlogPostController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid())
         {
-            $post = $form->getData();
+            $content = $form->get('content')->getData();
+            $strippedContent = strip_tags($content, CkeditorType::ALLOWED_TAGS);
+            
+            $post->setTitle($form->get('title')->getData());
+            $post->setContent($strippedContent);
             $post->setCreatedOn(new DateTime());
             $post->setCreatedBy($this->getUser());
             $entityManager->persist($post);
@@ -71,7 +76,11 @@ class BlogPostController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $post = $form->getData();
+            $content = $form->get('content')->getData();
+            $strippedContent = strip_tags($content, CkeditorType::ALLOWED_TAGS);
+            
+            $post->setTitle($form->get('title')->getData());
+            $post->setContent($strippedContent);
             $post->setModifiedOn(new DateTime());
             $post->setModifiedBy($this->getUser());
             

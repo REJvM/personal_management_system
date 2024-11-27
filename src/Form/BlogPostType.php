@@ -3,8 +3,8 @@
 namespace App\Form;
 
 use App\Entity\BlogPost;
+use App\Form\Type\CkeditorType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,7 +14,7 @@ class BlogPostType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('content', TextareaType::class)
+            ->add('content', CkeditorType::class)
         ;
     }
 

@@ -2,7 +2,24 @@
 
     {{ form_label(field, label) }}
 
-    {{ form_widget(field) }}
+    {% if field.vars.id == 'editor' %}
+        <div 
+            id="editor-container"
+            class="editor-container editor-container_balloon-editor editor-container_include-block-toolbar"
+        >
+            {% set initialData = field.vars.value ?? '' %}
+            <div class="editor-container__editor">
+                <div
+                    id="editor" 
+                    data-initialData="{{ initialData }}"
+                ></div>
+            </div>
+        </div>
+
+        <script type="module" src="{{ asset('/ckeditor.js') }}" ></script>
+    {% else %}
+        {{ form_widget(field) }}
+    {% endif %}
 
     {% if form_help(field) %}
         <small>{{ form_help(field) }}</small>
