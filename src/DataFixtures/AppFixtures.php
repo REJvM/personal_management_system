@@ -2,13 +2,16 @@
 
 namespace App\DataFixtures;
 
+use DateTime;
 use App\Entity\User;
+use App\Entity\BlogPost;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
+    private const DUMMY_CONTENT = '<h1>Congratulations on setting up the Project</h1><p>You\'ve successfully created a post.</p><h3>What\'s next?</h3><ol><li><strong>Click through the website:</strong> Take a look around all the content on the website.</li><li><strong>Create new content:</strong> Experiment with different features and create new blog post or other content.</li><li><strong>Send a message:</strong> If you like the website, send me a message</li></ol>';
     public function __construct(
         private UserPasswordHasherInterface $userPasswordHasher
     ){  
@@ -26,6 +29,23 @@ class AppFixtures extends Fixture
         );
         $adminUser->setRoles(["ROLE_ADMIN"]);
         $manager->persist($adminUser);
+
+        $firstBlogPost = new BlogPost();
+        $firstBlogPost->setTitle('My first Blog post');
+        $firstBlogPost->setContent(self::DUMMY_CONTENT);
+        $firstBlogPost->setCreatedBy($adminUser);
+        $firstBlogPost->setCreatedOn(new DateTime('yesterday'));
+        $firstBlogPost->setModifiedBy($adminUser);
+        $firstBlogPost->setModifiedOn(new DateTime());
+        $manager->persist($firstBlogPost);
+
+        
+        $secondBlogPost = new BlogPost();
+        $secondBlogPost->setTitle('My Second Blog post');
+        $secondBlogPost->setContent(self::DUMMY_CONTENT);
+        $secondBlogPost->setCreatedBy($adminUser);
+        $secondBlogPost->setCreatedOn(new DateTime());
+        $manager->persist($secondBlogPost);
 
         $manager->flush();
     }
