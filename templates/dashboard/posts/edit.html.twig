@@ -19,6 +19,11 @@
                 } %}{% endembed %}
 
                 {% embed 'dashboard/shared/_field.html.twig' with { 
+                        field: form.category,
+                        label: 'Category',
+                } %}{% endembed %}
+
+                {% embed 'dashboard/shared/_field.html.twig' with { 
                         field: form.content,
                         label: 'Content',
                 } %}{% endembed %}

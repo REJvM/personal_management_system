@@ -7,6 +7,7 @@ use App\Form\Type\CkeditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class BlogPostType extends AbstractType
 {
@@ -14,6 +15,11 @@ class BlogPostType extends AbstractType
     {
         $builder
             ->add('title')
+            ->add('category', ChoiceType::class, [
+                'choices' => BlogPost::AVAILABLE_CATEGORIES,
+                'multiple' => false,
+                'expanded' => false,
+            ])
             ->add('content', CkeditorType::class)
         ;
     }

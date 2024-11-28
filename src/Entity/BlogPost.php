@@ -6,11 +6,31 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\BlogPostRepository;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: BlogPostRepository::class)]
 #[UniqueEntity(fields: ['title'], message: 'The blog post title has to be unique.')]
 class BlogPost
 {
+    public const CATEGORY_PROJECTS = 'projects';
+    public const CATEGORY_AREA = 'area';
+    public const CATEGORY_RESOURCES = 'resources';
+    public const CATEGORY_ARCHIVES = 'archives';
+
+    public const AVAILABLE_CATEGORIES = [
+        self::CATEGORY_PROJECTS => self::CATEGORY_PROJECTS,
+        self::CATEGORY_AREA => self::CATEGORY_AREA,
+        self::CATEGORY_RESOURCES => self::CATEGORY_RESOURCES,
+        self::CATEGORY_ARCHIVES => self::CATEGORY_ARCHIVES
+    ];
+
+    public const CATEGORY_ICONS = [
+        self::CATEGORY_PROJECTS => "icon-rocket",
+        self::CATEGORY_AREA => "icon-earth",
+        self::CATEGORY_RESOURCES => "icon-lab",
+        self::CATEGORY_ARCHIVES => "icon-drawer"
+    ];
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -34,6 +54,13 @@ class BlogPost
 
     #[ORM\ManyToOne(inversedBy: 'posts')]
     private ?User $modifiedBy = null;
+
+    #[ORM\Column(length: 255)]
+    #[Assert\Choice(
+        choices: self::AVAILABLE_CATEGORIES,
+        message: 'Choose a valid category.',
+    )]
+    private ?string $category = null;
 
     public function getId(): ?int
     {
@@ -108,6 +135,18 @@ class BlogPost
     public function setModifiedBy(User $modifiedBy): static
     {
         $this->modifiedBy = $modifiedBy;
+
+        return $this;
+    }
+
+    public function getCategory(): ?string
+    {
+        return $this->category;
+    }
+
+    public function setCategory(string $category): static
+    {
+        $this->category = $category;
 
         return $this;
     }

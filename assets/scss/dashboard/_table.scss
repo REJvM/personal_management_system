@@ -1,5 +1,16 @@
 @use 'variables';
 
+div.content-filters {
+    display: flex;
+    justify-content: space-between;
+    
+    div.content-filters-category {
+        display: flex;
+        justify-content: space-between; 
+        gap: 5px;
+    }
+}
+
 table {
     width: 100%;
     overflow: hidden;
@@ -38,10 +49,16 @@ table {
     }
 }
 
-td div.items {
-    display: flex;
-    gap: 4px;
-    justify-content: center;
+td {
+    svg.icon:not(a svg.icon) {
+        stroke: variables.$gray-6;
+        fill: variables.$gray-6;
+    }
+    div.items {
+        display: flex;
+        gap: 4px;
+        justify-content: center;
+    }
 }
 
 div.actions {

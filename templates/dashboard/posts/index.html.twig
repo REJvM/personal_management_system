@@ -9,9 +9,20 @@
     {{ include('/dashboard/shared/_flash.html.twig') }}
 
     <section>
-        <div class="content">
-            <div class="test">
-                {# search form or filters for the table #}
+        <div class="content content-filters">
+            <div class="content-filters-category">
+                {% for category, icon in categories %}
+                    {% set buttonType = app.request.get('category') == category ? 'button-primary' : 'button-secondary' %}
+                    {% set linkCategory = app.request.get('category') == category ? null : category %}
+                    <a 
+                        href="{{ path('app_dashboard_blog_post', { category: linkCategory }) }}"
+                        class="button {{ buttonType }}"
+                    >
+                        <svg class="icon" viewBox="0 0 16 16" width="16" height="16">
+                            <use href="{{ asset('/svg/dashboard-icons.svg') }}#{{ icon }}"></use>
+                        </svg>
+                    </a>
+                {% endfor %}
             </div>
 
             <a 
@@ -27,10 +38,16 @@
     </section>
 
     <section>
+        {% if posts|length == 0 %}
+        <div class="content">
+            <span>No Blog posts have been found.</span>
+        </div>
+        {% else %}
         <table>
             <thead>
                 <tr>
                     <th>Title</th>
+                    <th>Category</th>
                     <th>Last Changed on</th>
                     <th>Last Changed by</th>
                     <th>Actions</th>
@@ -40,6 +57,12 @@
                 {% for post in posts %}
                 <tr>
                     <td>{{ post.title }}</td>
+                    <td>
+                        <svg class="icon" viewBox="0 0 16 16" width="16" height="16">
+                            <use href="{{ asset('/svg/dashboard-icons.svg') }}#{{ categories[post.category] }}"></use>
+                        </svg>
+                        {{ post.category|capitalize }}
+                    </td>
                     <td>{{ post.modifiedOn != null ? post.modifiedOn|date("d/m/Y") : post.createdOn|date("d/m/Y") }}</td>
                     <td>{{ post.modifiedBy != null ? post.modifiedBy.email : post.createdBy.email }}</td>
                     <td>
@@ -69,5 +92,6 @@
                 {% endfor %}
             </tbody>
         </table>
+        {% endif %}
     </section>
 {% endblock %}

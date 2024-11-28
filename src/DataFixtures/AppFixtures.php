@@ -33,6 +33,7 @@ class AppFixtures extends Fixture
         $firstBlogPost = new BlogPost();
         $firstBlogPost->setTitle('My first Blog post');
         $firstBlogPost->setContent(self::DUMMY_CONTENT);
+        $firstBlogPost->setCategory(BlogPost::CATEGORY_PROJECTS);
         $firstBlogPost->setCreatedBy($adminUser);
         $firstBlogPost->setCreatedOn(new DateTime('yesterday'));
         $firstBlogPost->setModifiedBy($adminUser);
@@ -43,6 +44,7 @@ class AppFixtures extends Fixture
         $secondBlogPost = new BlogPost();
         $secondBlogPost->setTitle('My Second Blog post');
         $secondBlogPost->setContent(self::DUMMY_CONTENT);
+        $secondBlogPost->setCategory(BlogPost::CATEGORY_ARCHIVES);
         $secondBlogPost->setCreatedBy($adminUser);
         $secondBlogPost->setCreatedOn(new DateTime());
         $manager->persist($secondBlogPost);

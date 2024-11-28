@@ -16,19 +16,14 @@ label, small {
     margin-left: 10px;
 }
 
-input, textarea {
+input, textarea, select {
     padding: 5px 10px;
     border-radius: 8px;
     border: 1px solid variables.$gray-4;
 }
 
-input[type=checkbox] + label {
+input[type=checkbox] + label, select {
     cursor: pointer;
-}
-
-select {
-    border-radius: 8px;
-    border: 1px solid variables.$gray-4;
 }
 
 div.field-row {

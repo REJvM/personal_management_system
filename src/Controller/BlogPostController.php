@@ -18,11 +18,18 @@ class BlogPostController extends AbstractController
 {
     #[Route('/dashboard/blog-posts', name: 'app_dashboard_blog_post')]
     public function index(
+        Request $request,
         BlogPostRepository $posts
     ): Response
     {
+        $listedPosts = $posts->findAll();
+        if($request->get('category')) {
+            $listedPosts = $posts->findBy(['category' => $request->get('category')]);
+        }
+
         return $this->render('dashboard/posts/index.html.twig', [
-            'posts' => $posts->findAll()
+            'posts' => $listedPosts,
+            'categories' => BlogPost::CATEGORY_ICONS
         ]);
     }
 
@@ -44,6 +51,7 @@ class BlogPostController extends AbstractController
             $strippedContent = strip_tags($content, CkeditorType::ALLOWED_TAGS);
             
             $post->setTitle($form->get('title')->getData());
+            $post->setCategory($form->get('category')->getData());
             $post->setContent($strippedContent);
             $post->setCreatedOn(new DateTime());
             $post->setCreatedBy($this->getUser());
@@ -80,6 +88,7 @@ class BlogPostController extends AbstractController
             $strippedContent = strip_tags($content, CkeditorType::ALLOWED_TAGS);
             
             $post->setTitle($form->get('title')->getData());
+            $post->setCategory($form->get('category')->getData());
             $post->setContent($strippedContent);
             $post->setModifiedOn(new DateTime());
             $post->setModifiedBy($this->getUser());
