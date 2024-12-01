@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use DateTime;
+use App\Pagination;
 use App\Entity\BlogPost;
 use App\Form\BlogPostType;
 use App\Form\Type\CkeditorType;
@@ -19,17 +20,18 @@ class BlogPostController extends AbstractController
     #[Route('/dashboard/blog-posts', name: 'app_dashboard_blog_post')]
     public function index(
         Request $request,
-        BlogPostRepository $posts
+        BlogPostRepository $posts,
+        Pagination $pagination
     ): Response
     {
-        $listedPosts = $posts->findAll();
-        if($request->get('category')) {
-            $listedPosts = $posts->findBy(['category' => $request->get('category')]);
-        }
+        $page = $request->get('page') ?? 1;
+        $criteria = $request->get('category') ? ['category' => $request->get('category')] : [];
+        $listedPosts = $pagination->getEntityForPage($posts, $page, $criteria);
 
         return $this->render('dashboard/posts/index.html.twig', [
             'posts' => $listedPosts,
-            'categories' => BlogPost::CATEGORY_ICONS
+            'categories' => BlogPost::CATEGORY_ICONS,
+            'maxPages' => $pagination->getMaxPages($posts->count($criteria))
         ]);
     }
 

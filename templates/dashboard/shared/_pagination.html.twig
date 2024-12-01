@@ -1,0 +1,15 @@
+{% if maxPages > 1 %}
+    <div class="pagination">
+        {% for pageNumber in 1..maxPages %}
+            <a
+                class="{{ active_page(app.request.getQueryString(), pageNumber) }}"
+                href="{{ pagination_path( 
+                    app.request.getPathInfo(), 
+                    app.request.getQueryString(),
+                    pageNumber
+                ) }}">
+                {{ pageNumber }}
+            </a>
+        {% endfor %}
+    </div>
+{% endif %}

@@ -92,6 +92,9 @@
                 {% endfor %}
             </tbody>
         </table>
+
+        {{ include('/dashboard/shared/_pagination.html.twig', { objects: posts, maxPages: maxPages }) }}
+
         {% endif %}
     </section>
 {% endblock %}

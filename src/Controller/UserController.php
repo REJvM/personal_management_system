@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Pagination;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
@@ -17,11 +18,17 @@ class UserController extends AbstractController
 {
     #[Route('/dashboard/users', name: 'app_dashboard_user')]
     public function users(
+        Request $request,
         UserRepository $users,
+        Pagination $pagination
     ): Response
     {
+        $page = $request->get('page') ?? 1;
+        $listedUsers = $pagination->getEntityForPage($users, $page);
+
         return $this->render('dashboard/users/index.html.twig', [
-            'users' => $users->findAll()
+            'users' => $listedUsers,            
+            'maxPages' => $pagination->getMaxPages($users->count())
         ]);
     }
 
