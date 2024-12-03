@@ -5,9 +5,6 @@
 {% block breathcrumbs %}/ Blog Posts{% endblock %}
 
 {% block bodyDashboard %}
-
-    {{ include('/dashboard/shared/_flash.html.twig') }}
-
     <section>
         <div class="content content-filters">
             <div class="content-filters-category">
@@ -25,76 +22,87 @@
                 {% endfor %}
             </div>
 
-            <a 
-                href="{{ path('app_dashboard_blog_post_create') }}"
-                class="button button-secondary"
-            >  
-                <svg class="icon" viewBox="0 0 16 16" width="16" height="16">
-                    <use href="{{ asset('/svg/dashboard-icons.svg') }}#icon-plus"></use>
-                </svg>
-                Create
-            </a>
+            <div class="content-actions">
+                <a 
+                    href="{{ path('app_dashboard_blog_post_create') }}"
+                    class="button button-secondary"
+                >  
+                    <svg class="icon" viewBox="0 0 16 16" width="16" height="16">
+                        <use href="{{ asset('/svg/dashboard-icons.svg') }}#icon-plus"></use>
+                    </svg>
+                    Create
+                </a>
+                <button 
+                    type="submit" 
+                    form="tableForm"
+                    formaction="{{ path('app_dashboard_blog_post_edit') }}"
+                    value="edit" 
+                    class="button button-secondary"
+                    disabled="disabled"
+                >
+                    <svg class="icon" viewBox="0 0 16 16" width="16" height="16">
+                        <use href="{{ asset('/svg/dashboard-icons.svg') }}#icon-pencil"></use>
+                    </svg>
+                    Edit
+                </button>
+                
+                <button 
+                    type="submit" 
+                    form="tableForm" 
+                    formaction="{{ path('app_dashboard_blog_post_delete') }}"
+                    value="delete" 
+                    class="button button-secondary"
+                    disabled="disabled"
+                >
+                    <svg class="icon" viewBox="0 0 16 16" width="16" height="16">
+                        <use href="{{ asset('/svg/dashboard-icons.svg') }}#icon-bin2"></use>
+                    </svg>
+                    Delete
+                </button>
+            </div>
         </div>
     </section>
 
     <section>
         {% if posts|length == 0 %}
-        <div class="content">
-            <span>No Blog posts have been found.</span>
-        </div>
+            <div class="content">
+                <span>No Blog posts have been found.</span>
+            </div>
         {% else %}
-        <table>
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Category</th>
-                    <th>Last Changed on</th>
-                    <th>Last Changed by</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for post in posts %}
-                <tr>
-                    <td>{{ post.title }}</td>
-                    <td>
-                        <svg class="icon" viewBox="0 0 16 16" width="16" height="16">
-                            <use href="{{ asset('/svg/dashboard-icons.svg') }}#{{ categories[post.category] }}"></use>
-                        </svg>
-                        {{ post.category|capitalize }}
-                    </td>
-                    <td>{{ post.modifiedOn != null ? post.modifiedOn|date("d/m/Y") : post.createdOn|date("d/m/Y") }}</td>
-                    <td>{{ post.modifiedBy != null ? post.modifiedBy.email : post.createdBy.email }}</td>
-                    <td>
-                        <div class="items">
-                            <a 
-                                href="{{ path('app_dashboard_blog_post_edit', { id: post.id }) }}"
-                                class="button button-secondary"
-                            >
+            <form id="tableForm">
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Title</th>
+                            <th>Category</th>
+                            <th>Last Changed on</th>
+                            <th>Last Changed by</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for post in posts %}
+                        <tr>
+                            <td>
+                                <input class="object_id" type="radio" name="object_id" value="{{ post.id }}"></input>
+                                # {{ post.id}}
+                            </td>
+                            <td>{{ post.title }}</td>
+                            <td>
                                 <svg class="icon" viewBox="0 0 16 16" width="16" height="16">
-                                    <use href="{{ asset('/svg/dashboard-icons.svg') }}#icon-pencil"></use>
+                                    <use href="{{ asset('/svg/dashboard-icons.svg') }}#{{ categories[post.category] }}"></use>
                                 </svg>
-                                Edit
-                            </a>
-                            
-                            <a 
-                                href="{{ path('app_dashboard_blog_post_delete', { id: post.id }) }}"
-                                class="button button-secondary"
-                            >
-                                <svg class="icon" viewBox="0 0 16 16" width="16" height="16">
-                                    <use href="{{ asset('/svg/dashboard-icons.svg') }}#icon-bin2"></use>
-                                </svg>
-                                Delete
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                                {{ post.category|capitalize }}
+                            </td>
+                            <td>{{ post.modifiedOn != null ? post.modifiedOn|date("d/m/Y") : post.createdOn|date("d/m/Y") }}</td>
+                            <td>{{ post.modifiedBy != null ? post.modifiedBy.email : post.createdBy.email }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </form>
 
-        {{ include('/dashboard/shared/_pagination.html.twig', { objects: posts, maxPages: maxPages }) }}
-
+            {{ include('/dashboard/shared/_pagination.html.twig', { objects: posts, maxPages: maxPages }) }}
         {% endif %}
     </section>
 {% endblock %}

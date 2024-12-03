@@ -5,8 +5,40 @@
 {% block breathcrumbs %}/ Users{% endblock %}
 
 {% block bodyDashboard %}
-
-    {{ include('/dashboard/shared/_flash.html.twig') }}
+    <section>
+        <div class="content content-filters">
+            <div></div>
+            <div class="content-actions">
+                <button 
+                    type="submit" 
+                    form="tableForm"
+                    formaction="{{ path('app_dashboard_user_edit') }}"
+                    value="edit" 
+                    class="button button-secondary"
+                    disabled="disabled"
+                >
+                    <svg class="icon" viewBox="0 0 16 16" width="16" height="16">
+                        <use href="{{ asset('/svg/dashboard-icons.svg') }}#icon-pencil"></use>
+                    </svg>
+                    Edit
+                </button>
+                
+                <button 
+                    type="submit" 
+                    form="tableForm" 
+                    formaction="{{ path('app_dashboard_user_delete') }}"
+                    value="delete" 
+                    class="button button-secondary"
+                    disabled="disabled"
+                >
+                    <svg class="icon" viewBox="0 0 16 16" width="16" height="16">
+                        <use href="{{ asset('/svg/dashboard-icons.svg') }}#icon-bin2"></use>
+                    </svg>
+                    Delete
+                </button>
+            </div>
+        </div>
+    </section>
 
     <section>
         {% if users|length == 0 %}
@@ -14,57 +46,37 @@
                 <span>No users have been found.</span>
             </div>
         {% else %}
-            <table>
-                <thead>
-                    <tr>
-                        <th>Email</th>
-                        <th>Name</th>
-                        <th>Roles</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for user in users %}
-                    <tr>
-                        <td>{{ user.email }}</td>
-                        <td>{{ user.userProfile.name ?? '' }}</td>
-                        <td>
-                            <div class="items">
-                            {% for role in user.roles %}     
-                                <div class="small-tag">{{ role }}</div>
-                            {% endfor %}
-                            </div>
-                        </td>
-                        <td>
-                            <div class="items">
-                                <a 
-                                    href="{{ path('app_dashboard_user_edit', { id: user.id }) }}"
-                                    class="button button-secondary"
-                                >
-                                    <svg class="icon" viewBox="0 0 16 16" width="16" height="16">
-                                        <use href="{{ asset('/svg/dashboard-icons.svg') }}#icon-pencil"></use>
-                                    </svg>
-                                    Edit
-                                </a>
-                                
-                                <a 
-                                    href="{{ path('app_dashboard_user_delete', { id: user.id }) }}"
-                                    class="button button-secondary"
-                                    {# {% if app.user.id != user.id and 'ROLE_ADMIN' in app.user.roles %}
-                                        disabled="disabled"
-                                    {% endif %} #}
-                                >
-                                    <svg class="icon" viewBox="0 0 16 16" width="16" height="16">
-                                        <use href="{{ asset('/svg/dashboard-icons.svg') }}#icon-bin2"></use>
-                                    </svg>
-                                    Delete
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+            <form id="tableForm">
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Email</th>
+                            <th>Name</th>
+                            <th>Roles</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                        <tr> 
+                            <td>
+                                <input class="object_id" type="radio" name="object_id" value="{{ user.id }}"></input>
+                                # {{ user.id}}
+                            </td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.userProfile.name ?? '' }}</td>
+                            <td>
+                                <div class="items">
+                                {% for role in user.roles %}     
+                                    <div class="small-tag">{{ role }}</div>
+                                {% endfor %}
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </form>
             
             {{ include('/dashboard/shared/_pagination.html.twig', { objects: users, maxPages: maxPages }) }}
         {% endif %}

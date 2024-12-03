@@ -55,6 +55,16 @@ button.button-primary, a.button-primary {
             fill: variables.$primary-1;
         }
     }
+
+    &:disabled, &:disabled:hover {
+        cursor: auto;
+        border: 1px solid variables.$gray-4;
+        background-color: variables.$gray-4;
+        
+        svg {
+            fill: variables.$gray-1;
+        }
+    }
 }
 
 button.button-secondary, a.button-secondary {
@@ -72,6 +82,17 @@ button.button-secondary, a.button-secondary {
         
         svg {
             fill: variables.$gray-1;
+        }
+    }
+
+    &:disabled, &:disabled:hover {
+        cursor: auto;
+        color: variables.$gray-4;
+        border: 1px solid variables.$gray-4;
+        background-color: transparent;
+        
+        svg {
+            fill: variables.$gray-4;
         }
     }
 }

@@ -9,13 +9,18 @@ div.content-filters {
         justify-content: space-between; 
         gap: 5px;
     }
+
+    div.content-actions {
+        display: flex;
+        justify-content: space-between; 
+        gap: 5px;
+    }
 }
 
 table {
     width: 100%;
-    overflow: hidden;
-    border-radius: inherit;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
 }
 
 thead {
@@ -26,27 +31,50 @@ thead {
 th, td {
     padding: 5px 10px;
     text-align: left;
-    border: 1px solid variables.$gray-2;
 }
 
-// remove outside borders
-table {
-    tr:first-child th {
-        border-top: 0;
-    }
-    tr:last-child td {
-        border-bottom: 0;
-    }
-    tr {
-        td:first-child,
-            th:first-child {
-            border-left: 0;
+tbody tr {
+    cursor: pointer;
+    background-color: white;
+    
+    &:hover {
+        background-color: transparent;
+        scale: 1.01;
+
+        td {
+            background-color: variables.$primary-3;
         }
-        td:last-child,
-        th:last-child {
-            border-right: 0;
-        }   
+        
+        td:first-child {
+            border-radius: 10px 0 0 10px;
+        }
+    
+        td:last-child {
+            border-radius: 0 10px 10px 0;
+        }
     }
+}
+
+tr:has(> td > input.object_id:checked) {
+    scale: 1.01;
+    background-color: transparent;
+    border-radius: 10px;
+
+    td {
+        background-color: variables.$primary-2;
+    }
+
+    td:first-child {
+        border-radius: 10px 0 0 10px;
+    }
+
+    td:last-child {
+        border-radius: 0 10px 10px 0;
+    }
+}
+
+input.object_id {
+    display: none;
 }
 
 td {

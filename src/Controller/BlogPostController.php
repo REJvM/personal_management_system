@@ -12,32 +12,37 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class BlogPostController extends AbstractController
 {
+    private $_posts; 
+
+    public function __construct(BlogPostRepository $posts) {
+        $this->_posts = $posts;
+    }
+
     #[Route('/dashboard/blog-posts', name: 'app_dashboard_blog_post')]
     public function index(
         Request $request,
-        BlogPostRepository $posts,
         Pagination $pagination
     ): Response
     {
         $page = $request->get('page') ?? 1;
         $criteria = $request->get('category') ? ['category' => $request->get('category')] : [];
-        $listedPosts = $pagination->getEntityForPage($posts, $page, $criteria);
+        $listedPosts = $pagination->getEntityForPage($this->_posts, $page, $criteria);
 
         return $this->render('dashboard/posts/index.html.twig', [
             'posts' => $listedPosts,
             'categories' => BlogPost::CATEGORY_ICONS,
-            'maxPages' => $pagination->getMaxPages($posts->count($criteria))
+            'maxPages' => $pagination->getMaxPages($this->_posts->count($criteria))
         ]);
     }
 
     #[Route('/dashboard/blog-posts/create', name: 'app_dashboard_blog_post_create')]
     public function create(
-        BlogPostRepository $posts,
         Request $request,
         EntityManagerInterface $entityManager
     ): Response
@@ -63,7 +68,7 @@ class BlogPostController extends AbstractController
             $this->addFlash('success', sprintf('Blog post "%s" has been deleted.', $post->getTitle()));
 
             return $this->redirectToRoute('app_dashboard_blog_post', [
-                'posts' => $posts->findAll()
+                'posts' => $this->_posts->findAll()
             ]);
         }
 
@@ -73,14 +78,22 @@ class BlogPostController extends AbstractController
     }
 
 
-    #[Route('/dashboard/blog-posts/{id}/edit', name: 'app_dashboard_blog_post_edit')]
+    #[Route('/dashboard/blog-posts/edit', name: 'app_dashboard_blog_post_edit')]
     public function edit(
-        BlogPost $post,
         Request $request,
-        BlogPostRepository $posts,
         EntityManagerInterface $entityManager
     ): Response
     {
+        if($request->get('object_id') === null) {
+            return $this->handleError('No blog post was found.');
+        }
+
+        $post = $this->_posts->find($request->get('object_id'));
+
+        if($post === null) {
+            return $this->handleError('No blog post was found.');
+        }
+
         $form = $this->createForm(BlogPostType::class, $post);
 
         $form->handleRequest($request);
@@ -101,7 +114,7 @@ class BlogPostController extends AbstractController
             $this->addFlash('success', sprintf('Blog post "%s" has been edited.', $post->getTitle()));
 
             return $this->redirectToRoute('app_dashboard_blog_post', [
-                'users' => $posts->findAll()
+                'users' => $this->_posts->findAll()
             ]);
         }
 
@@ -111,13 +124,22 @@ class BlogPostController extends AbstractController
         ]);
     }
 
-    #[Route('/dashboard/blog-posts/{id}/delete', name: 'app_dashboard_blog_post_delete')]
+    #[Route('/dashboard/blog-posts/delete', name: 'app_dashboard_blog_post_delete')]
     #[IsGranted('ROLE_ADMIN')]
     public function delete(
-        BlogPost $post,
         Request $request,
         EntityManagerInterface $entityManager
     ): Response {
+
+        if($request->get('object_id') == null) {
+            return  $this->handleError('No blog post was found.');
+        }
+
+        $post = $this->_posts->find($request->get('object_id'));
+
+        if($post === null) {
+            return  $this->handleError('No blog post was found.');
+        }
 
         $entityManager->remove($post);
         $entityManager->flush();
@@ -125,5 +147,14 @@ class BlogPostController extends AbstractController
         $this->addFlash('success', sprintf('Blog post "%s" has been deleted.', $post->getTitle()));
 
         return $this->redirect($request->headers->get('referer'));
+    }
+
+    protected function handleError(string $message): RedirectResponse 
+    {
+        $this->addFlash('error', $message);
+        
+        return $this->redirectToRoute('app_dashboard_blog_post', [
+            'users' => $this->_posts->findAll()
+        ]);
     }
 }
