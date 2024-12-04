@@ -6,6 +6,6 @@
  */
 import './styles/dashboard.css';
 
-import './svg/dashboard-icons.svg';
+import './javascript/table.js';
 
 console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
