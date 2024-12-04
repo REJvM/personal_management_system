@@ -1,5 +1,8 @@
 twig:
     file_name_pattern: '*.twig'
+    globals:
+        my_email: '%app.my_email%'
+        my_github_link: '%app.my_github_link%'
 
 when@test:
     twig:

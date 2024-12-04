@@ -23,5 +23,8 @@
 /public/assets/
 /assets/vendor/
 /assets/styles/
-/assets/includes/
 ###< symfony/asset-mapper ###
+
+###> config parameters ###
+/config/services.yaml
+###< config parameters ###

@@ -34,12 +34,7 @@
                     
                     <div class="header-right">
                         <div>{{ app.user.email }}</div>
-                        <a href="{{ path('app_logout') }}" class="button button-secondary">
-                            <svg class="icon" viewBox="0 0 16 16" width="16" height="16">
-                                <use href="{{ asset('/svg/dashboard-icons.svg') }}#icon-exit"></use>
-                            </svg>
-                            Logout
-                        </a>
+                        <a href="{{ path('app_logout') }}" class="button button-secondary">Logout</a>
                     </div>
                 </header>
                 <div id="content">

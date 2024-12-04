@@ -1,25 +1,145 @@
-/* Color Theme Swatches in Hex */
-$background-color-1: #253C59;
-$background-color-2: #5D7A8C;
-$accent-color: #99B4BF;
-$primary-color-1: #D9B70D;
-$primary-color-2: #BF8D30;
+$primary: #FF6F39;
+$error: #ff3939;
+$black: #24292f;
+$light-gray: #b5b5b5;
 
-body {
-    background-color: $background-color-1;
-    margin: 0;
+/* background image */
+body::before {
+    content: "";
+    position: absolute;
+    width: 100%; height: 100%;
+    filter: grayscale(80%);
+    z-index: -20;
 }
 
-#login-form {
-    background-color: $background-color-2 ;
-    color: $accent-color;
+body{
+    background-color: $light-gray;
+    font-family: "Mona Sans","Mona Sans Fallback","Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    color: $black;
+}
+
+a {
+    color: $black;
+   
+    &:hover {
+        text-decoration: none;
+    }
+
+    &.github {
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        fill: $black;
+        stroke: $black;
+        font-weight: 600;
+    }
+}
+
+
+svg.icon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    stroke-width: 0;
+}
+
+section {
+    position: relative;
+    background-color: white;
+    max-width: 400px;
+    margin: 0 auto; 
+    padding: 50px;
+}
+
+form {
+    margin: 40px 0;
+
+    fieldset {
+        padding: 0;
+        border: none;
+        
+        legend {
+            margin: 0 auto;
+            padding: 0;
+        }
+    }
+
+    div.field-row {
+        display: flex;
+        flex-direction: column;
+        margin: 20px 0;
+
+        input {
+            padding: 5px 10px;
+            border: none;
+            border-bottom: 2px solid;
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+}
+
+div.errors {
+    min-height: 24px;
+    color: $error;
+    margin: 30px 0 10px 0;
     
-    width: 400px;
-
-    margin: 20px auto;
-    padding: 20px;
-    border-radius: 10px;
-
-    color: white;
-
+    p.error::before {
+        content:"Invalid";
+        background-color: $error;
+        color: white;
+        padding: 2px 4px;
+        border-radius: 8px;
+        font-size: 0.7em;
+        margin-right: 10px;
+    }
 }
+
+div.action {
+    display: flex;
+    justify-content: end;
+
+    button {
+        cursor: pointer;
+        border: 1px solid $primary;
+        border-radius: 8px;
+        padding: 5px 10px;
+        color: white;
+        background-color: $primary;
+
+        &:hover {
+            color: $primary;
+            background-color: white;
+        }
+    }
+}
+
+div.footer {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+div.bottom {
+    z-index: -10;
+    position: absolute;
+    background-color: white;
+    left: 0;
+    right: 0;
+    height: 50px;
+    transform: skewY(-3deg);
+    
+    &:after {
+        content: "";
+        position: absolute;
+        background-color: white;
+        left: 0;
+        right: 0;
+        height: 50px;
+        transform: skewY(6deg);
+    }
+}
+

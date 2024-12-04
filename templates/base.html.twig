@@ -7,10 +7,16 @@
         {% block stylesheets %}
         {% endblock %}
 
-
         {% block javascripts %}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
+        
+        <style type="text/css">
+            body::before{
+                background: url("{{ asset( '/images/backgrounds/' ~ random_background() ) }}") no-repeat center center fixed;
+                background-size: cover;
+            }
+        </style>
     </head>
     <body>
         {% block body %}{% endblock %}

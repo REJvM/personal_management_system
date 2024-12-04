@@ -3,27 +3,44 @@
 {% block title %}Login{% endblock %}
 
 {% block body %}
-<section id="login-form">
-    {% if error %}
-        <div>{{ error.message }}</div>
-    {% endif %}
+<section>
     <form action="{{ path('app_login') }}" method="POST">
-        <div>
-            <label >Email</label>
-            <input type="text" name="_username" value="{{ lastUsername }}" />
-        </div>
+        <fieldset>
+            <legend>Personal Management System</legend>
+            
+            <div class="errors">
+                {% if error %}
+                    <p class="error">{{ error.messageKey|trans(error.messageData, 'security')  }}</p>
+                {% endif %}
+            </div>
+            
+            <div class="field-row">
+                <label for="_username">Email</label>
+                <input type="text" name="_username" value="{{ lastUsername }}" autofocus />
+            </div>
 
-        <div>
-            <label >Password</label>
-            <input type="password" name="_password" />
-        </div>
+            <div class="field-row">
+                <label for="_password">Password</label>
+                <input type="password" name="_password" />
+            </div>
 
-        {# <input type="hidden" name="_target_path" value="/" /> #}
-
-        
-        <div>
-            <button type="submit">Login</button>
-        </div>
+            <div class="action">
+                <button type="submit">Login</button>
+            </div>
+        </fieldset>
     </form>
+
+    <div class="footer">
+        <a href="mailto:{{ my_email }}" target="_blank">
+            Contact me
+        </a>
+        <a class="github" href="{{ my_github_link }}" target="_blank">
+            <svg class="icon" viewBox="0 0 16 16" width="16" height="16">
+                <use href="{{ asset('/svg/dashboard-icons.svg') }}#icon-github-mark"></use>
+            </svg>
+            GitHub
+        </a>
+    </div>
+    <div class="bottom"></div>
 </section>
 {% endblock %}

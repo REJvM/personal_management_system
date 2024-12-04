@@ -1,5 +1,10 @@
 # Personal website
 
+## Setup project parameters
+
+Change the parameters in the services file and remove ".dist" extention
+.\config\services.yaml.dist
+
 ## Installing and starting the project
 
 Install missing assets
