@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -40,6 +42,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
     private ?UserProfile $userProfile = null;
+
+    /**
+     * @var Collection<int, BlogPost>
+     */
+    #[ORM\OneToMany(targetEntity: BlogPost::class, mappedBy: 'createdBy')]
+    private Collection $createdBlogPosts;
+
+    /**
+     * @var Collection<int, BlogPost>
+     */
+    #[ORM\OneToMany(targetEntity: BlogPost::class, mappedBy: 'modifiedBy')]
+    private Collection $modifiedBlogPosts;
+
+    public function __construct()
+    {
+        $this->createdBlogPosts = new ArrayCollection();
+        $this->modifiedBlogPosts = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -137,4 +157,65 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, BlogPost>
+     */
+    public function getCreatedBlogPosts(): Collection
+    {
+        return $this->createdBlogPosts;
+    }
+
+    public function addCreatedBlogPost(BlogPost $createdBlogPost): static
+    {
+        if (!$this->createdBlogPosts->contains($createdBlogPost)) {
+            $this->createdBlogPosts->add($createdBlogPost);
+            $createdBlogPost->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCreatedBlogPost(BlogPost $createdBlogPost): static
+    {
+        if ($this->createdBlogPosts->removeElement($createdBlogPost)) {
+            // set the owning side to null (unless already changed)
+            if ($createdBlogPost->getCreatedBy() === $this) {
+                $createdBlogPost->setCreatedBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, BlogPost>
+     */
+    public function getModifiedBlogPosts(): Collection
+    {
+        return $this->modifiedBlogPosts;
+    }
+
+    public function addModifiedBlogPost(BlogPost $modifiedBlogPost): static
+    {
+        if (!$this->modifiedBlogPosts->contains($modifiedBlogPost)) {
+            $this->modifiedBlogPosts->add($modifiedBlogPost);
+            $modifiedBlogPost->setModifiedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeModifiedBlogPost(BlogPost $modifiedBlogPost): static
+    {
+        if ($this->modifiedBlogPosts->removeElement($modifiedBlogPost)) {
+            // set the owning side to null (unless already changed)
+            if ($modifiedBlogPost->getModifiedBy() === $this) {
+                $modifiedBlogPost->setModifiedBy(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

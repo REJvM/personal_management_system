@@ -13,13 +13,23 @@ legend {
 }
 
 label, small {
-    margin-left: 10px;
+    margin: 0 10px 5px;
 }
 
-input, textarea, select {
+input, select {
     padding: 5px 10px;
-    border-radius: 8px;
-    border: 1px solid variables.$gray-4;
+    border: none;
+    background: none;
+    border-left: 4px solid transparent;
+    border-bottom: 2px solid variables.$black;
+    &:focus {
+        outline: none;
+        border-left: 4px solid variables.$primary-1;
+    }
+}
+
+textarea {
+    padding: 5px 10px;
 }
 
 input[type=checkbox] + label, select {

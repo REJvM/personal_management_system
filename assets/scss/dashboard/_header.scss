@@ -1,8 +1,7 @@
 @use 'variables';
 
 header {
-    background-color: variables.$gray-1;
-    color: variables.$primary-2;
+    background-color: white;
     padding: 20px 30px;
     display: flex;
     justify-content: space-between;
@@ -10,8 +9,14 @@ header {
     div.header-left {
         display: flex;
         flex-direction: column;
-        .breathcrumbs {
+        div.breathcrumbs {
             font-size: 0.7em;
+            a {
+                color: variables.$black;
+            }
+            span {
+                color: variables.$primary-1
+            }
         }
     }
     div.header-right {

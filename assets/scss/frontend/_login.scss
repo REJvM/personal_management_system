@@ -13,9 +13,12 @@ body::before {
 }
 
 body{
-    background-color: $light-gray;
+    background-color: white;
     font-family: "Mona Sans","Mona Sans Fallback","Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
     color: $black;
+
+    visibility: hidden; 
+    transition: visibility 0s 0.5s;
 }
 
 a {
@@ -50,6 +53,8 @@ section {
     max-width: 400px;
     margin: 0 auto; 
     padding: 50px;
+
+    display: none;
 }
 
 form {
@@ -73,9 +78,11 @@ form {
         input {
             padding: 5px 10px;
             border: none;
-            border-bottom: 2px solid;
+            border-left: 4px solid transparent;
+            border-bottom: 2px solid $black;
             &:focus {
                 outline: none;
+                border-left: 4px solid $primary;
             }
         }
     }

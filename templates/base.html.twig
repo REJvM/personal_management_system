@@ -10,15 +10,16 @@
         {% block javascripts %}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
-        
+
+        {% set background_image_url = asset( '/images/backgrounds/' ~ random_background() ) %}
         <style type="text/css">
             body::before{
-                background: url("{{ asset( '/images/backgrounds/' ~ random_background() ) }}") no-repeat center center fixed;
+                background: url("{{ background_image_url }}") no-repeat center center fixed;
                 background-size: cover;
             }
         </style>
     </head>
-    <body>
+    <body  data-bg-image="{{ background_image_url }}">
         {% block body %}{% endblock %}
     </body>
 </html>

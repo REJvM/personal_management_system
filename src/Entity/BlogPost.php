@@ -48,11 +48,11 @@ class BlogPost
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $modifiedOn = null;
 
-    #[ORM\ManyToOne(inversedBy: 'posts')]
+    #[ORM\ManyToOne(inversedBy: 'createdBlogPosts')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $createdBy = null;
 
-    #[ORM\ManyToOne(inversedBy: 'posts')]
+    #[ORM\ManyToOne(inversedBy: 'modifiedBlogPosts')]
     private ?User $modifiedBy = null;
 
     #[ORM\Column(length: 255)]
@@ -120,7 +120,7 @@ class BlogPost
         return $this->createdBy;
     }
 
-    public function setCreatedBy(User $createdBy): static
+    public function setCreatedBy(?User $createdBy): static
     {
         $this->createdBy = $createdBy;
 
@@ -132,7 +132,7 @@ class BlogPost
         return $this->modifiedBy;
     }
 
-    public function setModifiedBy(User $modifiedBy): static
+    public function setModifiedBy(?User $modifiedBy): static
     {
         $this->modifiedBy = $modifiedBy;
 

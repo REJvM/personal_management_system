@@ -79,8 +79,8 @@ input.object_id {
 
 td {
     svg.icon:not(a svg.icon) {
-        stroke: variables.$gray-6;
-        fill: variables.$gray-6;
+        stroke: variables.$black;
+        fill: variables.$black;
     }
     div.items {
         display: flex;
