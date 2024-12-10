@@ -4,8 +4,12 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
-   app.my_email: 'something@example.com'
-   app.my_github_link: 'https://github.com/GIT'
+    app.my_email: 'something@example.com'
+    app.my_github_link: 'https://github.com/GIT'
+    files_uploads: '/files/uploads/'
+    files_uploads_directory: '%kernel.project_dir%/public%files_uploads%'
+    files_uploads_backgrounds: '%files_uploads%/background/'
+    files_uploads_backgrounds_directory: '%kernel.project_dir%/public%files_uploads_backgrounds%'
 
 services:
     # default configuration for services in *this* file

@@ -55,10 +55,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: BlogPost::class, mappedBy: 'modifiedBy')]
     private Collection $modifiedBlogPosts;
 
+    /**
+     * @var Collection<int, FileUpload>
+     */
+    #[ORM\OneToMany(targetEntity: FileUpload::class, mappedBy: 'createdBy')]
+    private Collection $uploadedFiles;
+
     public function __construct()
     {
         $this->createdBlogPosts = new ArrayCollection();
         $this->modifiedBlogPosts = new ArrayCollection();
+        $this->uploadedFiles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -218,4 +225,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    /**
+     * @return Collection<int, FileUpload>
+     */
+    public function getUploadedFiles(): Collection
+    {
+        return $this->uploadedFiles;
+    }
+
+    public function addUploadedFile(FileUpload $uploadedFile): static
+    {
+        if (!$this->uploadedFiles->contains($uploadedFile)) {
+            $this->uploadedFiles->add($uploadedFile);
+            $uploadedFile->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUploadedFile(FileUpload $uploadedFile): static
+    {
+        if ($this->uploadedFiles->removeElement($uploadedFile)) {
+            // set the owning side to null (unless already changed)
+            if ($uploadedFile->getCreatedBy() === $this) {
+                $uploadedFile->setCreatedBy(null);
+            }
+        }
+
+        return $this;
+    }
 }

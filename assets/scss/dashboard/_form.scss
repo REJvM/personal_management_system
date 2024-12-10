@@ -16,7 +16,7 @@ label, small {
     margin: 0 10px 5px;
 }
 
-input, select {
+input:not([type='file']), select {
     padding: 5px 10px;
     border: none;
     background: none;
@@ -32,7 +32,7 @@ textarea {
     padding: 5px 10px;
 }
 
-input[type=checkbox] + label, select {
+input[type=checkbox] + label, select, option {
     cursor: pointer;
 }
 
@@ -43,6 +43,18 @@ div.field-row {
 
     div:not(.field-errors) label {
         margin: 0 10px;
+    }
+
+    &:has(input[type=checkbox]) {
+        flex-direction: row;
+        label, input {
+            cursor: pointer;
+        }
+    }
+    &:has(input[type=file]) {
+        label, input {
+            cursor: pointer;
+        }
     }
 }
 

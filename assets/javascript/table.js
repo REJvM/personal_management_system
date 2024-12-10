@@ -7,12 +7,20 @@ if(tbody) {
         if(tr.querySelector('input.object_id')){
             if(tr.querySelector('input.object_id').checked) {
                 tr.querySelector('input.object_id').checked = false;
-                editButton.disabled = true;
-                deleteButton.disabled = true;
+                if(editButton !== null) {
+                    editButton.disabled = true;
+                }
+                if(deleteButton !== null) {
+                    deleteButton.disabled = true;
+                } 
             } else {
                 tr.querySelector('input.object_id').checked = true;
-                editButton.disabled = false;
-                deleteButton.disabled = false;
+                if(editButton !== null) {
+                    editButton.disabled = false;
+                }
+                if(deleteButton !== null) {
+                    deleteButton.disabled = false;
+                }
             }
         }
     });

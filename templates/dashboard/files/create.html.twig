@@ -1,0 +1,41 @@
+{% extends 'base-dashboard.html.twig' %}
+
+{% block title %}File Upload{% endblock %}
+
+{% block breathcrumbs %}/ <a href="{{ path('app_dashboard_file') }}">Files</a> / <span class="current">Upload file<span>{% endblock %}
+
+{% block bodyDashboard %}
+    <section>
+        <div class="content">
+            
+            {{ form_start(form) }}
+        
+            <fieldset>
+                <legend>Upload new file</legend>
+                
+                {% embed 'dashboard/shared/_field.html.twig' with { 
+                        field: form.name,
+                        label: 'File name',
+                } %}{% endembed %}
+
+                {% embed 'dashboard/shared/_field.html.twig' with { 
+                        field: form.loginBackground,
+                        label: 'Use as Login Background',
+                } %}{% endembed %}
+
+                {% embed 'dashboard/shared/_field.html.twig' with { 
+                        field: form.file,
+                        label: 'File (JPG or PNG file)',
+                } %}{% endembed %}
+            </fieldset>
+
+            <div class="actions">
+                <a class="button button-secondary" href="{{ path('app_dashboard_file') }}">Cancel</a>
+                <button type="submit" class="button-primary">Upload</button>
+            </div>
+
+            {{ form_end(form) }}
+
+        </div>
+    </section>
+{% endblock %}

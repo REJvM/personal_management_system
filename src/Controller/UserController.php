@@ -28,8 +28,7 @@ class UserController extends AbstractController
     public function users(
         Request $request,
         Pagination $pagination
-    ): Response
-    {
+    ): Response {
         $page = $request->get('page') ?? 1;
         $listedUsers = $pagination->getEntityForPage($this->_users, $page);
 

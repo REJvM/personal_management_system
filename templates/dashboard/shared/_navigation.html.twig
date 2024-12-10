@@ -15,5 +15,10 @@
                 content: 'Posts',
                 icon: 'icon-newspaper'
         } %}{% endembed %}
+        {% embed 'dashboard/shared/_navigationItem.html.twig' with { 
+                route: 'app_dashboard_file',
+                content: 'Files',
+                icon: 'icon-folder-open'
+        } %}{% endembed %}
     </ul>
 </nav>

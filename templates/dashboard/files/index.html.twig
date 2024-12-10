@@ -1,0 +1,75 @@
+{% extends 'base-dashboard.html.twig' %}
+
+{% block title %}File Uploads{% endblock %}
+
+{% block breathcrumbs %}/ <span class="current">Files</span>{% endblock %}
+
+{% block bodyDashboard %}
+    <section>
+        <div class="content content-filters">
+            <div>
+            </div>
+
+            <div class="content-actions">
+                <a 
+                    href="{{ path('app_dashboard_file_create') }}"
+                    class="button button-secondary"
+                >  
+                    <svg class="icon" viewBox="0 0 16 16" width="16" height="16">
+                        <use href="{{ asset('/svg/dashboard-icons.svg') }}#icon-plus"></use>
+                    </svg>
+                    Upload
+                </a>
+                <button 
+                    type="submit" 
+                    form="tableForm" 
+                    formaction="{{ path('app_dashboard_file_delete') }}"
+                    value="delete" 
+                    class="button button-secondary"
+                    disabled="disabled"
+                >
+                    <svg class="icon" viewBox="0 0 16 16" width="16" height="16">
+                        <use href="{{ asset('/svg/dashboard-icons.svg') }}#icon-bin2"></use>
+                    </svg>
+                    Delete
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        {% if files|length == 0 %}
+            <div class="content">
+                <span>No Files have been found.</span>
+            </div>
+        {% else %}
+            <form id="tableForm">
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Uploaded on</th>
+                            <th>Uploaded by</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for file in files %}
+                        <tr>
+                            <td>
+                                <input class="object_id" type="radio" name="object_id" value="{{ file.id }}"></input>
+                                # {{ file.id}}
+                            </td>
+                            <td>{{ file.name }}</td>
+                            <td>{{ file.createdOn|date("d/m/Y") }}</td>
+                            <td>{{ file.createdBy.email }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </form>
+
+            {{ include('/dashboard/shared/_pagination.html.twig', { objects: files, maxPages: maxPages }) }}
+        {% endif %}
+    </section>
+{% endblock %}
