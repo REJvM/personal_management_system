@@ -6,6 +6,6 @@
  */
 import './styles/app.css';
 
-import './javascript/image-load-fix.js';
+import './javascript/login.js';
 
 console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');

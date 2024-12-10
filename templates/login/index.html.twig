@@ -6,7 +6,7 @@
 <section>
     <form action="{{ path('app_login') }}" method="POST">
         <fieldset>
-            <legend>Personal Management System</legend>
+            <h1>Personal Management System</h1>
             
             <div class="errors">
                 {% if error %}
@@ -15,13 +15,13 @@
             </div>
             
             <div class="field-row">
-                <label for="_username">Email</label>
-                <input type="text" name="_username" value="{{ lastUsername }}" autofocus />
+                <label for="username">Email</label>
+                <input id="username" type="text" name="_username" value="{{ lastUsername }}" />
             </div>
 
             <div class="field-row">
-                <label for="_password">Password</label>
-                <input type="password" name="_password" />
+                <label for="password">Password</label>
+                <input id="password" type="password" name="_password" />
             </div>
 
             <div class="action">

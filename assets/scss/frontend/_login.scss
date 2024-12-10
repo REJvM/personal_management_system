@@ -50,11 +50,18 @@ svg.icon {
 section {
     position: relative;
     background-color: white;
-    max-width: 400px;
+    max-width: min(400px, 90%);
     margin: 0 auto; 
     padding: 50px;
 
+    /* this will be removed when background image is fully loaded*/
     display: none;
+}
+
+h1 {
+    text-align: center;
+    font-size: 1em;
+    font-weight: normal;
 }
 
 form {
@@ -63,11 +70,6 @@ form {
     fieldset {
         padding: 0;
         border: none;
-        
-        legend {
-            margin: 0 auto;
-            padding: 0;
-        }
     }
 
     div.field-row {
@@ -76,6 +78,7 @@ form {
         margin: 20px 0;
 
         input {
+            width: 100%;
             padding: 5px 10px;
             border: none;
             border-left: 4px solid transparent;

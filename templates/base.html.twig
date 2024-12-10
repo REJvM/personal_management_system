@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
@@ -12,7 +12,7 @@
         {% endblock %}
 
         {% set background_image_url = random_background(files_uploads_backgrounds) %}
-         <style type="text/css">
+         <style>
             body::before{
                 background: url("{{ background_image_url }}") no-repeat center center fixed;
                 background-size: cover;
