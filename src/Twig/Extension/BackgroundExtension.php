@@ -5,9 +5,17 @@ namespace App\Twig\Extension;
 use Twig\TwigFunction;
 use Symfony\Component\Finder\Finder;
 use Twig\Extension\AbstractExtension;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class BackgroundExtension extends AbstractExtension
 {
+    private $_projectDir;
+
+    public function __construct(ParameterBagInterface $params)
+    {
+        $this->_projectDir = $params->get('kernel.project_dir');
+    }
+
     public function getFunctions(): array
     {
         return [
@@ -15,16 +23,16 @@ class BackgroundExtension extends AbstractExtension
         ];
     }
 
-    public function getRandomBackground(): string
+    public function getRandomBackground(string $filePath): string
     {
         $finder = new Finder();
-        $finder->files()->in(__DIR__ .'/../../../assets/images/backgrounds')->name('*.jpg');
+        $finder->files()->in($this->_projectDir . '/public/' . $filePath)->name('*.jpg');
 
         $allImageNames = [];
         foreach ($finder as $file) {
             $allImageNames[] = $file->getFilename();
         }
         
-        return (string) $allImageNames[array_rand($allImageNames)];
+        return (string) $filePath . $allImageNames[array_rand($allImageNames)];
     }
 }

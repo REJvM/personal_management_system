@@ -11,8 +11,8 @@
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
 
-        {% set background_image_url = asset( '/images/backgrounds/' ~ random_background() ) %}
-        <style type="text/css">
+        {% set background_image_url = random_background(files_uploads_backgrounds) %}
+         <style type="text/css">
             body::before{
                 background: url("{{ background_image_url }}") no-repeat center center fixed;
                 background-size: cover;

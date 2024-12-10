@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use DateTime;
 use App\Entity\User;
 use App\Entity\BlogPost;
+use App\Entity\FileUpload;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -49,6 +50,26 @@ class AppFixtures extends Fixture
         $secondBlogPost->setCreatedOn(new DateTime());
         $manager->persist($secondBlogPost);
 
+        
+        $firstBackgroundImage = new FileUpload();
+        $firstBackgroundImage->setName('chefchaouen-123abc.jpg');
+        $firstBackgroundImage->setCreatedBy($adminUser);
+        $firstBackgroundImage->setCreatedOn(new DateTime());
+        $manager->persist($firstBackgroundImage);
+
+        $secondBackgroundImage = new FileUpload();
+        $secondBackgroundImage->setName('chiangmai-abc123.jpg');
+        $secondBackgroundImage->setCreatedBy($adminUser);
+        $secondBackgroundImage->setCreatedOn(new DateTime());
+        $manager->persist($secondBackgroundImage);
+
+        $thirdbackgroundImage = new FileUpload();
+        $thirdbackgroundImage->setName('china-456def.jpg');
+        $thirdbackgroundImage->setCreatedBy($adminUser);
+        $thirdbackgroundImage->setCreatedOn(new DateTime());
+        $manager->persist($thirdbackgroundImage);
+
+        
         $manager->flush();
     }
 }

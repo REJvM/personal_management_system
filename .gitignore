@@ -21,10 +21,18 @@
 
 ###> symfony/asset-mapper ###
 /public/assets/
-/public/files/
 /assets/vendor/
 /assets/styles/
 ###< symfony/asset-mapper ###
+
+###> public file uploads ###
+/public/files/uploads/*
+!/public/files/uploads/background/
+/public/files/uploads/background/*
+!/public/files/uploads/background/chefchaouen-123abc.jpg
+!/public/files/uploads/background/chiangmai-abc123.jpg
+!/public/files/uploads/background/china-456def.jpg
+###< public file uploads ###
 
 ###> config parameters ###
 /config/services.yaml

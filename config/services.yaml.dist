@@ -8,7 +8,7 @@ parameters:
     app.my_github_link: 'https://github.com/GIT'
     files_uploads: '/files/uploads/'
     files_uploads_directory: '%kernel.project_dir%/public%files_uploads%'
-    files_uploads_backgrounds: '%files_uploads%/background/'
+    files_uploads_backgrounds: '%files_uploads%background/'
     files_uploads_backgrounds_directory: '%kernel.project_dir%/public%files_uploads_backgrounds%'
 
 services:
