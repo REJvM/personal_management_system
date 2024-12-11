@@ -5,7 +5,7 @@
 {% block breathcrumbs %}/ <span class="current">Files</span>{% endblock %}
 
 {% block bodyDashboard %}
-    <section>
+    <div class="section">
         <div class="content content-filters">
             <div>
             </div>
@@ -35,9 +35,9 @@
                 </button>
             </div>
         </div>
-    </section>
+    </div>
 
-    <section>
+    <div class="section">
         {% if files|length == 0 %}
             <div class="content">
                 <span>No Files have been found.</span>
@@ -51,18 +51,24 @@
                             <th>Name</th>
                             <th>Uploaded on</th>
                             <th>Uploaded by</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for file in files %}
                         <tr>
-                            <td>
-                                <input class="object_id" type="radio" name="object_id" value="{{ file.id }}"></input>
+                            <td data-cell="ID">
+                                <input class="object_id" type="radio" name="object_id" value="{{ file.id }}" />
                                 # {{ file.id}}
                             </td>
-                            <td>{{ file.name }}</td>
-                            <td>{{ file.createdOn|date("d/m/Y") }}</td>
-                            <td>{{ file.createdBy.email }}</td>
+                            <td data-cell="Name">{{ file.name }}</td>
+                            <td data-cell="Uploaded on">{{ file.createdOn|date("d/m/Y") }}</td>
+                            <td data-cell="Uploaded by">{{ file.createdBy.email }}</td>
+                            <td data-cell="Type">
+                                <svg class="icon" viewBox="0 0 16 16" width="16" height="16">
+                                    <use href="{{ asset('/svg/dashboard-icons.svg') }}#icon-file-picture"></use>
+                                </svg>
+                            </td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -71,5 +77,5 @@
 
             {{ include('/dashboard/shared/_pagination.html.twig', { objects: files, maxPages: maxPages }) }}
         {% endif %}
-    </section>
+    </div>
 {% endblock %}

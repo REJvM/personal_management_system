@@ -103,3 +103,35 @@ div.small-tag {
     width: fit-content;
     font-size: small;
 }
+
+@media (max-width: variables.$medium-breakpoint) {
+    thead {
+        display: none;
+    }
+
+    tr {
+        display: flex;
+        flex-direction: column;
+    }
+
+    td {
+        display: block;
+        
+        &:before {
+            content: attr(data-cell) ": ";
+            font-weight: 700;
+        }
+
+        &:first-child {
+            border-radius: 10px 10px 0 0 !important;
+        }
+    
+        &:last-child {
+            border-radius: 0 0 10px 10px !important;
+        }
+
+        div.items {
+            justify-content: start;
+        }
+    }
+}

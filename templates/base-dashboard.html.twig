@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Personal Management System{% endblock %}</title>
         <link rel="icon" href="{{ asset('/images/favicon.ico') }}">
 
         {% block stylesheets %}
-            <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/43.3.1/ckeditor5.css" />
+            <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/43.3.1/ckeditor5.css">
         {% endblock %}
 
         {% block javascripts %}
@@ -14,29 +14,18 @@
         {% endblock %}
             
         <script>
-            /*to prevent Firefox FOUC, this must be here*/
+            /* to prevent Firefox FOUC, this must be here */
             let FF_FOUC_FIX;
         </script>
     </head>
     <body>
         <div id="container">
+           
+            {% include('/dashboard/shared/_header.html.twig') with {'blockTitle':  block('title')} %}
 
-            {{ include('/dashboard/shared/_navigation.html.twig') }}
+            {% include('/dashboard/shared/_navigation.html.twig') %}
 
             <div id="content-container">
-                <header>
-                    <div class="header-left">
-                        {{ block('title') }}
-                        <div class="breathcrumbs">
-                            <a href="{{ path('app_dashboard_home') }}">Dashboard</a> {% block breathcrumbs %}{% endblock %}
-                        </div>
-                    </div>
-                    
-                    <div class="header-right">
-                        <div>{{ app.user.email }}</div>
-                        <a href="{{ path('app_logout') }}" class="button button-secondary">Logout</a>
-                    </div>
-                </header>
                 <div id="content">
                 
                     {{ include('/dashboard/shared/_flash.html.twig') }}

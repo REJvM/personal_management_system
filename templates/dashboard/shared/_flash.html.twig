@@ -1,14 +1,14 @@
 {% for message in app.flashes('success') %}
-<section class="flash flash-success">
+<div class="section flash flash-success">
     <div>
         {{ message }}
     </div>
-</section>
+</div>
 {% endfor %}
 {% for message in app.flashes('error') %}
-<section class="flash flash-error">
+<div class="section flash flash-error">
     <div>
         {{ message }}
     </div>
-</section>
+</div>
 {% endfor %}

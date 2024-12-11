@@ -103,7 +103,7 @@ nav div#logo {
     margin-bottom: 40px;
 }
 
-section {
+div.section {
     background: white;
     border-radius: 10px;
     margin-bottom: 20px;
@@ -124,13 +124,21 @@ div#container {
     align-items: stretch;
     width: 100%;
     min-height: 100vh;
+}
 
+div#content-container {
+    padding: 80px 0 0 120px;
+    width: 100%;
+}
+
+div#content {
+    padding: 20px;
+    width: inherit;
+}
+
+@media (max-width: variables.$medium-breakpoint) {
     div#content-container {
+        padding: 120px 0 0 0;
         width: 100%;
-    }
-    
-    div#content {
-        padding: 20px;
-        width: inherit;
     }
 }

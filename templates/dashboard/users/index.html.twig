@@ -2,10 +2,10 @@
 
 {% block title %}Backend Users{% endblock %}
 
-{% block breathcrumbs %}/ <span class="current">Users<span>{% endblock %}
+{% block breathcrumbs %}/ <span class="current">Users</span>{% endblock %}
 
 {% block bodyDashboard %}
-    <section>
+    <div class="section">
         <div class="content content-filters">
             <div></div>
             <div class="content-actions">
@@ -38,9 +38,9 @@
                 </button>
             </div>
         </div>
-    </section>
+    </div>
 
-    <section>
+    <div class="section">
         {% if users|length == 0 %}
             <div class="content">
                 <span>No users have been found.</span>
@@ -59,13 +59,13 @@
                     <tbody>
                         {% for user in users %}
                         <tr> 
-                            <td>
-                                <input class="object_id" type="radio" name="object_id" value="{{ user.id }}"></input>
+                            <td data-cell="ID">
+                                <input class="object_id" type="radio" name="object_id" value="{{ user.id }}" />
                                 # {{ user.id}}
                             </td>
-                            <td>{{ user.email }}</td>
-                            <td>{{ user.userProfile.name ?? '' }}</td>
-                            <td>
+                            <td data-cell="Email">{{ user.email }}</td>
+                            <td data-cell="Name">{{ user.userProfile.name ?? '' }}</td>
+                            <td data-cell="Roles">
                                 <div class="items">
                                 {% for role in user.roles %}     
                                     <div class="small-tag">{{ role }}</div>
@@ -80,5 +80,5 @@
             
             {{ include('/dashboard/shared/_pagination.html.twig', { objects: users, maxPages: maxPages }) }}
         {% endif %}
-    </section>
+    </div>
 {% endblock %}

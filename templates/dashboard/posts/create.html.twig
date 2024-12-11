@@ -2,10 +2,10 @@
 
 {% block title %}Blog Posts{% endblock %}
 
-{% block breathcrumbs %}/ <a href="{{ path('app_dashboard_blog_post') }}">Blog Posts</a> / <span class="current">Create Blog Post<span>{% endblock %}
+{% block breathcrumbs %}/ <a href="{{ path('app_dashboard_blog_post') }}">Blog Posts</a> / <span class="current">Create Blog Post</span>{% endblock %}
 
 {% block bodyDashboard %}
-    <section>
+    <div class="section">
         <div class="content">
             
             {{ form_start(form) }}
@@ -36,5 +36,5 @@
 
             {{ form_end(form) }}
         </div>
-    </section>
+    </div>
 {% endblock %}

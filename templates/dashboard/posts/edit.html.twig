@@ -2,16 +2,16 @@
 
 {% block title %}Blog Posts{% endblock %}
 
-{% block breathcrumbs %}/ <a href="{{ path('app_dashboard_blog_post') }}">Blog Posts</a> / <span class="current">Edit Post<span>{% endblock %}
+{% block breathcrumbs %}/ <a href="{{ path('app_dashboard_blog_post') }}">Blog Posts</a> / <span class="current">Edit Post</span>{% endblock %}
 
 {% block bodyDashboard %}
-    <section>
+    <div class="section">
         <div class="content">
 
             {{ form_start(form) }}
         
             <fieldset>
-                <legend>Edit Post "{{ post.title }}"</legend>
+                <legend>Edit Post "{{ post.title }}"</h1>
                 
                 {% embed 'dashboard/shared/_field.html.twig' with { 
                         field: form.title,
@@ -36,5 +36,5 @@
 
             {{ form_end(form) }}
         </div>
-    </section>
+    </div>
 {% endblock %}

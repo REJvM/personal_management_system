@@ -1,15 +1,15 @@
 @use 'variables';
 
-section.flash {
+div.flash {
     padding: 10px;
 }
 
-section.flash-success {
+div.flash-success {
     background-color: variables.$success-2 ;
     color: variables.$black;
 }
 
-section.flash-error {
+div.flash-error {
     background-color: variables.$error-2;
     color: white;
 }

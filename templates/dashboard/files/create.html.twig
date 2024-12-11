@@ -2,10 +2,10 @@
 
 {% block title %}File Upload{% endblock %}
 
-{% block breathcrumbs %}/ <a href="{{ path('app_dashboard_file') }}">Files</a> / <span class="current">Upload file<span>{% endblock %}
+{% block breathcrumbs %}/ <a href="{{ path('app_dashboard_file') }}">Files</a> / <span class="current">Upload file</span>{% endblock %}
 
 {% block bodyDashboard %}
-    <section>
+    <div class="section">
         <div class="content">
             
             {{ form_start(form) }}
@@ -37,5 +37,5 @@
             {{ form_end(form) }}
 
         </div>
-    </section>
+    </div>
 {% endblock %}

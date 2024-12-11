@@ -2,10 +2,10 @@
 
 {% block title %}Backend Users{% endblock %}
 
-{% block breathcrumbs %}/ <a href="{{ path('app_dashboard_user') }}">Users</a> / <span class="current">Edit User<span>{% endblock %}
+{% block breathcrumbs %}/ <a href="{{ path('app_dashboard_user') }}">Users</a> / <span class="current">Edit User</span>{% endblock %}
 
 {% block bodyDashboard %}
-    <section>
+    <div class="section">
         <div class="content">
 
             {{ form_start(form) }}
@@ -40,5 +40,5 @@
 
             {{ form_end(form) }}
         </div>
-    </section>
+    </div>
 {% endblock %}

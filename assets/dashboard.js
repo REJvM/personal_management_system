@@ -7,5 +7,6 @@
 import './styles/dashboard.css';
 
 import './javascript/table.js';
+import './javascript/mobile-menu.js';
 
 console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
