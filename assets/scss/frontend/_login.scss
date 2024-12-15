@@ -7,7 +7,8 @@ $light-gray: #b5b5b5;
 body::before {
     content: "";
     position: absolute;
-    width: 100%; height: 100%;
+    width: 100%; 
+    height: 100%;
     filter: grayscale(80%);
     z-index: -20;
 }
@@ -32,7 +33,7 @@ a {
         text-decoration: none;
         display: flex;
         align-items: center;
-        gap: 5px;
+        gap: 0.5rem;
         fill: $black;
         stroke: $black;
         font-weight: 600;
@@ -49,10 +50,10 @@ svg.icon {
 
 section {
     position: relative;
-    background-color: white;
-    max-width: min(400px, 90%);
+    background-color: white;  
+    max-width: min(600px, 80%);
     margin: 0 auto; 
-    padding: 50px;
+    padding: 4rem;
 
     /* this will be removed when background image is fully loaded*/
     display: none;
@@ -60,12 +61,11 @@ section {
 
 h1 {
     text-align: center;
-    font-size: 1em;
     font-weight: normal;
 }
 
 form {
-    margin: 40px 0;
+    margin: 15% 0;
 
     fieldset {
         padding: 0;
@@ -75,7 +75,7 @@ form {
     div.field-row {
         display: flex;
         flex-direction: column;
-        margin: 20px 0;
+        margin: 1.5em 0;
 
         input {
             width: 100%;
@@ -114,8 +114,8 @@ div.action {
     button {
         cursor: pointer;
         border: 1px solid $primary;
-        border-radius: 8px;
-        padding: 5px 10px;
+        border-radius: .8em;
+        padding: .5em 1em;
         color: white;
         background-color: $primary;
 
@@ -139,7 +139,7 @@ div.bottom {
     background-color: white;
     left: 0;
     right: 0;
-    height: 50px;
+    height: 4em;
     transform: skewY(-3deg);
     
     &:after {
@@ -148,8 +148,7 @@ div.bottom {
         background-color: white;
         left: 0;
         right: 0;
-        height: 50px;
+        height: 4em;
         transform: skewY(6deg);
     }
 }
-

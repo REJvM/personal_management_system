@@ -136,7 +136,7 @@ div#content {
     width: inherit;
 }
 
-@media (max-width: variables.$medium-breakpoint) {
+@media screen and (max-width: variables.$medium-breakpoint) {
     div#content-container {
         padding: 120px 0 0 0;
         width: 100%;

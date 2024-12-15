@@ -54,7 +54,7 @@ div#mobile-header {
 }
 
 
-@media (max-width: variables.$medium-breakpoint) {
+@media screen and (max-width: variables.$medium-breakpoint) {
     header {
         padding: 0;
     }
