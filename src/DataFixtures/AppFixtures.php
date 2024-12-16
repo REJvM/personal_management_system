@@ -12,7 +12,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
-    private const DUMMY_CONTENT = '<h1>Congratulations on setting up the Project</h1><p>You\'ve successfully created a post.</p><h3>What\'s next?</h3><ol><li><strong>Click through the website:</strong> Take a look around all the content on the website.</li><li><strong>Create new content:</strong> Experiment with different features and create new blog post or other content.</li><li><strong>Send a message:</strong> If you like the website, send me a message</li></ol>';
+    private const DUMMY_CONTENT = '<h1>Congratulations on setting up the Project</h1><p>This is an example post.</p><h3>What\'s next?</h3><ol><li><strong>Click through the website:</strong> Take a look around all the content on the website.</li><li><strong>Create new content:</strong> Experiment with different features and create new blog post or other content.</li><li><strong>Send a message:</strong> If you like the website, send me a message</li></ol>';
     public function __construct(
         private UserPasswordHasherInterface $userPasswordHasher
     ){  
