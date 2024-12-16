@@ -2,10 +2,8 @@
 
 namespace App\Controller;
 
-use App\Pagination;
 use App\Entity\BlogPost;
 use App\Repository\BlogPostRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -63,7 +61,6 @@ class ApiController extends AbstractController
 
         $items = [];
         foreach ($blogPosts as $blogPost) {
-            
             $lastModifiedOn = $blogPost->getModifiedOn() !== null ? $blogPost->getModifiedOn() : $blogPost->getCreatedOn();
             $items[] = [
                 'id' => $blogPost->getId(),
@@ -101,13 +98,11 @@ class ApiController extends AbstractController
 
         $lastModifiedOn = $blogPost->getModifiedOn() !== null ? $blogPost->getModifiedOn() : $blogPost->getCreatedOn();
 
-        $postResponse = [
+        return $this->json([
             'title' => $blogPost->getTitle(),
             'content' => $blogPost->getContent(),
             'category' => $blogPost->getCategory(),
             'last_modified_on' => $lastModifiedOn
-        ];
-
-        return $this->json($postResponse);
+        ]);
     }
 }
