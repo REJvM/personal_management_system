@@ -29,12 +29,14 @@ class UserController extends AbstractController
         Request $request,
         Pagination $pagination
     ): Response {
-        $page = $request->get('page') ?? 1;
-        $listedUsers = $pagination->getEntityForPage($this->_users, $page);
+        $page = $request->get('page', 1);
+        $queryBuilder = $this->_users->createQueryBuilder('u');
+
+        $listedUsers = $pagination->paginate($queryBuilder, $page);
 
         return $this->render('dashboard/users/index.html.twig', [
-            'users' => $listedUsers,            
-            'maxPages' => $pagination->getMaxPages($this->_users->count())
+            'users' => $listedUsers['items'],            
+            'totalPages' => $listedUsers['totalPages']
         ]);
     }
 

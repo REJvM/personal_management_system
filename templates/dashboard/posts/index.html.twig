@@ -102,7 +102,7 @@
                 </table>
             </form>
 
-            {{ include('/dashboard/shared/_pagination.html.twig', { objects: posts, maxPages: maxPages }) }}
+            {{ include('/dashboard/shared/_pagination.html.twig', { objects: posts, totalPages: totalPages }) }}
         {% endif %}
     </div>
 {% endblock %}

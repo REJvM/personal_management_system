@@ -75,7 +75,7 @@
                 </table>
             </form>
 
-            {{ include('/dashboard/shared/_pagination.html.twig', { objects: files, maxPages: maxPages }) }}
+            {{ include('/dashboard/shared/_pagination.html.twig', { objects: files, totalPages: totalPages }) }}
         {% endif %}
     </div>
 {% endblock %}

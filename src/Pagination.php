@@ -2,41 +2,33 @@
 
 namespace App;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+
 
 class Pagination
 {
-    public const PER_PAGE = 20;
+    public const DEFUALT_LIMIT = 20; 
     public const PAGE_PARAMETER = 'page'; 
 
-    public function getEntityForPage(EntityRepository $repository, int $page, array $criterias = []): mixed
-    {
-        $whereParameters = [];
-        if(count($criterias) > 0) {
-            foreach($criterias as $criteria => $value)
-            {   
-                $whereParameters[] = "u." . $criteria . " = '" . $value . "'";
-            }    
-        }
+    public function paginate(
+        QueryBuilder $queryBuilder,
+        int $page = 1, 
+        int $limit = self::DEFUALT_LIMIT
+    ): array {
+        $queryBuilder
+            ->setFirstResult((--$page) * $limit)            
+            ->setMaxResults($limit);
 
-        $queryBuilder = $repository->createQueryBuilder('u');
+        $paginator = new Paginator($queryBuilder);
+        $totalResults = count($paginator);
 
-        if(count($whereParameters) > 0) {
-            foreach($whereParameters as $parameter)
-            {
-                $queryBuilder->where($parameter);  
-            }
-        }
-
-        return $queryBuilder->setFirstResult((--$page) * self::PER_PAGE)            
-                ->setMaxResults(self::PER_PAGE)
-                ->getQuery()
-                ->getResult();
+        return [
+            'items' => iterator_to_array($paginator),
+            'total' => (int) $totalResults,
+            'page' => (int) $page,
+            'limit' => (int) $limit,
+            'totalPages' => (int) ceil($totalResults / $limit),
+        ];
     }
-
-    public function getMaxPages(int $maxObjects): string
-    {
-        return $maxObjects / self::PER_PAGE;
-    }
-
 }

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Pagination;
 use App\Entity\BlogPost;
 use App\Repository\BlogPostRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -42,25 +43,19 @@ class ApiController extends AbstractController
         format:'json',
         methods:['GET']
     )]
-    public function blogPostList(Request $request): JsonResponse
+    public function blogPostList(
+        Request $request,
+        Pagination $pagination
+    ): JsonResponse
     {
         $page = (int) $request->query->get('offset', 1);
-        $limit = (int) $request->query->get('limit', 10);
-        $offset = ($page - 1) * $limit;
+        $limit = (int) $request->query->get('limit', 20);
 
-        $blogPosts = $this->_posts->createQueryBuilder('p')
-            ->setFirstResult($offset)
-            ->setMaxResults($limit)
-            ->getQuery()
-            ->getResult();
-
-        $totalBlogPosts = $this->_posts->createQueryBuilder('p')
-            ->select('count(p.id)')
-            ->getQuery()
-            ->getSingleScalarResult();
+        $queryBuilder = $this->_posts->createQueryBuilder('p');
+        $blogPosts = $pagination->paginate($queryBuilder, $page, $limit);
 
         $items = [];
-        foreach ($blogPosts as $blogPost) {
+        foreach ($blogPosts['items'] as $blogPost) {
             $lastModifiedOn = $blogPost->getModifiedOn() !== null ? $blogPost->getModifiedOn() : $blogPost->getCreatedOn();
             $items[] = [
                 'id' => $blogPost->getId(),
@@ -70,15 +65,13 @@ class ApiController extends AbstractController
             ];
         }
 
-        $totalPages = ceil($totalBlogPosts / $limit);
-
         return $this->json([
             'items' => $items,
             'pagination' => [
-                'total' => (int) $totalBlogPosts,
-                'page' => (int) $page,
-                'limit' => (int) $limit,
-                'totalPages' => (int) $totalPages,
+                'total' =>$blogPosts['total'],
+                'page' => $blogPosts['page'],
+                'limit' => $blogPosts['limit'],
+                'totalPages' => $blogPosts['totalPages'],
             ]
         ]);
     }
