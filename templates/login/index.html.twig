@@ -30,9 +30,18 @@
 </form>
 
 <div class="footer">
-    <a href="mailto:{{ my_email }}" target="_blank">
-        Contact me
-    </a>
+    <ul>
+        <li>
+            <a href="mailto:{{ my_email }}" target="_blank">
+                Contact me
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('app_api') }}">
+                Public API
+            </a>
+        </li>
+    </ul>
     <a class="github" href="{{ my_github_link }}" target="_blank">
         <svg class="icon" viewBox="0 0 16 16" width="16" height="16">
             <use href="{{ asset('/svg/dashboard-icons.svg') }}#icon-github-mark"></use>
