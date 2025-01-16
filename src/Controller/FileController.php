@@ -32,12 +32,14 @@ class FileController extends AbstractController
         Request $request,
         Pagination $pagination
     ): Response {
-        $page = $request->get('page') ?? 1;
-        $listedFiles = $pagination->getEntityForPage($this->_files, $page);
+        $queryBuilder = $this->_files->createQueryBuilder('u');
+
+        $page = $request->get('page', 1);
+        $listedFiles = $pagination->paginate($queryBuilder, $page);
         
         return $this->render('dashboard/files/index.html.twig', [
-            'files' => $listedFiles,
-            'maxPages' => $pagination->getMaxPages($this->_files->count())
+            'files' => $listedFiles['items'],
+            'totalPages' => $listedFiles['totalPages']
         ]);
     }
     

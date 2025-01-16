@@ -30,14 +30,20 @@ class BlogPostController extends AbstractController
         Pagination $pagination
     ): Response
     {
-        $page = $request->get('page') ?? 1;
-        $criteria = $request->get('category') ? ['category' => $request->get('category')] : [];
-        $listedPosts = $pagination->getEntityForPage($this->_posts, $page, $criteria);
+        $posts = $this->_posts;
+        if($request->get('category')) {
+            $posts = $posts->where("u.category = '" . $request->get('category') . "'");
+        }
+
+        $queryBuilder = $posts->createQueryBuilder('u');
+
+        $page = $request->get('page', 1);
+        $listedPosts = $pagination->paginate($queryBuilder, $page, 2);
 
         return $this->render('dashboard/posts/index.html.twig', [
-            'posts' => $listedPosts,
-            'categories' => BlogPost::CATEGORY_ICONS,
-            'maxPages' => $pagination->getMaxPages($this->_posts->count($criteria))
+            'posts' => $listedPosts['items'],
+            'totalPages' => $listedPosts['totalPages'],
+            'categories' => BlogPost::CATEGORY_ICONS
         ]);
     }
 

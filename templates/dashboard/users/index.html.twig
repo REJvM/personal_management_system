@@ -78,7 +78,7 @@
                 </table>
             </form>
             
-            {{ include('/dashboard/shared/_pagination.html.twig', { objects: users, maxPages: maxPages }) }}
+            {{ include('/dashboard/shared/_pagination.html.twig', { objects: users, totalPages: totalPages }) }}
         {% endif %}
     </div>
 {% endblock %}

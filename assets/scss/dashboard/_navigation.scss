@@ -55,7 +55,7 @@ nav.open {
     top: 0;
 }
 
-@media (max-width: variables.$medium-breakpoint) {
+@media screen and (max-width: variables.$medium-breakpoint) {
     nav {
         top: -120%; // will be removed by class open.
         width: 100vw;

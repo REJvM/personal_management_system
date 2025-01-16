@@ -1,6 +1,6 @@
-{% if maxPages > 1 %}
+{% if totalPages > 1 %}
     <div class="pagination">
-        {% for pageNumber in 1..maxPages %}
+        {% for pageNumber in 1..totalPages %}
             <a
                 class="{{ active_page(app.request.getQueryString(), pageNumber) }}"
                 href="{{ pagination_path( 

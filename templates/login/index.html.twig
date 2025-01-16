@@ -3,44 +3,50 @@
 {% block title %}Login{% endblock %}
 
 {% block body %}
-<section>
-    <form action="{{ path('app_login') }}" method="POST">
-        <fieldset>
-            <h1>Personal Management System</h1>
-            
-            <div class="errors">
-                {% if error %}
-                    <p class="error">{{ error.messageKey|trans(error.messageData, 'security')  }}</p>
-                {% endif %}
-            </div>
-            
-            <div class="field-row">
-                <label for="username">Email</label>
-                <input id="username" type="text" name="_username" value="{{ lastUsername }}" />
-            </div>
+<form action="{{ path('app_login') }}" method="POST">
+    <fieldset>
+        <h1>Personal Management System</h1>
+        
+        <div class="errors">
+            {% if error %}
+                <p class="error">{{ error.messageKey|trans(error.messageData, 'security')  }}</p>
+            {% endif %}
+        </div>
+        
+        <div class="field-row">
+            <label for="username">Email</label>
+            <input id="username" type="text" name="_username" value="{{ lastUsername }}" />
+        </div>
 
-            <div class="field-row">
-                <label for="password">Password</label>
-                <input id="password" type="password" name="_password" />
-            </div>
+        <div class="field-row">
+            <label for="password">Password</label>
+            <input id="password" type="password" name="_password" />
+        </div>
 
-            <div class="action">
-                <button type="submit">Login</button>
-            </div>
-        </fieldset>
-    </form>
+        <div class="action">
+            <button type="submit">Login</button>
+        </div>
+    </fieldset>
+</form>
 
-    <div class="footer">
-        <a href="mailto:{{ my_email }}" target="_blank">
-            Contact me
-        </a>
-        <a class="github" href="{{ my_github_link }}" target="_blank">
-            <svg class="icon" viewBox="0 0 16 16" width="16" height="16">
-                <use href="{{ asset('/svg/dashboard-icons.svg') }}#icon-github-mark"></use>
-            </svg>
-            GitHub
-        </a>
-    </div>
-    <div class="bottom"></div>
-</section>
+<div class="footer">
+    <ul>
+        <li>
+            <a href="mailto:{{ my_email }}" target="_blank">
+                Contact me
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('app_api') }}">
+                Personal Website API
+            </a>
+        </li>
+    </ul>
+    <a class="github" href="{{ my_github_link }}" target="_blank">
+        <svg class="icon" viewBox="0 0 16 16" width="16" height="16">
+            <use href="{{ asset('/svg/dashboard-icons.svg') }}#icon-github-mark"></use>
+        </svg>
+        GitHub
+    </a>
+</div>
 {% endblock %}

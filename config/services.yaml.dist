@@ -10,6 +10,7 @@ parameters:
     files_uploads_directory: '%kernel.project_dir%/public%files_uploads%'
     files_uploads_backgrounds: '%files_uploads%background/'
     files_uploads_backgrounds_directory: '%kernel.project_dir%/public%files_uploads_backgrounds%'
+    api_key: '%env(resolve:API_KEY)%'
 
 services:
     # default configuration for services in *this* file
@@ -28,6 +29,9 @@ services:
 
     App\Twig\Extension\NavigationExtension:
         tags: [twig.extension]
-        
+
+    App\EventListener\ApiExceptionListener:
+        tags:
+            - { name: kernel.event_subscriber }
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

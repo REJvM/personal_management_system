@@ -104,7 +104,7 @@ div.small-tag {
     font-size: small;
 }
 
-@media (max-width: variables.$medium-breakpoint) {
+@media screen and (max-width: variables.$medium-breakpoint) {
     thead {
         display: none;
     }
