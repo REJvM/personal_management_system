@@ -10,6 +10,7 @@ parameters:
     files_uploads_directory: '%kernel.project_dir%/public%files_uploads%'
     files_uploads_backgrounds: '%files_uploads%background/'
     files_uploads_backgrounds_directory: '%kernel.project_dir%/public%files_uploads_backgrounds%'
+    api_key: '%env(resolve:API_KEY)%'
 
 services:
     # default configuration for services in *this* file
