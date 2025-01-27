@@ -44,6 +44,20 @@
             "schema": {
               "type": "integer"
             }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Limits posts to one specific category",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "projects",
+                "area",
+                "resources",
+                "archive"
+              ]
+            }
           }
         ],
         "responses": {
