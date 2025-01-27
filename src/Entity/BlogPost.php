@@ -15,20 +15,20 @@ class BlogPost
     public const CATEGORY_PROJECTS = 'projects';
     public const CATEGORY_AREA = 'area';
     public const CATEGORY_RESOURCES = 'resources';
-    public const CATEGORY_ARCHIVES = 'archives';
+    public const CATEGORY_ARCHIVE = 'archive';
 
     public const AVAILABLE_CATEGORIES = [
         self::CATEGORY_PROJECTS => self::CATEGORY_PROJECTS,
         self::CATEGORY_AREA => self::CATEGORY_AREA,
         self::CATEGORY_RESOURCES => self::CATEGORY_RESOURCES,
-        self::CATEGORY_ARCHIVES => self::CATEGORY_ARCHIVES
+        self::CATEGORY_ARCHIVE => self::CATEGORY_ARCHIVE
     ];
 
     public const CATEGORY_ICONS = [
         self::CATEGORY_PROJECTS => "icon-rocket",
         self::CATEGORY_AREA => "icon-earth",
         self::CATEGORY_RESOURCES => "icon-lab",
-        self::CATEGORY_ARCHIVES => "icon-drawer"
+        self::CATEGORY_ARCHIVE => "icon-drawer"
     ];
 
     #[ORM\Id]

@@ -50,8 +50,13 @@ class ApiController extends AbstractController
     {
         $page = (int) $request->query->get('offset', 1);
         $limit = (int) $request->query->get('limit', 20);
+        $category = (string) $request->query->get('category', null);
 
         $queryBuilder = $this->_posts->createQueryBuilder('p');
+        if($category !== null && in_array($category, BlogPost::AVAILABLE_CATEGORIES)) {
+            $queryBuilder->andWhere('p.category = :val');
+            $queryBuilder->setParameter('val', $category);
+        }
         $blogPosts = $pagination->paginate($queryBuilder, $page, $limit);
 
         $items = [];
@@ -68,7 +73,7 @@ class ApiController extends AbstractController
         return $this->json([
             'items' => $items,
             'pagination' => [
-                'total' =>$blogPosts['total'],
+                'total' => $blogPosts['total'],
                 'page' => $blogPosts['page'],
                 'limit' => $blogPosts['limit'],
                 'totalPages' => $blogPosts['totalPages'],

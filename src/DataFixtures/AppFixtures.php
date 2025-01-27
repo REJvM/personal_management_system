@@ -45,7 +45,7 @@ class AppFixtures extends Fixture
         $secondBlogPost = new BlogPost();
         $secondBlogPost->setTitle('My Second Blog post');
         $secondBlogPost->setContent(self::DUMMY_CONTENT);
-        $secondBlogPost->setCategory(BlogPost::CATEGORY_ARCHIVES);
+        $secondBlogPost->setCategory(BlogPost::CATEGORY_ARCHIVE);
         $secondBlogPost->setCreatedBy($adminUser);
         $secondBlogPost->setCreatedOn(new DateTime());
         $manager->persist($secondBlogPost);

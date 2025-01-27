@@ -38,7 +38,7 @@ class BlogPostController extends AbstractController
         $queryBuilder = $posts->createQueryBuilder('u');
 
         $page = $request->get('page', 1);
-        $listedPosts = $pagination->paginate($queryBuilder, $page, 2);
+        $listedPosts = $pagination->paginate($queryBuilder, $page);
 
         return $this->render('dashboard/posts/index.html.twig', [
             'posts' => $listedPosts['items'],
