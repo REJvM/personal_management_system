@@ -16,8 +16,9 @@ class Pagination
         int $page = 1, 
         int $limit = self::DEFUALT_LIMIT
     ): array {
+        $queryPage = $page;
         $queryBuilder
-            ->setFirstResult((--$page) * $limit)            
+            ->setFirstResult((--$queryPage) * $limit)            
             ->setMaxResults($limit);
 
         $paginator = new Paginator($queryBuilder);
