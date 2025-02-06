@@ -17,34 +17,55 @@ div.content-filters {
     }
 }
 
-table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-}
+#table-form {
 
-thead {
-    background-color: variables.$gray-4;
-    color: white;
-}
-
-th, td {
-    padding: 5px 10px;
-    text-align: left;
-}
-
-tbody tr {
-    cursor: pointer;
-    background-color: white;
+    table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+    }
     
-    &:hover {
-        background-color: transparent;
-        scale: 1.01;
-
-        td {
-            background-color: variables.$primary-3;
-        }
+    thead {
+        background-color: variables.$gray-4;
+        color: white;
+    }
+    
+    th, td {
+        padding: 5px 10px;
+        text-align: left;
+    }
+    
+    tbody tr {
+        cursor: pointer;
+        background-color: white;
         
+        &:hover {
+            background-color: transparent;
+            scale: 1.01;
+    
+            td {
+                background-color: variables.$primary-3;
+            }
+            
+            td:first-child {
+                border-radius: 10px 0 0 10px;
+            }
+        
+            td:last-child {
+                border-radius: 0 10px 10px 0;
+            }
+        }
+    }
+    
+    tr:has(> td > input.object_id:checked) {
+        scale: 1.01;
+        background-color: transparent;
+        border-radius: 10px;
+    
+        td {
+            background-color: variables.$primary-2;
+        }
+    
         td:first-child {
             border-radius: 10px 0 0 10px;
         }
@@ -53,41 +74,24 @@ tbody tr {
             border-radius: 0 10px 10px 0;
         }
     }
-}
-
-tr:has(> td > input.object_id:checked) {
-    scale: 1.01;
-    background-color: transparent;
-    border-radius: 10px;
-
+    
+    input.object_id {
+        display: none;
+    }
+    
     td {
-        background-color: variables.$primary-2;
-    }
-
-    td:first-child {
-        border-radius: 10px 0 0 10px;
-    }
-
-    td:last-child {
-        border-radius: 0 10px 10px 0;
-    }
-}
-
-input.object_id {
-    display: none;
-}
-
-td {
-    svg.icon:not(a svg.icon) {
-        stroke: variables.$black;
-        fill: variables.$black;
-    }
-    div.items {
-        display: flex;
-        gap: 4px;
-        justify-content: center;
+        svg.icon:not(a svg.icon) {
+            stroke: variables.$black;
+            fill: variables.$black;
+        }
+        div.items {
+            display: flex;
+            gap: 4px;
+            justify-content: center;
+        }
     }
 }
+
 
 div.actions {
     display: flex;
