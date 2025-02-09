@@ -18,9 +18,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class BlogPostController extends AbstractController
 {
-    private $_posts; 
+    private $_posts;
 
-    public function __construct(BlogPostRepository $posts) {
+    public function __construct(BlogPostRepository $posts)
+    {
         $this->_posts = $posts;
     }
 
@@ -28,10 +29,9 @@ class BlogPostController extends AbstractController
     public function index(
         Request $request,
         Pagination $pagination
-    ): Response
-    {
+    ): Response {
         $posts = $this->_posts;
-        if($request->get('category')) {
+        if ($request->get('category')) {
             $posts = $posts->where("u.category = '" . $request->get('category') . "'");
         }
 
@@ -50,22 +50,22 @@ class BlogPostController extends AbstractController
     #[Route('/dashboard/blog-posts/create', name: 'app_dashboard_blog_post_create')]
     public function create(
         Request $request,
+        BlogPostRepository $blogPostRepository,
         EntityManagerInterface $entityManager
-    ): Response
-    {
+    ): Response {
         $post = new BlogPost();
         $form = $this->createForm(BlogPostType::class, $post);
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $content = $form->get('content')->getData();
             $strippedContent = strip_tags($content, CkeditorType::ALLOWED_TAGS);
-            
+            $newContent = $blogPostRepository->addIdToHeading($strippedContent);
+
             $post->setTitle($form->get('title')->getData());
             $post->setCategory($form->get('category')->getData());
-            $post->setContent($strippedContent);
+            $post->setContent($newContent);
             $post->setCreatedOn(new DateTime());
             $post->setCreatedBy($this->getUser());
             $entityManager->persist($post);
@@ -87,16 +87,16 @@ class BlogPostController extends AbstractController
     #[Route('/dashboard/blog-posts/edit', name: 'app_dashboard_blog_post_edit')]
     public function edit(
         Request $request,
+        BlogPostRepository $blogPostRepository,
         EntityManagerInterface $entityManager
-    ): Response
-    {
-        if($request->get('object_id') === null) {
+    ): Response {
+        if ($request->get('object_id') === null) {
             return $this->handleError('No blog post was found.');
         }
 
         $post = $this->_posts->find($request->get('object_id'));
 
-        if($post === null) {
+        if ($post === null) {
             return $this->handleError('No blog post was found.');
         }
 
@@ -107,13 +107,14 @@ class BlogPostController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $content = $form->get('content')->getData();
             $strippedContent = strip_tags($content, CkeditorType::ALLOWED_TAGS);
-            
+            $newContent = $blogPostRepository->addIdToHeading($strippedContent);
+
             $post->setTitle($form->get('title')->getData());
             $post->setCategory($form->get('category')->getData());
-            $post->setContent($strippedContent);
+            $post->setContent($newContent);
             $post->setModifiedOn(new DateTime());
             $post->setModifiedBy($this->getUser());
-            
+
             $entityManager->persist($post);
             $entityManager->flush();
 
@@ -137,13 +138,13 @@ class BlogPostController extends AbstractController
         EntityManagerInterface $entityManager
     ): Response {
 
-        if($request->get('object_id') == null) {
+        if ($request->get('object_id') == null) {
             return  $this->handleError('No blog post was found.');
         }
 
         $post = $this->_posts->find($request->get('object_id'));
 
-        if($post === null) {
+        if ($post === null) {
             return  $this->handleError('No blog post was found.');
         }
 
@@ -155,10 +156,10 @@ class BlogPostController extends AbstractController
         return $this->redirect($request->headers->get('referer'));
     }
 
-    protected function handleError(string $message): RedirectResponse 
+    protected function handleError(string $message): RedirectResponse
     {
         $this->addFlash('error', $message);
-        
+
         return $this->redirectToRoute('app_dashboard_blog_post', [
             'users' => $this->_posts->findAll()
         ]);
