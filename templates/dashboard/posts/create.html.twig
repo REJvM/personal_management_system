@@ -24,6 +24,11 @@
                 } %}{% endembed %}
 
                 {% embed 'dashboard/shared/_field.html.twig' with { 
+                        field: form.links,
+                        label: 'Links',
+                } %}{% endembed %}
+                
+                {% embed 'dashboard/shared/_field.html.twig' with { 
                         field: form.content,
                         label: 'Content',
                 } %}{% endembed %}

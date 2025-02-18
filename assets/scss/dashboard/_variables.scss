@@ -1,22 +1,21 @@
-@font-face { 
-    font-family: "FunnelSans";
-    font-style: normal;
-    font-weight: 400;
-    src: 
-        url(../fonts/FunnelSans-VariableFont_wght.ttf) format("truetype");
+@font-face {
+  font-family: "FunnelSans";
+  font-style: normal;
+  font-weight: 400;
+  src: url(../fonts/FunnelSans-VariableFont_wght.ttf) format("truetype");
 }
 
-$gray-1: #FDFDFD;
-$gray-2: #F3F3F3;
-$gray-3: #DBDBDB;
-$gray-4: #AAAAAA;
+$gray-1: #fdfdfd;
+$gray-2: #f3f3f3;
+$gray-3: #dbdbdb;
+$gray-4: #aaaaaa;
 $gray-5: #555555;
 
 $black: #24292f;
 
-$primary-1: #FF6F39;
-$primary-2: #FF936B;
-$primary-3: #FCE8E1;
+$primary-1: #ff6f39;
+$primary-2: #ff936b;
+$primary-3: #fce8e1;
 
 $success-1: #4dff39;
 $success-2: #89ff6b;

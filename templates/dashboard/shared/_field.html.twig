@@ -17,6 +17,31 @@
         </div>
 
         <script type="module" src="{{ asset('/javascript/ckeditor.js') }}" ></script>
+    {% elseif field.vars.id == 'blog_post_links' %}
+        <ul 
+            class="links"
+            data-index="{{ form.links|length > 0 ? form.links|last.vars.name + 1 : 0 }}"
+            data-prototype="{{ form_widget(form.links.vars.prototype)|e('html_attr') }}"
+        >            
+            {% for linkForm in field %}
+                <li>
+                    <div id="{{ linkForm.vars.id }}">
+                        {{ form_row(linkForm.icon) }}
+                        {{ form_row(linkForm.url) }}
+                        {{ form_row(linkForm.remove) }}
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <button 
+            type="button" 
+            class="add_item_link button button-secondary" 
+            data-collection-holder-class="links"
+        >
+            Add a Link
+        </button>
+        <script type="module" src="{{ asset('/javascript/blog-post-links.js') }}" ></script>
     {% else %}
         {{ form_widget(field) }}
     {% endif %}

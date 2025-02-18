@@ -1,19 +1,19 @@
-@use 'variables';
+@use "variables";
 
 div.pagination {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 
-    a {
-        margin: 5px 0;
-        padding: 5px 15px;
-        border-radius: 8px;
-        border: 1px solid variables.$primary-1;
+  a {
+    margin: 5px 0;
+    padding: 5px 15px;
+    border-radius: 8px;
+    border: 1px solid variables.$primary-1;
 
-        &.active {
-            color: variables.$gray-1;
-            background-color: variables.$primary-1;
-        }
+    &.active {
+      color: variables.$gray-1;
+      background-color: variables.$primary-1;
     }
+  }
 }

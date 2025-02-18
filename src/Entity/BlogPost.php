@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\BlogPostRepository;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: BlogPostRepository::class)]
 #[UniqueEntity(fields: ['title'], message: 'The blog post title has to be unique.')]
@@ -61,6 +63,17 @@ class BlogPost
         message: 'Choose a valid category.',
     )]
     private ?string $category = null;
+
+    /**
+     * @var Collection<int, BlogPostLink>
+     */
+    #[ORM\OneToMany(targetEntity: BlogPostLink::class, mappedBy: 'blogPost')]
+    private Collection $links;
+
+    public function __construct()
+    {
+        $this->links = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -147,6 +160,36 @@ class BlogPost
     public function setCategory(string $category): static
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, BlogPostLink>
+     */
+    public function getLinks(): Collection
+    {
+        return $this->links;
+    }
+
+    public function addLink(BlogPostLink $link): static
+    {
+        if (!$this->links->contains($link)) {
+            $this->links->add($link);
+            $link->setBlogPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLink(BlogPostLink $link): static
+    {
+        if ($this->links->removeElement($link)) {
+            // set the owning side to null (unless already changed)
+            if ($link->getBlogPost() === $this) {
+                $link->setBlogPost(null);
+            }
+        }
 
         return $this;
     }

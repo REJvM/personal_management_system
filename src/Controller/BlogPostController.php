@@ -7,6 +7,7 @@ use App\Pagination;
 use App\Entity\BlogPost;
 use App\Form\BlogPostType;
 use App\Form\Type\CkeditorType;
+use App\Repository\BlogPostLinkRepository;
 use App\Repository\BlogPostRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,10 +20,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class BlogPostController extends AbstractController
 {
     private $_posts;
+    private $_postLinks;
 
-    public function __construct(BlogPostRepository $posts)
-    {
+    public function __construct(
+        BlogPostRepository $posts,
+        BlogPostLinkRepository $postLinks
+    ) {
         $this->_posts = $posts;
+        $this->_postLinks = $postLinks;
     }
 
     #[Route('/dashboard/blog-posts', name: 'app_dashboard_blog_post')]
@@ -50,7 +55,6 @@ class BlogPostController extends AbstractController
     #[Route('/dashboard/blog-posts/create', name: 'app_dashboard_blog_post_create')]
     public function create(
         Request $request,
-        BlogPostRepository $blogPostRepository,
         EntityManagerInterface $entityManager
     ): Response {
         $post = new BlogPost();
@@ -61,13 +65,26 @@ class BlogPostController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $content = $form->get('content')->getData();
             $strippedContent = strip_tags($content, CkeditorType::ALLOWED_TAGS);
-            $newContent = $blogPostRepository->addIdToHeading($strippedContent);
+            $newContent = $this->_posts->addIdToHeading($strippedContent);
 
             $post->setTitle($form->get('title')->getData());
             $post->setCategory($form->get('category')->getData());
             $post->setContent($newContent);
             $post->setCreatedOn(new DateTime());
             $post->setCreatedBy($this->getUser());
+
+            foreach ($form->get('links')->getData() as $formLink) {
+                if ($formLink->getId()) {
+                    // Update existing link
+                    $entityManager->persist($formLink);
+                } else {
+                    // Add new link
+                    $post->addLink($formLink);
+                    $entityManager->persist($formLink);
+                }
+            }
+            $this->_postLinks->cleanupLinks();
+
             $entityManager->persist($post);
             $entityManager->flush();
 
@@ -87,7 +104,6 @@ class BlogPostController extends AbstractController
     #[Route('/dashboard/blog-posts/edit', name: 'app_dashboard_blog_post_edit')]
     public function edit(
         Request $request,
-        BlogPostRepository $blogPostRepository,
         EntityManagerInterface $entityManager
     ): Response {
         if ($request->get('object_id') === null) {
@@ -107,13 +123,25 @@ class BlogPostController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $content = $form->get('content')->getData();
             $strippedContent = strip_tags($content, CkeditorType::ALLOWED_TAGS);
-            $newContent = $blogPostRepository->addIdToHeading($strippedContent);
+            $newContent = $this->_posts->addIdToHeading($strippedContent);
 
             $post->setTitle($form->get('title')->getData());
             $post->setCategory($form->get('category')->getData());
             $post->setContent($newContent);
             $post->setModifiedOn(new DateTime());
             $post->setModifiedBy($this->getUser());
+
+            foreach ($form->get('links')->getData() as $formLink) {
+                if ($formLink->getId()) {
+                    // Update existing link
+                    $entityManager->persist($formLink);
+                } else {
+                    // Add new link
+                    $post->addLink($formLink);
+                    $entityManager->persist($formLink);
+                }
+            }
+            $this->_postLinks->cleanupLinks();
 
             $entityManager->persist($post);
             $entityManager->flush();
