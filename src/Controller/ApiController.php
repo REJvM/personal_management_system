@@ -15,7 +15,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class ApiController extends AbstractController
 {
     const VERSION_NUMBER = 1;
-    const BASE_API_PATH = '/api/v'.self::VERSION_NUMBER;
+    const BASE_API_PATH = '/api/v' . self::VERSION_NUMBER;
 
     private $_posts;
 
@@ -31,29 +31,28 @@ class ApiController extends AbstractController
         return $this->render('api/swagger.html.twig');
     }
 
-    #[Route(self::BASE_API_PATH.'/openapi.json', name: 'app_api_openapi', format:'json')]
+    #[Route(self::BASE_API_PATH . '/openapi.json', name: 'app_api_openapi', format: 'json')]
     public function openapi(): Response
     {
         return $this->render('api/openapi.json');
     }
-    
+
     #[Route(
-        self::BASE_API_PATH.'/blog-posts', 
-        name: 'app_api_blog_post_list', 
-        format:'json',
-        methods:['GET']
+        self::BASE_API_PATH . '/blog-posts',
+        name: 'app_api_blog_post_list',
+        format: 'json',
+        methods: ['GET']
     )]
     public function blogPostList(
         Request $request,
         Pagination $pagination
-    ): JsonResponse
-    {
+    ): JsonResponse {
         $page = (int) $request->query->get('offset', 1);
         $limit = (int) $request->query->get('limit', 20);
         $category = (string) $request->query->get('category', null);
 
         $queryBuilder = $this->_posts->createQueryBuilder('p');
-        if($category !== null && in_array($category, BlogPost::AVAILABLE_CATEGORIES)) {
+        if ($category !== null && in_array($category, BlogPost::AVAILABLE_CATEGORIES)) {
             $queryBuilder->andWhere('p.category = :val');
             $queryBuilder->setParameter('val', $category);
         }
@@ -82,10 +81,10 @@ class ApiController extends AbstractController
     }
 
     #[Route(
-        self::BASE_API_PATH.'/blog-posts/{id}', 
-        name: 'app_api_blog_post', 
-        format:'json',
-        methods:['GET']
+        self::BASE_API_PATH . '/blog-posts/{id}',
+        name: 'app_api_blog_post',
+        format: 'json',
+        methods: ['GET']
     )]
     public function blogPost(int $id): JsonResponse
     {
@@ -100,6 +99,7 @@ class ApiController extends AbstractController
             'title' => $blogPost->getTitle(),
             'content' => $blogPost->getContent(),
             'category' => $blogPost->getCategory(),
+            'links' => $blogPost->getLinks(),
             'last_modified_on' => $lastModifiedOn
         ]);
     }

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\EventSubscriber;
 
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -24,11 +25,13 @@ class ApiKeySubscriber implements EventSubscriberInterface
          * block all API calls if there is no api key in the headers.
          * Exclude swagger interface from this key requirement. 
          */
-        if(strpos($request->getPathInfo(), '/api/v1/') === 0 && 
+        if (
+            strpos($request->getPathInfo(), '/api/v1/') === 0 &&
             in_array($request->getPathInfo(), ['/api/v1/', '/api/v1/openapi.json']) === false
-         ) {
+        ) {
             $headers = getallheaders();
-            if (array_key_exists('Api-Key', $headers) === false || 
+            if (
+                array_key_exists('Api-Key', $headers) === false ||
                 $headers['Api-Key'] !== $this->apiKey
             ) {
                 throw new AccessDeniedHttpException('This action needs a valid key!');

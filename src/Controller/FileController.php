@@ -36,40 +36,38 @@ class FileController extends AbstractController
 
         $page = $request->get('page', 1);
         $listedFiles = $pagination->paginate($queryBuilder, $page);
-        
+
         return $this->render('dashboard/files/index.html.twig', [
             'files' => $listedFiles['items'],
             'totalPages' => $listedFiles['totalPages']
         ]);
     }
-    
+
     #[Route('/dashboard/files/create', name: 'app_dashboard_file_create')]
     public function create(
         Request $request,
         SluggerInterface $slugger,
         EntityManagerInterface $entityManager
-    ): Response
-    {
+    ): Response {
         $post = new FileUpload();
         $form = $this->createForm(FileUploadType::class, $post);
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $fileDatabaseEntry = $form->getData();
 
             $uploadedFile = $form->get('file')->getData();
-            if($uploadedFile === null) {
+            if ($uploadedFile === null) {
                 return $this->handleError('No file data was uploaded.');
             }
 
             $saveFileName = $slugger->slug($form->get('name')->getData());
-            $newFileName = $saveFileName . '-' . uniqid(). '.' . $uploadedFile->guessExtension();
+            $newFileName = $saveFileName . '-' . uniqid() . '.' . $uploadedFile->guessExtension();
 
             try {
                 /* move background image to a different folder */
-                if($form->get('loginBackground')->getData() === true) {
+                if ($form->get('loginBackground')->getData() === true) {
                     $uploadedFile->move(
                         $this->getParameter('files_uploads_backgrounds_directory'),
                         $newFileName
@@ -80,7 +78,7 @@ class FileController extends AbstractController
                         $newFileName
                     );
                 }
-            } catch(FileException $e) {
+            } catch (FileException $e) {
                 return $this->handleError('Error while uploading file.');
             }
 
@@ -100,7 +98,7 @@ class FileController extends AbstractController
             'form' => $form
         ]);
     }
-    
+
     #[Route('/dashboard/files/delete', name: 'app_dashboard_file_delete')]
     #[IsGranted('ROLE_ADMIN')]
     public function delete(
@@ -108,19 +106,20 @@ class FileController extends AbstractController
         EntityManagerInterface $entityManager
     ): Response {
 
-        if($request->get('object_id') === null) {
+        if ($request->get('object_id') === null) {
             return $this->handleError('No file was found.');
         }
-        
+
         $file = $this->_files->find($request->get('object_id'));
 
-        if($file === null) {
+        if ($file === null) {
             return $this->handleError('No file was found.');
         }
 
         /* delete file in upload folder */
         $uploadDirectory = $this->getParameter('files_uploads_directory');
-        if( file_exists($uploadDirectory . $file->getFileName()) &&
+        if (
+            file_exists($uploadDirectory . $file->getFileName()) &&
             is_writable($uploadDirectory . $file->getFileName())
         ) {
             unlink($uploadDirectory . $file->getFileName());
@@ -128,7 +127,8 @@ class FileController extends AbstractController
 
         /* delete file in background folder */
         $backgroundUploadDirectory = $this->getParameter('files_uploads_backgrounds_directory');
-        if( file_exists($backgroundUploadDirectory . $file->getFileName()) &&
+        if (
+            file_exists($backgroundUploadDirectory . $file->getFileName()) &&
             is_writable($backgroundUploadDirectory . $file->getFileName())
         ) {
             unlink($backgroundUploadDirectory . $file->getFileName());
@@ -141,11 +141,11 @@ class FileController extends AbstractController
 
         return $this->redirect($request->headers->get('referer'));
     }
-    
-    protected function handleError(string $message): RedirectResponse 
+
+    protected function handleError(string $message): RedirectResponse
     {
         $this->addFlash('error', $message);
-        
+
         return $this->redirectToRoute('app_dashboard_file', [
             'files' => $this->_files->findAll()
         ]);

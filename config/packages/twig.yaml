@@ -1,12 +1,12 @@
 twig:
-    file_name_pattern: '*.twig'
-    globals:
-        my_email: '%app.my_email%'
-        my_github_link: '%app.my_github_link%'
-        kernal_project_dir: '%kernel.project_dir%'
-        files_uploads_backgrounds: '%files_uploads%background/'
-        files_uploads_backgrounds_directory: '%kernel.project_dir%/public%files_uploads_backgrounds%/'
+  file_name_pattern: "*.twig"
+  globals:
+    my_email: "%app.my_email%"
+    my_github_link: "%app.my_github_link%"
+    kernal_project_dir: "%kernel.project_dir%"
+    files_uploads_backgrounds: "%files_uploads%background/"
+    files_uploads_backgrounds_directory: "%kernel.project_dir%/public%files_uploads_backgrounds%/"
 
 when@test:
-    twig:
-        strict_variables: true
+  twig:
+    strict_variables: true

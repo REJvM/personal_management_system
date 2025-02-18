@@ -32,7 +32,7 @@ class BackgroundExtension extends AbstractExtension
         foreach ($finder as $file) {
             $allImageNames[] = $file->getFilename();
         }
-        
+
         return (string) $filePath . $allImageNames[array_rand($allImageNames)];
     }
 }
