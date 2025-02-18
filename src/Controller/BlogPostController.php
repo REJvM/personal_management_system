@@ -36,11 +36,11 @@ class BlogPostController extends AbstractController
         Pagination $pagination
     ): Response {
         $posts = $this->_posts;
-        if ($request->get('category')) {
-            $posts = $posts->where("u.category = '" . $request->get('category') . "'");
-        }
 
         $queryBuilder = $posts->createQueryBuilder('u');
+        if ($request->get('category')) {
+            $posts = $queryBuilder->where("u.category = '" . $request->get('category') . "'");
+        }
 
         $page = $request->get('page', 1);
         $listedPosts = $pagination->paginate($queryBuilder, $page);
