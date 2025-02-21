@@ -95,11 +95,19 @@ class ApiController extends AbstractController
 
         $lastModifiedOn = $blogPost->getModifiedOn() !== null ? $blogPost->getModifiedOn() : $blogPost->getCreatedOn();
 
+        $singlePostLinks = [];
+        foreach ($blogPost->getLinks() as $link) {
+            $singlePostLinks[] = [
+                'url' => $link->getUrl(),
+                'icon' => $link->getIcon()
+            ];
+        }
+
         return $this->json([
             'title' => $blogPost->getTitle(),
             'content' => $blogPost->getContent(),
             'category' => $blogPost->getCategory(),
-            'links' => $blogPost->getLinks(),
+            'links' => $singlePostLinks,
             'last_modified_on' => $lastModifiedOn
         ]);
     }
