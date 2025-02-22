@@ -64,8 +64,9 @@ class BlogPostController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $content = $form->get('content')->getData();
-            $strippedContent = strip_tags($content, CkeditorType::ALLOWED_TAGS);
-            $newContent = $this->_posts->addIdToHeading($strippedContent);
+            $newContent = strip_tags($content, CkeditorType::ALLOWED_TAGS);
+            $this->_posts->addIdToHeading($newContent);
+            $this->_posts->addCodeLanguageToPre($newContent);
 
             $post->setTitle($form->get('title')->getData());
             $post->setCategory($form->get('category')->getData());
@@ -122,8 +123,9 @@ class BlogPostController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $content = $form->get('content')->getData();
-            $strippedContent = strip_tags($content, CkeditorType::ALLOWED_TAGS);
-            $newContent = $this->_posts->addIdToHeading($strippedContent);
+            $newContent = strip_tags($content, CkeditorType::ALLOWED_TAGS);
+            $this->_posts->addIdToHeading($newContent);
+            $this->_posts->addCodeLanguageToPre($newContent);
 
             $post->setTitle($form->get('title')->getData());
             $post->setCategory($form->get('category')->getData());

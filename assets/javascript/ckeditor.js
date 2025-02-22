@@ -105,6 +105,19 @@ const editorConfig = {
         Underline,
         Undo
     ],
+    codeBlock: {
+        languages: [
+            { language: 'plaintext', label: 'Plain text' }, 
+            { language: 'css', label: 'CSS' },
+            { language: 'html', label: 'HTML' },
+            { language: 'javascript', label: 'JavaScript' },
+            { language: 'php', label: 'PHP' },
+            { language: 'python', label: 'Python' },
+            { language: 'ruby', label: 'Ruby' },
+            { language: 'typescript', label: 'TypeScript' },
+            { language: 'xml', label: 'XML' }
+        ]
+    },
     blockToolbar: ['bold', 'italic', '|', 'link', 'insertTable', '|', 'bulletedList', 'numberedList', 'outdent', 'indent'],
     heading: {
         options: [
@@ -173,7 +186,7 @@ const editorConfig = {
 };
 
 BalloonEditor.create(document.querySelector('#editor'), editorConfig)
-.then( newEditor => {
+    .then( newEditor => {
         editor = newEditor;
     } )
     .catch( error => {

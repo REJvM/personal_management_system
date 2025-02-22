@@ -105,5 +105,6 @@
 }
 
 .editor-container_balloon-editor .editor-container__editor {
+  min-height: 200px;
   border: 1px solid variables.$gray-4;
 }

@@ -9,12 +9,12 @@ use Doctrine\ORM\Mapping as ORM;
 class BlogPostLink
 {
     public const LINK_ICONS = [
-        'Github' => 'icon-github-mark',
-        'Codepen' => 'icon-codepen',
-        'Behance' => 'icon-behance2',
-        'Youtube' => 'icon-youtube',
-        'Facebook' => 'icon-facebook2',
-        'X' => 'icon-x'
+        'Github' => 'Github',
+        'Codepen' => 'Codepen',
+        'Behance' => 'Behance',
+        'Youtube' => 'Youtube',
+        'Facebook' => 'Facebook',
+        'X' => 'X'
     ];
 
     #[ORM\Id]
