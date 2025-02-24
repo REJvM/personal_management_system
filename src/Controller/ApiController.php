@@ -97,10 +97,14 @@ class ApiController extends AbstractController
 
         $singlePostLinks = [];
         foreach ($blogPost->getLinks() as $link) {
-            $singlePostLinks[] = [
+            $linkInfo = [
                 'url' => $link->getUrl(),
                 'icon' => $link->getIcon()
             ];
+            if ($link->getName()) {
+                $linkInfo['name'] = $link->getName();
+            }
+            $singlePostLinks[] = $linkInfo;
         }
 
         return $this->json([

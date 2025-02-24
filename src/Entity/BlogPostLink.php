@@ -28,6 +28,9 @@ class BlogPostLink
     #[ORM\Column(length: 255)]
     private ?string $icon = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $name = null;
+
     #[ORM\ManyToOne(inversedBy: 'links')]
     private ?BlogPost $blogPost = null;
 
@@ -54,6 +57,18 @@ class BlogPostLink
     public function setIcon(string $icon): void
     {
         $this->icon = $icon;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(?string $name): static
+    {
+        $this->name = $name;
+
+        return $this;
     }
 
     public function getBlogPost(): ?BlogPost
