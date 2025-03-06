@@ -72,7 +72,8 @@
                     "properties": {
                       "title": {
                         "type": "string",
-                        "example": "My first Blog post"
+                        "example": "My first Blog post",
+                        "required": true
                       },
                       "category": {
                         "type": "string",
@@ -82,31 +83,38 @@
                           "resources",
                           "archive"
                         ],
-                        "example": "projects"
+                        "example": "projects",
+                        "required": true
                       },
                       "last_modified_on": {
                         "type": "string",
                         "format": "date-time",
-                        "example": "2025-01-31T10:11:12.000Z"
+                        "example": "2025-01-31T10:11:12.000Z",
+                        "required": true
                       }
                     }
                   },
                   "pagination": {
+                      "type": "array",
                       "total": {
                         "type": "integer",
-                        "example": 20
+                        "example": 20,
+                        "required": true
                       },
                       "page": {
                         "type": "integer",
-                        "example": 1
+                        "example": 1,
+                        "required": true
                       },
                       "limit":  {
                         "type": "integer",
-                        "example": 5
+                        "example": 5,
+                        "required": true
                       },
                       "totalPages": {
                         "type": "integer",
-                        "example": 4
+                        "example": 4,
+                        "required": true
                       }
                   }
                 }
@@ -159,11 +167,13 @@
                   "properties": {
                     "title": {
                       "type": "string",
-                      "example": "My first Blog post"
+                      "example": "My first Blog post",
+                      "required": true
                     },
                     "content": {
                       "type": "string",
-                      "example": "<h1>Congratulations on setting up the Project</h1>p>This is an example post.</p>"
+                      "example": "<h1>Congratulations on setting up the Project</h1>p>This is an example post.</p>",
+                      "required": true
                     },
                     "category": {
                       "type": "string",
@@ -173,12 +183,27 @@
                         "resources",
                         "archive"
                       ],
-                      "example": "projects"
+                      "example": "projects",
+                      "required": true
                     },
                     "last_modified_on": {
                       "type": "string",
                       "format": "date-time",
-                      "example": "2025-01-31T10:11:12.000Z"
+                      "example": "2025-01-31T10:11:12.000Z",
+                      "required": true
+                    },
+                    "user": {
+                      "type": "array",
+                      "items": {
+                        "name": {
+                          "type": "string",
+                          "example": "Admin"
+                        },
+                        "picture": {
+                          "type": "string",
+                          "example": "picture_name-12345678.jpg"
+                        }
+                      }
                     }
                   }
                 }

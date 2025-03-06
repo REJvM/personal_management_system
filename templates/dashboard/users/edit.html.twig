@@ -31,6 +31,11 @@
                             label: 'Repeated Password',
                     } %}{% endembed %}
                 </div>
+
+                {% embed 'dashboard/shared/_field.html.twig' with { 
+                        field: form.userProfile.picture,
+                        label: 'Picture',
+                } %}{% endembed %}
             </fieldset>
 
             <div class="actions">

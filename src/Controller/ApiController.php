@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Pagination;
+use App\Entity\User;
 use App\Entity\BlogPost;
 use App\Repository\BlogPostRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -107,12 +108,25 @@ class ApiController extends AbstractController
             $singlePostLinks[] = $linkInfo;
         }
 
-        return $this->json([
+        $user = $blogPost->getCreatedBy();
+
+        $parameters = [
             'title' => $blogPost->getTitle(),
             'content' => $blogPost->getContent(),
             'category' => $blogPost->getCategory(),
             'links' => $singlePostLinks,
-            'last_modified_on' => $lastModifiedOn
-        ]);
+            'last_modified_on' => $lastModifiedOn,
+        ];
+
+        if ($user instanceof User) {
+            $userProfile = $user->getUserProfile();
+            $parameters['user'] = [];
+            $parameters['user']['name'] = $userProfile->getName() != null ? $userProfile->getName() : $user->getEmail();
+            if ($userProfile->getPicture() !== null) {
+                $parameters['user']['picture'] = $userProfile->getPicture()->getFileName();
+            }
+        }
+
+        return $this->json($parameters);
     }
 }
