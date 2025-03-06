@@ -20,6 +20,7 @@ class UserProfileType extends AbstractType
                 'choice_label' => 'name',
                 'multiple' => false,
                 'expanded' => false,
+                'required' => false
             ]);
     }
 
