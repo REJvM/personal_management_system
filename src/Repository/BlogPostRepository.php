@@ -2,6 +2,9 @@
 
 namespace App\Repository;
 
+use \DomXPath;
+use \DOMDocument;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use App\Entity\BlogPost;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -11,9 +14,67 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class BlogPostRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private $slugger;
+
+    public function __construct(ManagerRegistry $registry, SluggerInterface $slugger)
     {
+        $this->slugger = $slugger;
+
         parent::__construct($registry, BlogPost::class);
+    }
+
+    public function addIdToHeading(string &$htmlString)
+    {
+        $dom = new DOMDocument();
+        libxml_use_internal_errors(true);
+        $dom->loadHTML('<?xml encoding="UTF-8">' . $htmlString);
+        libxml_use_internal_errors(false);
+
+        $xpath = new DomXPath($dom);
+        $headers = $xpath->query("//h2");
+
+        /** @var DomElement $header */
+        foreach ($headers as $header) {
+            $header->setAttribute(
+                "id",
+                $this->slugger->slug(
+                    strtolower(
+                        $header->nodeValue
+                    )
+                )
+            );
+        }
+
+        $htmlString = null;
+        foreach ($dom->documentElement->childNodes as $n) {
+            $htmlString .= $dom->saveHTML($n);
+        }
+    }
+
+
+    public function addCodeLanguageToPre(string &$htmlString)
+    {
+        $dom = new DOMDocument();
+        libxml_use_internal_errors(true);
+        $dom->loadHTML('<?xml encoding="UTF-8">' . $htmlString);
+        libxml_use_internal_errors(false);
+
+        $xpath = new DomXPath($dom);
+        $pres = $xpath->query("//pre");
+
+        /** @var DomElement $pre */
+        foreach ($pres as $pre) {
+            if (isset($pre->childNodes->item(0)->className)) {
+                $codeClass = $pre->childNodes->item(0)->className;
+                $codeLanguage = substr($codeClass, strlen('language-'));
+                $pre->setAttribute('data-language', ucfirst($codeLanguage));
+            }
+        }
+
+        $htmlString = null;
+        foreach ($dom->documentElement->childNodes as $n) {
+            $htmlString .= $dom->saveHTML($n);
+        }
     }
 
     //    /**

@@ -13,7 +13,6 @@ import {
     FindAndReplace,
     Heading,
     Highlight,
-    HorizontalLine,
     Indent,
     IndentBlock,
     Italic,
@@ -33,8 +32,6 @@ import {
     Table,
     TableToolbar,
     TextTransformation,
-    Title,
-    TodoList,
     Underline,
     Undo
 } from 'https://cdn.ckeditor.com/ckeditor5/43.3.1/ckeditor5.js';
@@ -59,7 +56,6 @@ const editorConfig = {
             'code',
             '|',
             'specialCharacters',
-            'horizontalLine',
             'link',
             'insertTable',
             'highlight',
@@ -68,7 +64,6 @@ const editorConfig = {
             '|',
             'bulletedList',
             'numberedList',
-            'todoList',
             'outdent',
             'indent'
         ],
@@ -88,7 +83,6 @@ const editorConfig = {
         FindAndReplace,
         Heading,
         Highlight,
-        HorizontalLine,
         Indent,
         IndentBlock,
         Italic,
@@ -108,11 +102,22 @@ const editorConfig = {
         Table,
         TableToolbar,
         TextTransformation,
-        Title,
-        TodoList,
         Underline,
         Undo
     ],
+    codeBlock: {
+        languages: [
+            { language: 'plaintext', label: 'Plain text' }, 
+            { language: 'css', label: 'CSS' },
+            { language: 'html', label: 'HTML' },
+            { language: 'javascript', label: 'JavaScript' },
+            { language: 'php', label: 'PHP' },
+            { language: 'python', label: 'Python' },
+            { language: 'ruby', label: 'Ruby' },
+            { language: 'typescript', label: 'TypeScript' },
+            { language: 'xml', label: 'XML' }
+        ]
+    },
     blockToolbar: ['bold', 'italic', '|', 'link', 'insertTable', '|', 'bulletedList', 'numberedList', 'outdent', 'indent'],
     heading: {
         options: [
@@ -120,12 +125,6 @@ const editorConfig = {
                 model: 'paragraph',
                 title: 'Paragraph',
                 class: 'ck-heading_paragraph'
-            },
-            {
-                model: 'heading1',
-                view: 'h1',
-                title: 'Heading 1',
-                class: 'ck-heading_heading1'
             },
             {
                 model: 'heading2',
@@ -187,7 +186,7 @@ const editorConfig = {
 };
 
 BalloonEditor.create(document.querySelector('#editor'), editorConfig)
-.then( newEditor => {
+    .then( newEditor => {
         editor = newEditor;
     } )
     .catch( error => {

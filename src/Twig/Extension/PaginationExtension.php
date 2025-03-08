@@ -15,13 +15,13 @@ class PaginationExtension extends AbstractExtension
             new TwigFunction('active_page', [$this, 'getActivePage']),
         ];
     }
-    
+
     public function getActivePage(string|null $queryString, int $pageNumber): string
     {
         $queryParameters = [];
         $active = $pageNumber === 1;
         parse_str($queryString, $queryParameters);
-        if($queryString !== null && array_key_exists(Pagination::PAGE_PARAMETER, $queryParameters)) {
+        if ($queryString !== null && array_key_exists(Pagination::PAGE_PARAMETER, $queryParameters)) {
             $active = (int) $queryParameters[Pagination::PAGE_PARAMETER] === $pageNumber;
         }
         return $active ? 'active' : '';
@@ -30,11 +30,11 @@ class PaginationExtension extends AbstractExtension
     public function getPaginationPath(string $pathinfo, string|null $queryString, int $pagenumber): string
     {
         $query = '';
-        if($queryString !== null) {
+        if ($queryString !== null) {
             parse_str($queryString, $queryParameters);
         }
         $queryParameters[Pagination::PAGE_PARAMETER] = $pagenumber;
-        $query = '?' . http_build_query($queryParameters); 
+        $query = '?' . http_build_query($queryParameters);
         return $pathinfo . $query;
     }
 }

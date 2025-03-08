@@ -7,6 +7,7 @@ use App\Pagination;
 use App\Entity\BlogPost;
 use App\Form\BlogPostType;
 use App\Form\Type\CkeditorType;
+use App\Repository\BlogPostLinkRepository;
 use App\Repository\BlogPostRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,27 +19,31 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class BlogPostController extends AbstractController
 {
-    private $_posts; 
+    private $_posts;
+    private $_postLinks;
 
-    public function __construct(BlogPostRepository $posts) {
+    public function __construct(
+        BlogPostRepository $posts,
+        BlogPostLinkRepository $postLinks
+    ) {
         $this->_posts = $posts;
+        $this->_postLinks = $postLinks;
     }
 
     #[Route('/dashboard/blog-posts', name: 'app_dashboard_blog_post')]
     public function index(
         Request $request,
         Pagination $pagination
-    ): Response
-    {
+    ): Response {
         $posts = $this->_posts;
-        if($request->get('category')) {
-            $posts = $posts->where("u.category = '" . $request->get('category') . "'");
-        }
 
         $queryBuilder = $posts->createQueryBuilder('u');
+        if ($request->get('category')) {
+            $posts = $queryBuilder->where("u.category = '" . $request->get('category') . "'");
+        }
 
         $page = $request->get('page', 1);
-        $listedPosts = $pagination->paginate($queryBuilder, $page, 2);
+        $listedPosts = $pagination->paginate($queryBuilder, $page);
 
         return $this->render('dashboard/posts/index.html.twig', [
             'posts' => $listedPosts['items'],
@@ -51,23 +56,36 @@ class BlogPostController extends AbstractController
     public function create(
         Request $request,
         EntityManagerInterface $entityManager
-    ): Response
-    {
+    ): Response {
         $post = new BlogPost();
         $form = $this->createForm(BlogPostType::class, $post);
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $content = $form->get('content')->getData();
-            $strippedContent = strip_tags($content, CkeditorType::ALLOWED_TAGS);
-            
+            $newContent = strip_tags($content, CkeditorType::ALLOWED_TAGS);
+            $this->_posts->addIdToHeading($newContent);
+            $this->_posts->addCodeLanguageToPre($newContent);
+
             $post->setTitle($form->get('title')->getData());
             $post->setCategory($form->get('category')->getData());
-            $post->setContent($strippedContent);
+            $post->setContent($newContent);
             $post->setCreatedOn(new DateTime());
             $post->setCreatedBy($this->getUser());
+
+            foreach ($form->get('links')->getData() as $formLink) {
+                if ($formLink->getId()) {
+                    // Update existing link
+                    $entityManager->persist($formLink);
+                } else {
+                    // Add new link
+                    $post->addLink($formLink);
+                    $entityManager->persist($formLink);
+                }
+            }
+            $this->_postLinks->cleanupLinks();
+
             $entityManager->persist($post);
             $entityManager->flush();
 
@@ -88,15 +106,14 @@ class BlogPostController extends AbstractController
     public function edit(
         Request $request,
         EntityManagerInterface $entityManager
-    ): Response
-    {
-        if($request->get('object_id') === null) {
+    ): Response {
+        if ($request->get('object_id') === null) {
             return $this->handleError('No blog post was found.');
         }
 
         $post = $this->_posts->find($request->get('object_id'));
 
-        if($post === null) {
+        if ($post === null) {
             return $this->handleError('No blog post was found.');
         }
 
@@ -106,14 +123,28 @@ class BlogPostController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $content = $form->get('content')->getData();
-            $strippedContent = strip_tags($content, CkeditorType::ALLOWED_TAGS);
-            
+            $newContent = strip_tags($content, CkeditorType::ALLOWED_TAGS);
+            $this->_posts->addIdToHeading($newContent);
+            $this->_posts->addCodeLanguageToPre($newContent);
+
             $post->setTitle($form->get('title')->getData());
             $post->setCategory($form->get('category')->getData());
-            $post->setContent($strippedContent);
+            $post->setContent($newContent);
             $post->setModifiedOn(new DateTime());
             $post->setModifiedBy($this->getUser());
-            
+
+            foreach ($form->get('links')->getData() as $formLink) {
+                if ($formLink->getId()) {
+                    // Update existing link
+                    $entityManager->persist($formLink);
+                } else {
+                    // Add new link
+                    $post->addLink($formLink);
+                    $entityManager->persist($formLink);
+                }
+            }
+            $this->_postLinks->cleanupLinks();
+
             $entityManager->persist($post);
             $entityManager->flush();
 
@@ -137,13 +168,13 @@ class BlogPostController extends AbstractController
         EntityManagerInterface $entityManager
     ): Response {
 
-        if($request->get('object_id') == null) {
+        if ($request->get('object_id') == null) {
             return  $this->handleError('No blog post was found.');
         }
 
         $post = $this->_posts->find($request->get('object_id'));
 
-        if($post === null) {
+        if ($post === null) {
             return  $this->handleError('No blog post was found.');
         }
 
@@ -155,10 +186,10 @@ class BlogPostController extends AbstractController
         return $this->redirect($request->headers->get('referer'));
     }
 
-    protected function handleError(string $message): RedirectResponse 
+    protected function handleError(string $message): RedirectResponse
     {
         $this->addFlash('error', $message);
-        
+
         return $this->redirectToRoute('app_dashboard_blog_post', [
             'users' => $this->_posts->findAll()
         ]);

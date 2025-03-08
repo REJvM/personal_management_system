@@ -1,4 +1,5 @@
 <?php
+
 namespace App\EventListener;
 
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -15,8 +16,8 @@ class ApiExceptionListener implements EventSubscriberInterface
         $exception = $event->getThrowable();
         $request = $event->getRequest();
 
-        if($exception instanceof HttpException) {
-            if($request->getPathInfo() === '/api' || strpos($request->getPathInfo(), '/api/') === 0) {
+        if ($exception instanceof HttpException) {
+            if ($request->getPathInfo() === '/api' || strpos($request->getPathInfo(), '/api/') === 0) {
                 $response = new JsonResponse([
                     'message' => $exception->getMessage(),
                     'statusCode' => $exception->getStatusCode(),

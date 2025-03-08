@@ -1,4 +1,4 @@
-const tbody = document.querySelector('form#tableForm table tbody');
+const tbody = document.querySelector('form#table-form table tbody');
 if(tbody) {
     tbody.addEventListener('click', element => {
         const tr = element.target.parentNode;

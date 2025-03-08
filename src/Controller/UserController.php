@@ -35,7 +35,7 @@ class UserController extends AbstractController
         $listedUsers = $pagination->paginate($queryBuilder, $page);
 
         return $this->render('dashboard/users/index.html.twig', [
-            'users' => $listedUsers['items'],            
+            'users' => $listedUsers['items'],
             'totalPages' => $listedUsers['totalPages']
         ]);
     }
@@ -45,15 +45,15 @@ class UserController extends AbstractController
     public function edit(
         Request $request,
         EntityManagerInterface $entityManager,
-        UserPasswordHasherInterface $userPasswordHasher, 
+        UserPasswordHasherInterface $userPasswordHasher,
     ): Response {
-    
-        if($request->get('object_id') === null) {
+
+        if ($request->get('object_id') === null) {
             return $this->handleError('No user was found.');
         }
 
         $user = $this->_users->find($request->get('object_id'));
-        if($user === null) {
+        if ($user === null) {
             return $this->handleError('No user was found.');
         }
 
@@ -66,14 +66,14 @@ class UserController extends AbstractController
 
             /** @var string $plainPassword */
             $plainPassword = $form->get('plainPassword')->getData();
-            
+
             $user->setRoles($roles);
-            
-            if($plainPassword) {
+
+            if ($plainPassword) {
                 // encode the plain password
                 $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
             }
-            
+
             $entityManager->persist($user);
             $entityManager->flush();
 
@@ -90,7 +90,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    
+
     #[Route('/dashboard/users/delete', name: 'app_dashboard_user_delete')]
     #[IsGranted('ROLE_ADMIN')]
     public function delete(
@@ -98,13 +98,13 @@ class UserController extends AbstractController
         EntityManagerInterface $entityManager
     ): Response {
 
-        if($request->get('object_id') === null) {
+        if ($request->get('object_id') === null) {
             return $this->handleError('No user was found.');
         }
-        
+
         $user = $this->_users->find($request->get('object_id'));
 
-        if($user === null) {
+        if ($user === null) {
             return $this->handleError('No user was found.');
         }
 
@@ -116,10 +116,10 @@ class UserController extends AbstractController
         return $this->redirect($request->headers->get('referer'));
     }
 
-    protected function handleError(string $message): RedirectResponse 
+    protected function handleError(string $message): RedirectResponse
     {
         $this->addFlash('error', $message);
-        
+
         return $this->redirectToRoute('app_dashboard_user', [
             'users' => $this->_users->findAll()
         ]);

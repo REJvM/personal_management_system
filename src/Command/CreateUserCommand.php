@@ -22,8 +22,7 @@ class CreateUserCommand extends Command
     public function __construct(
         private UserPasswordHasherInterface $userPasswordHasher,
         private EntityManagerInterface $entityManager
-    )
-    {
+    ) {
         parent::__construct();
     }
 
@@ -47,7 +46,7 @@ class CreateUserCommand extends Command
         $newUser->setEmail($email);
         $newUser->setPassword(
             $this->userPasswordHasher->hashPassword(
-                $newUser, 
+                $newUser,
                 $password
             )
         );

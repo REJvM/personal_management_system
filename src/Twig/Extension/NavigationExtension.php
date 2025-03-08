@@ -13,7 +13,7 @@ class NavigationExtension extends AbstractExtension
             new TwigFunction('active_route', [$this, 'getActiveRoute']),
         ];
     }
-    
+
     public function getActiveRoute(string $value, string $route): string
     {
         // check if route is in the first part of the value.

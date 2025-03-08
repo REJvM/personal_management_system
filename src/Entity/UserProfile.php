@@ -20,6 +20,9 @@ class UserProfile
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $name = null;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?fileUpload $picture = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -45,6 +48,18 @@ class UserProfile
     public function setName(?string $name): static
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getPicture(): ?fileUpload
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?fileUpload $picture): static
+    {
+        $this->picture = $picture;
 
         return $this;
     }

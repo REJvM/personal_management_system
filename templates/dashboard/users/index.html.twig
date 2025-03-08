@@ -11,7 +11,7 @@
             <div class="content-actions">
                 <button 
                     type="submit" 
-                    form="tableForm"
+                    form="table-form"
                     formaction="{{ path('app_dashboard_user_edit') }}"
                     value="edit" 
                     class="button button-secondary"
@@ -25,7 +25,7 @@
                 
                 <button 
                     type="submit" 
-                    form="tableForm" 
+                    form="table-form" 
                     formaction="{{ path('app_dashboard_user_delete') }}"
                     value="delete" 
                     class="button button-secondary"
@@ -46,7 +46,7 @@
                 <span>No users have been found.</span>
             </div>
         {% else %}
-            <form id="tableForm">
+            <form id="table-form">
                 <table>
                     <thead>
                         <tr>

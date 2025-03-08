@@ -3,11 +3,13 @@
 namespace App\Form;
 
 use App\Entity\BlogPost;
+use App\Form\BlogPostLinkType;
 use App\Form\Type\CkeditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class BlogPostType extends AbstractType
 {
@@ -19,6 +21,14 @@ class BlogPostType extends AbstractType
                 'choices' => BlogPost::AVAILABLE_CATEGORIES,
                 'multiple' => false,
                 'expanded' => false,
+            ])
+            ->add('links', CollectionType::class, [
+                'entry_type' => BlogPostLinkType::class,
+                'entry_options' => ['label' => false],
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'label' => false,
             ])
             ->add('content', CkeditorType::class)
         ;

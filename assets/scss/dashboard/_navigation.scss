@@ -1,73 +1,73 @@
-@use 'variables';
+@use "variables";
 
 nav {
-    position: fixed;
-    padding-top: 80px;
-    background-color: variables.$primary-1;
-    min-width: 120px;
-    height: 100%;
+  position: fixed;
+  padding-top: 80px;
+  background-color: variables.$primary-1;
+  min-width: 120px;
+  height: 100%;
 
-    ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-    }
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
 
-    li {
-        border-bottom: 1px solid variables.$gray-1;                
-    }
-    
-    a {
-        padding: 10px;        
-        color: variables.$gray-1;
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        gap: 5px;
+  li {
+    border-bottom: 1px solid variables.$gray-1;
+  }
 
-        &.active {
-            color: variables.$primary-1;
-            background-color: variables.$gray-1;
-            
-            svg.icon {
-                fill: variables.$primary-1;
-            }
-            &:hover {
-                svg.icon {
-                    fill: variables.$primary-1;
-                }
-            }
-        }
+  a {
+    padding: 10px;
+    color: variables.$gray-1;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 
+    &.active {
+      color: variables.$primary-1;
+      background-color: variables.$gray-1;
+
+      svg.icon {
+        fill: variables.$primary-1;
+      }
+      &:hover {
         svg.icon {
-            fill: variables.$gray-1;
+          fill: variables.$primary-1;
         }
-
-        &:hover {
-            svg.icon {
-                fill: variables.$gray-1;
-            }
-        }
+      }
     }
+
+    svg.icon {
+      fill: variables.$gray-1;
+    }
+
+    &:hover {
+      svg.icon {
+        fill: variables.$gray-1;
+      }
+    }
+  }
 }
 
 nav.open {
-    top: 0;
+  top: 0;
 }
 
 @media screen and (max-width: variables.$medium-breakpoint) {
-    nav {
-        top: -120%; // will be removed by class open.
-        width: 100vw;
-        height: 100%;
-        z-index: 90;
-        margin-top: 80px;
-        padding: 0;
-        border-top: 1px solid variables.$primary-1;
-        transition: top 0.3s ease-in-out;
+  nav {
+    top: -120%; // will be removed by class open.
+    width: 100vw;
+    height: 100%;
+    z-index: 90;
+    margin-top: 80px;
+    padding: 0;
+    border-top: 1px solid variables.$primary-1;
+    transition: top 0.3s ease-in-out;
 
-        a {
-            padding: 10px 30px
-        }
+    a {
+      padding: 10px 30px;
     }
+  }
 }

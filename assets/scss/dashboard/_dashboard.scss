@@ -1,144 +1,149 @@
-@use 'variables';
+@use "variables";
 
 body {
-    background-color: variables.$gray-2;
-    color: variables.$black;
-    font-family: "Mona Sans","Mona Sans Fallback","Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-    font-weight: 400;
+  background-color: variables.$gray-2;
+  color: variables.$black;
+  font-family: "Mona Sans", "Mona Sans Fallback", "Segoe UI", Helvetica, Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-weight: 400;
 }
 
 p {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 a {
-    color: variables.$primary-1;
-    text-decoration: underline;
-    &:hover {
-        text-decoration: none;
-    }
+  color: variables.$primary-1;
+  text-decoration: underline;
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 svg.icon {
-    display: inline-block;
-    width: 1em;
-    height: 1em;
-    stroke-width: 0;
-    stroke: variables.$primary-1;
-    fill: variables.$primary-1;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  stroke-width: 0;
+  stroke: variables.$primary-1;
+  fill: variables.$primary-1;
 }
 
 .button {
-    padding: 5px 10px;
-    border-radius: 10px;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
+  padding: 5px 10px;
+  border-radius: 10px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
 }
 
-button.button-primary, a.button-primary {
-    color: variables.$gray-1;
-    border: 1px solid variables.$primary-1;
-    background-color: variables.$primary-1;
+button.button-primary,
+a.button-primary {
+  color: variables.$gray-1;
+  border: 1px solid variables.$primary-1;
+  background-color: variables.$primary-1;
 
-    svg {
-        fill: variables.$gray-1;
-    }
+  svg {
+    fill: variables.$gray-1;
+  }
 
-    &:hover {
-        color: variables.$primary-1;
-        background-color: transparent;
-
-        svg {
-            fill: variables.$primary-1;
-        }
-    }
-
-    &:disabled, &:disabled:hover {
-        cursor: auto;
-        border: 1px solid variables.$gray-4;
-        background-color: variables.$gray-4;
-        
-        svg {
-            fill: variables.$gray-1;
-        }
-    }
-}
-
-button.button-secondary, a.button-secondary {
+  &:hover {
     color: variables.$primary-1;
-    border: 1px solid variables.$primary-1;
     background-color: transparent;
 
     svg {
-        fill: variables.$primary-1;
+      fill: variables.$primary-1;
     }
+  }
 
-    &:hover {
-        color: variables.$gray-1;
-        background-color: variables.$primary-1;
-        
-        svg {
-            fill: variables.$gray-1;
-        }
-    }
+  &:disabled,
+  &:disabled:hover {
+    cursor: auto;
+    border: 1px solid variables.$gray-4;
+    background-color: variables.$gray-4;
 
-    &:disabled, &:disabled:hover {
-        cursor: auto;
-        color: variables.$gray-4;
-        border: 1px solid variables.$gray-4;
-        background-color: transparent;
-        
-        svg {
-            fill: variables.$gray-4;
-        }
+    svg {
+      fill: variables.$gray-1;
     }
+  }
+}
+
+button.button-secondary,
+a.button-secondary {
+  color: variables.$primary-1;
+  border: 1px solid variables.$primary-1;
+  background-color: transparent;
+
+  svg {
+    fill: variables.$primary-1;
+  }
+
+  &:hover {
+    color: variables.$gray-1;
+    background-color: variables.$primary-1;
+
+    svg {
+      fill: variables.$gray-1;
+    }
+  }
+
+  &:disabled,
+  &:disabled:hover {
+    cursor: auto;
+    color: variables.$gray-4;
+    border: 1px solid variables.$gray-4;
+    background-color: transparent;
+
+    svg {
+      fill: variables.$gray-4;
+    }
+  }
 }
 
 nav div#logo {
-    padding: 20px;
-    width: 100%;
-    margin-bottom: 40px;
+  padding: 20px;
+  width: 100%;
+  margin-bottom: 40px;
 }
 
 div.section {
-    background: white;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    div.content {
-        padding: 10px;
-    }
+  background: white;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  div.content {
+    padding: 10px;
+  }
 }
 
 button {
-    cursor: pointer;
-    padding: 5px 10px;
-    border-radius: 10px;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 10px;
 }
 
 div#container {
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    width: 100%;
-    min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  width: 100%;
+  min-height: 100vh;
 }
 
 div#content-container {
-    padding: 80px 0 0 120px;
-    width: 100%;
+  padding: 80px 0 0 120px;
+  width: 100%;
 }
 
 div#content {
-    padding: 20px;
-    width: inherit;
+  padding: 20px;
+  width: inherit;
 }
 
 @media screen and (max-width: variables.$medium-breakpoint) {
-    div#content-container {
-        padding: 120px 0 0 0;
-        width: 100%;
-    }
+  div#content-container {
+    padding: 120px 0 0 0;
+    width: 100%;
+  }
 }
