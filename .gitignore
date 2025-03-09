@@ -32,7 +32,3 @@
 !/public/files/uploads/background/chiangmai-abc123.jpg
 !/public/files/uploads/background/china-456def.jpg
 ###< public file uploads ###
-
-###> config parameters ###
-/config/services.yaml
-###< config parameters ###
