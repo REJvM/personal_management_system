@@ -67,6 +67,7 @@ class BlogPostController extends AbstractController
             $newContent = strip_tags($content, CkeditorType::ALLOWED_TAGS);
             $this->_posts->addIdToHeading($newContent);
             $this->_posts->addCodeLanguageToPre($newContent);
+            $this->_posts->splitCodeIntoList($newContent);
 
             $post->setTitle($form->get('title')->getData());
             $post->setCategory($form->get('category')->getData());
