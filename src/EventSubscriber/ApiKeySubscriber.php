@@ -29,10 +29,10 @@ class ApiKeySubscriber implements EventSubscriberInterface
             strpos($request->getPathInfo(), '/api/v1/') === 0 &&
             in_array($request->getPathInfo(), ['/api/v1/', '/api/v1/openapi.json']) === false
         ) {
-            $headers = getallheaders();
+            $headers =  array_change_key_case(getallheaders(), CASE_UPPER);
             if (
-                array_key_exists('Api-Key', $headers) === false ||
-                $headers['Api-Key'] !== $this->apiKey
+                array_key_exists('API-KEY', $headers) === false ||
+                $headers['API-KEY'] !== $this->apiKey
             ) {
                 throw new AccessDeniedHttpException('This action needs a valid key!');
             }

@@ -77,6 +77,37 @@ class BlogPostRepository extends ServiceEntityRepository
         }
     }
 
+    public function splitCodeIntoList(string &$htmlString) {
+        $dom = new DOMDocument();
+        libxml_use_internal_errors(true);
+        $dom->loadHTML('<?xml encoding="UTF-8">' . $htmlString);
+        libxml_use_internal_errors(false);
+
+        $xpath = new DomXPath($dom);
+        $pres = $xpath->query("//pre");
+         /** @var DomElement $pre */
+         foreach ($pres as $pre) {
+            $node = $pre->childNodes->item(0);
+            if (isset($node->tagName) && $node->tagName === "code") {
+                $linesInArray = explode(PHP_EOL, $node->firstChild->wholeText);
+                $node->nodeValue = '';
+                
+                $lineNumber = 1;
+                foreach($linesInArray as $line) {
+                    $line = $dom->createElement('div', htmlspecialchars($line));
+                    $line->setAttribute('data-number', $lineNumber);
+                    $node->appendChild($line);
+                    $lineNumber = ++$lineNumber; 
+                }
+            }
+        }
+
+        $htmlString = null;
+        foreach ($dom->documentElement->childNodes as $n) {
+            $htmlString .= $dom->saveHTML($n);
+        }
+    }
+
     //    /**
     //     * @return BlogPost[] Returns an array of BlogPost objects
     //     */
