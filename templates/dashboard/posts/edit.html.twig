@@ -4,12 +4,21 @@
 
 {% block breathcrumbs %}/ <a href="{{ path('app_dashboard_blog_post') }}">Blog Posts</a> / <span class="current">Edit Post</span>{% endblock %}
 
+{% block headerActions %} 
+    <div class="actions">
+        <a class="button button-secondary" href="{{ path('app_dashboard_blog_post') }}">Cancel</a>
+        <button type="submit" class="button-primary">Save Post</button>
+    </div>
+{% endblock %}
+
+{% block formStart %}
+    {{ form_start(form) }}
+{% endblock %}
+
 {% block bodyDashboard %}
-    <div class="section">
+    <div class="section has-action-bar">
         <div class="content">
 
-            {{ form_start(form) }}
-        
             <fieldset>
                 <legend>Edit Post "{{ post.title }}"</legend>
                 
@@ -33,13 +42,10 @@
                         label: 'Content',
                 } %}{% endembed %}
             </fieldset>
-
-            <div class="actions">
-                <a class="button button-secondary" href="{{ path('app_dashboard_blog_post') }}">Cancel</a>
-                <button type="submit" class="button-primary">Save Post</button>
-            </div>
-
-            {{ form_end(form) }}
         </div>
     </div>
+{% endblock %}
+
+{% block formEnd %}
+    {{ form_end(form) }}
 {% endblock %}

@@ -22,7 +22,10 @@
     </head>
     <body>
         <div id="container">
-           <header>
+        
+            {% block formStart %}{% endblock %}
+
+            <header>
                 <div id="header-content">
                     <div class="header-left">
                         <button class="button button-secondary mobile-menu">
@@ -45,12 +48,17 @@
                     </div>
                 </div>
             </header>
-            <div id="mobile-header">
-                <span>{{ app.user.userProfile.name ? app.user.userProfile.name : app.user.email }}</span>
+            <div id="action-container">
+                <div id="mobile-header">
+                    <span>{{ app.user.userProfile.name ? app.user.userProfile.name : app.user.email }}</span>
+                </div>
+
+                {% block headerActions %}
+                {% endblock %}
             </div>
 
             {% include('/dashboard/shared/_navigation.html.twig') %}
-
+        
             <div id="content-container">
                 <div id="content">
                 
@@ -59,6 +67,8 @@
                     {% block bodyDashboard %}{% endblock %}
                 </div>
             </div>
+            
+            {% block formEnd %}{% endblock %}
         </div>
     </body>
 </html>
