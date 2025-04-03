@@ -42,14 +42,30 @@ button.mobile-menu {
 }
 
 div#mobile-header {
-  display: none;
-  justify-content: end;
-  padding: 10px 30px;
-  background: variables.$gray-4;
-  color: white;
+  display: flex;
+  align-items: center;
+
+  span {
+    padding: 10px 30px;
+    display: none;
+  }
+}
+
+div#action-container {
+  display: flex;
+  justify-content: space-between;
+  background: variables.$gray-5;
+  color: variables.$black;
   position: fixed;
   top: 80px;
   width: 100%;
+
+  div.actions {
+    padding: 10px 30px;
+    display: flex;
+    gap: 10px;
+    justify-content: end;
+  }
 }
 
 @media screen and (max-width: variables.$medium-breakpoint) {
@@ -58,8 +74,8 @@ div#mobile-header {
   }
 
   button.mobile-menu,
-  div#mobile-header {
-    display: flex;
+  div#mobile-header span {
+    display: block;
   }
 
   div.header-right span {

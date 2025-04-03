@@ -4,11 +4,20 @@
 
 {% block breathcrumbs %}/ <a href="{{ path('app_dashboard_user') }}">Users</a> / <span class="current">Edit User</span>{% endblock %}
 
-{% block bodyDashboard %}
-    <div class="section">
-        <div class="content">
+{% block headerActions %} 
+    <div class="actions">
+        <a class="button button-secondary" href="{{ path('app_dashboard_user') }}">Cancel</a>
+        <button type="submit" class="button-primary">Save User</button>
+    </div>
+{% endblock %}
 
-            {{ form_start(form) }}
+{% block formStart %}
+    {{ form_start(form) }}
+{% endblock %}
+
+{% block bodyDashboard %}
+    <div class="section has-action-bar">
+        <div class="content">
         
             <fieldset>
                 <legend>Edit Users "{{ user.email }}"</legend>
@@ -37,13 +46,10 @@
                         label: 'Picture',
                 } %}{% endembed %}
             </fieldset>
-
-            <div class="actions">
-                <a class="button button-secondary" href="{{ path('app_dashboard_user') }}">Cancel</a>
-                <button type="submit" class="button-primary">Save User</button>
-            </div>
-
-            {{ form_end(form) }}
         </div>
     </div>
+{% endblock %}
+
+{% block formEnd %}
+    {{ form_end(form) }}
 {% endblock %}
