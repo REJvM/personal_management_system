@@ -53,6 +53,8 @@ class ApiController extends AbstractController
         $category = (string) $request->query->get('category', null);
 
         $queryBuilder = $this->_posts->createQueryBuilder('p');
+        $queryBuilder->addOrderBy('p.modifiedOn', 'DESC');
+        $queryBuilder->addOrderBy('p.createdOn', 'DESC');
         if ($category !== null && in_array($category, BlogPost::AVAILABLE_CATEGORIES)) {
             $queryBuilder->andWhere('p.category = :val');
             $queryBuilder->setParameter('val', $category);
