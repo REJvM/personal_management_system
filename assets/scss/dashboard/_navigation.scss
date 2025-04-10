@@ -6,6 +6,7 @@ nav {
     background-color: variables.$primary-1;
     min-width: 120px;
     height: 100%;
+    z-index: 200;
 
     ul {
         list-style-type: none;

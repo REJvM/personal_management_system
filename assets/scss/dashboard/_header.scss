@@ -59,6 +59,7 @@ div#action-container {
     position: fixed;
     top: 80px;
     width: 100%;
+    z-index: 80;
 
     div.actions {
         padding: 10px 30px;
