@@ -1,237 +1,237 @@
 {
-  "openapi": "3.0.0",
-  "info": {
-    "version": "1.0.0",
-    "title": "Personal Website API",
-    "description": "A public API to send data from the management system to the blog website."
-  },
-  "servers": [
-    {
-      "url": "https://www.remcovanmensvoort.nl/api/v1"
-    }
-  ],
-  "components": {
-    "securitySchemes": {
-      "ApiKeyAuth": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "API_KEY"
-      }
-    }
-  },
-  "security": [
-    {
-      "ApiKeyAuth": []
-    }
-  ],
-  "paths": {
-    "/blog-posts": {
-      "get": {
-        "summery": "Returns a list of blog posts",
-        "parameters": [
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "Limits the number of items on a page",
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "name": "offset",
-            "in": "query",
-            "description": "Specifies the page number of the blog posts to be displayed",
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "name": "category",
-            "in": "query",
-            "description": "Limits posts to one specific category",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "projects",
-                "area",
-                "resources",
-                "archive"
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully returned a list of blog posts",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "title": {
-                        "type": "string",
-                        "example": "My first Blog post",
-                        "required": true
-                      },
-                      "category": {
-                        "type": "string",
-                        "enum": [
-                          "projects",
-                          "area",
-                          "resources",
-                          "archive"
-                        ],
-                        "example": "projects",
-                        "required": true
-                      },
-                      "last_modified_on": {
-                        "type": "string",
-                        "format": "date-time",
-                        "example": "2025-01-31T10:11:12.000Z",
-                        "required": true
-                      }
-                    }
-                  },
-                  "pagination": {
-                      "type": "array",
-                      "total": {
-                        "type": "integer",
-                        "example": 20,
-                        "required": true
-                      },
-                      "page": {
-                        "type": "integer",
-                        "example": 1,
-                        "required": true
-                      },
-                      "limit":  {
-                        "type": "integer",
-                        "example": 5,
-                        "required": true
-                      },
-                      "totalPages": {
-                        "type": "integer",
-                        "example": 4,
-                        "required": true
-                      }
-                  }
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "No route found for \"GET https://www.remcovanmensvoort.nl/api/v1/no-route\""
-                    },
-                    "statusCode": {
-                      "type": "integer",
-                      "example": 404
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
+    "openapi": "3.0.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Personal Website API",
+        "description": "A public API to send data from the management system to the blog website."
     },
-    "/blog-posts/{id}": {
-      "get": {
-        "summery": "Returns a single blog posts and content",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully returned an artist",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "title": {
-                      "type": "string",
-                      "example": "My first Blog post",
-                      "required": true
-                    },
-                    "content": {
-                      "type": "string",
-                      "example": "<h1>Congratulations on setting up the Project</h1>p>This is an example post.</p>",
-                      "required": true
-                    },
-                    "category": {
-                      "type": "string",
-                      "enum": [
-                        "projects",
-                        "area",
-                        "resources",
-                        "archive"
-                      ],
-                      "example": "projects",
-                      "required": true
-                    },
-                    "last_modified_on": {
-                      "type": "string",
-                      "format": "date-time",
-                      "example": "2025-01-31T10:11:12.000Z",
-                      "required": true
-                    },
-                    "user": {
-                      "type": "array",
-                      "items": {
-                        "name": {
-                          "type": "string",
-                          "example": "Admin"
-                        },
-                        "picture": {
-                          "type": "string",
-                          "example": "picture_name-12345678.jpg"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-         "default": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "No route found for \"GET https://www.remcovanmensvoort.nl/api/v1/no-route\""
-                    },
-                    "statusCode": {
-                      "type": "integer",
-                      "example": 404
-                    }
-                  }
-                }
-              }
-            }
-          }
+    "servers": [
+        {
+            "url": "https://www.remcovanmensvoort.nl/api/v1"
         }
-      }
+    ],
+    "components": {
+        "securitySchemes": {
+            "ApiKeyAuth": {
+                "type": "apiKey",
+                "in": "header",
+                "name": "API_KEY"
+            }
+        }
+    },
+    "security": [
+        {
+            "ApiKeyAuth": []
+        }
+    ],
+    "paths": {
+        "/blog-posts": {
+            "get": {
+                "summery": "Returns a list of blog posts",
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Limits the number of items on a page",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "description": "Specifies the page number of the blog posts to be displayed",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "category",
+                        "in": "query",
+                        "description": "Limits posts to one specific category",
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "projects",
+                                "area",
+                                "resources",
+                                "archive"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully returned a list of blog posts",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "title": {
+                                                "type": "string",
+                                                "example": "My first Blog post",
+                                                "required": true
+                                            },
+                                            "category": {
+                                                "type": "string",
+                                                "enum": [
+                                                    "projects",
+                                                    "area",
+                                                    "resources",
+                                                    "archive"
+                                                ],
+                                                "example": "projects",
+                                                "required": true
+                                            },
+                                            "last_modified_on": {
+                                                "type": "string",
+                                                "format": "date-time",
+                                                "example": "2025-01-31T10:11:12.000Z",
+                                                "required": true
+                                            }
+                                        }
+                                    },
+                                    "pagination": {
+                                        "type": "array",
+                                        "total": {
+                                            "type": "integer",
+                                            "example": 20,
+                                            "required": true
+                                        },
+                                        "page": {
+                                            "type": "integer",
+                                            "example": 1,
+                                            "required": true
+                                        },
+                                        "limit": {
+                                            "type": "integer",
+                                            "example": 5,
+                                            "required": true
+                                        },
+                                        "totalPages": {
+                                            "type": "integer",
+                                            "example": 4,
+                                            "required": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No route found for \"GET https://www.remcovanmensvoort.nl/api/v1/no-route\""
+                                        },
+                                        "statusCode": {
+                                            "type": "integer",
+                                            "example": 404
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/blog-posts/{id}": {
+            "get": {
+                "summery": "Returns a single blog posts and content",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully returned an artist",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "title": {
+                                            "type": "string",
+                                            "example": "My first Blog post",
+                                            "required": true
+                                        },
+                                        "content": {
+                                            "type": "string",
+                                            "example": "<h1>Congratulations on setting up the Project</h1>p>This is an example post.</p>",
+                                            "required": true
+                                        },
+                                        "category": {
+                                            "type": "string",
+                                            "enum": [
+                                                "projects",
+                                                "area",
+                                                "resources",
+                                                "archive"
+                                            ],
+                                            "example": "projects",
+                                            "required": true
+                                        },
+                                        "last_modified_on": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2025-01-31T10:11:12.000Z",
+                                            "required": true
+                                        },
+                                        "user": {
+                                            "type": "array",
+                                            "items": {
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Admin"
+                                                },
+                                                "picture": {
+                                                    "type": "string",
+                                                    "example": "picture_name-12345678.jpg"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No route found for \"GET https://www.remcovanmensvoort.nl/api/v1/no-route\""
+                                        },
+                                        "statusCode": {
+                                            "type": "integer",
+                                            "example": 404
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
-  }
 }

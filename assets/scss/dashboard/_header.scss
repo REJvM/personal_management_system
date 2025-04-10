@@ -1,84 +1,84 @@
 @use "variables";
 
 header {
-  position: fixed;
-  width: 100%;
-  padding-left: 120px;
-  z-index: 100;
+    position: fixed;
+    width: 100%;
+    padding-left: 120px;
+    z-index: 100;
 }
 
 div#header-content {
-  background-color: white;
-  padding: 20px 30px;
-  display: flex;
-  justify-content: space-between;
-
-  div.header-left {
+    background-color: white;
+    padding: 20px 30px;
     display: flex;
-    flex-direction: row;
-    gap: 20px;
+    justify-content: space-between;
 
-    div.breathcrumbs {
-      font-size: 0.7em;
-      a {
-        color: variables.$black;
-      }
-      span {
-        color: variables.$primary-1;
-      }
+    div.header-left {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+
+        div.breathcrumbs {
+            font-size: 0.7em;
+            a {
+                color: variables.$black;
+            }
+            span {
+                color: variables.$primary-1;
+            }
+        }
     }
-  }
 
-  div.header-right {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
+    div.header-right {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
 }
 
 button.mobile-menu {
-  display: none;
-  align-items: center;
+    display: none;
+    align-items: center;
 }
 
 div#mobile-header {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 
-  span {
-    padding: 10px 30px;
-    display: none;
-  }
+    span {
+        padding: 10px 30px;
+        display: none;
+    }
 }
 
 div#action-container {
-  display: flex;
-  justify-content: space-between;
-  background: variables.$gray-5;
-  color: variables.$black;
-  position: fixed;
-  top: 80px;
-  width: 100%;
-
-  div.actions {
-    padding: 10px 30px;
     display: flex;
-    gap: 10px;
-    justify-content: end;
-  }
+    justify-content: space-between;
+    background: variables.$gray-5;
+    color: variables.$black;
+    position: fixed;
+    top: 80px;
+    width: 100%;
+
+    div.actions {
+        padding: 10px 30px;
+        display: flex;
+        gap: 10px;
+        justify-content: end;
+    }
 }
 
 @media screen and (max-width: variables.$medium-breakpoint) {
-  header {
-    padding: 0;
-  }
+    header {
+        padding: 0;
+    }
 
-  button.mobile-menu,
-  div#mobile-header span {
-    display: block;
-  }
+    button.mobile-menu,
+    div#mobile-header span {
+        display: block;
+    }
 
-  div.header-right span {
-    display: none;
-  }
+    div.header-right span {
+        display: none;
+    }
 }
