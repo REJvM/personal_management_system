@@ -1,112 +1,112 @@
 @use "variables";
 
 fieldset {
-  border: none;
-  padding: 0;
-  margin: 0 0 20px 0;
+    border: none;
+    padding: 0;
+    margin: 0 0 20px 0;
 }
 
 legend {
-  margin-bottom: 20px;
-  width: 100%;
-  border-bottom: 1px solid variables.$primary-1;
+    margin-bottom: 20px;
+    width: 100%;
+    border-bottom: 1px solid variables.$primary-1;
 }
 
 label,
 small {
-  margin: 0 10px 5px;
+    margin: 0 10px 5px;
 }
 
 input:not([type="file"]),
 select {
-  padding: 5px 10px;
-  border: none;
-  background: none;
-  border-left: 4px solid transparent;
-  border-bottom: 2px solid variables.$black;
-  &:focus {
-    outline: none;
-    border-left: 4px solid variables.$primary-1;
-  }
+    padding: 5px 10px;
+    border: none;
+    background: none;
+    border-left: 4px solid transparent;
+    border-bottom: 2px solid variables.$black;
+    &:focus {
+        outline: none;
+        border-left: 4px solid variables.$primary-1;
+    }
 }
 
 textarea {
-  padding: 5px 10px;
+    padding: 5px 10px;
 }
 
 input[type="checkbox"] + label,
 select,
 option {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 div.field-row {
-  display: flex;
-  flex-direction: column;
-  margin: 0 10px 20px 10px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 10px 20px 10px;
 
-  div:not(.field-errors) label {
-    margin: 0 10px;
-  }
+    div:not(.field-errors) label {
+        margin: 0 10px;
+    }
 
-  &:has(input[type="checkbox"]) {
-    flex-direction: row;
-    label,
-    input {
-      cursor: pointer;
+    &:has(input[type="checkbox"]) {
+        flex-direction: row;
+        label,
+        input {
+            cursor: pointer;
+        }
     }
-  }
-  &:has(input[type="file"]) {
-    label,
-    input {
-      cursor: pointer;
+    &:has(input[type="file"]) {
+        label,
+        input {
+            cursor: pointer;
+        }
     }
-  }
 }
 
 div.field-errors {
-  ul {
-    margin-left: 10px;
-    padding: 0;
-    list-style-type: none;
-    color: variables.$error-1;
+    ul {
+        margin-left: 10px;
+        padding: 0;
+        list-style-type: none;
+        color: variables.$error-1;
 
-    li::before {
-      content: "Invalid";
-      background-color: variables.$error-1;
-      color: white;
-      padding: 2px 4px;
-      border-radius: 8px;
-      font-size: 0.7em;
-      margin-right: 10px;
+        li::before {
+            content: "Invalid";
+            background-color: variables.$error-1;
+            color: white;
+            padding: 2px 4px;
+            border-radius: 8px;
+            font-size: 0.7em;
+            margin-right: 10px;
+        }
     }
-  }
 }
 
 ul.links {
-  margin: 10px;
-  padding: 0;
-  border-left: 4px solid variables.$primary-1;
+    margin: 10px;
+    padding: 0;
+    border-left: 4px solid variables.$primary-1;
 
-  li {
-    list-style: none;
-    padding: 5px 10px;
+    li {
+        list-style: none;
+        padding: 5px 10px;
 
-    div {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
+        div {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
 
-      input {
-        width: 100%;
-      }
+            input {
+                width: 100%;
+            }
 
-      div label {
-        display: none;
-      }
-      div:nth-of-type(3) {
-        flex-grow: 2;
-      }
+            div label {
+                display: none;
+            }
+            div:nth-of-type(3) {
+                flex-grow: 2;
+            }
+        }
     }
-  }
 }

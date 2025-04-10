@@ -16,6 +16,13 @@ class FileUploadRepository extends ServiceEntityRepository
         parent::__construct($registry, FileUpload::class);
     }
 
+    public function notBackgroundImages() {
+        $this->createQueryBuilder('f')
+            ->where('f.background = 0')
+            ->getQuery()
+            ->execute();
+    }
+
     //    /**
     //     * @return FileUpload[] Returns an array of FileUpload objects
     //     */

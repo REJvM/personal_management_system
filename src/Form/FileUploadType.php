@@ -25,12 +25,13 @@ class FileUploadType extends AbstractType
                 'required' => false,
                 'constraints' => [
                     new File([
-                        'maxSize' => '1024k',
+                        'maxSize' => '3072k',
                         'mimeTypes' => [
                             'image/jpeg',
-                            'image/png'
+                            'image/png',
+                            'image/gif'
                         ],
-                        'mimeTypesMessage' => 'Please upload a valid JPG/PNG image'
+                        'mimeTypesMessage' => 'Please upload a valid (JPG/PNG/GIF) image that is smaller than 3MB'
                     ])
                 ]
             ])

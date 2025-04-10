@@ -24,6 +24,9 @@ class FileUpload
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
+    #[ORM\Column]
+    private ?bool $background = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -55,7 +58,7 @@ class FileUpload
 
     public function getName(): ?string
     {
-        return substr($this->name, 0, strpos($this->name, '-'));
+        return substr($this->name, 0, strrpos($this->name, '-'));
     }
 
     public function getFileName(): ?string
@@ -66,6 +69,18 @@ class FileUpload
     public function setName(string $name): static
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function isBackground(): ?bool
+    {
+        return $this->background;
+    }
+
+    public function setBackground(bool $background): static
+    {
+        $this->background = $background;
 
         return $this;
     }

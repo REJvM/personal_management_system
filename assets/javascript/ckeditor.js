@@ -33,8 +33,8 @@ import {
     TableToolbar,
     TextTransformation,
     Underline,
-    Undo
-} from 'https://cdn.ckeditor.com/ckeditor5/43.3.1/ckeditor5.js';
+    Undo,
+} from "https://cdn.ckeditor.com/ckeditor5/43.3.1/ckeditor5.js";
 
 /* get editor div to retrieve data attributes */
 const editorBlock = document.querySelector("div#editor");
@@ -42,32 +42,32 @@ const editorBlock = document.querySelector("div#editor");
 const editorConfig = {
     toolbar: {
         items: [
-            'undo',
-            'redo',
-            '|',
-            'findAndReplace',
-            '|',
-            'heading',
-            '|',
-            'bold',
-            'italic',
-            'underline',
-            'strikethrough',
-            'code',
-            '|',
-            'specialCharacters',
-            'link',
-            'insertTable',
-            'highlight',
-            'blockQuote',
-            'codeBlock',
-            '|',
-            'bulletedList',
-            'numberedList',
-            'outdent',
-            'indent'
+            "undo",
+            "redo",
+            "|",
+            "findAndReplace",
+            "|",
+            "heading",
+            "|",
+            "bold",
+            "italic",
+            "underline",
+            "strikethrough",
+            "code",
+            "|",
+            "specialCharacters",
+            "link",
+            "insertTable",
+            "highlight",
+            "blockQuote",
+            "codeBlock",
+            "|",
+            "bulletedList",
+            "numberedList",
+            "outdent",
+            "indent",
         ],
-        shouldNotGroupWhenFull: false
+        shouldNotGroupWhenFull: false,
     },
     plugins: [
         AccessibilityHelp,
@@ -103,102 +103,113 @@ const editorConfig = {
         TableToolbar,
         TextTransformation,
         Underline,
-        Undo
+        Undo,
     ],
     codeBlock: {
         languages: [
-            { language: 'plaintext', label: 'Plain text' }, 
-            { language: 'css', label: 'CSS' },
-            { language: 'html', label: 'HTML' },
-            { language: 'javascript', label: 'JavaScript' },
-            { language: 'php', label: 'PHP' },
-            { language: 'python', label: 'Python' },
-            { language: 'ruby', label: 'Ruby' },
-            { language: 'typescript', label: 'TypeScript' },
-            { language: 'xml', label: 'XML' }
-        ]
+            { language: "plaintext", label: "Plain text" },
+            { language: "css", label: "CSS" },
+            { language: "html", label: "HTML" },
+            { language: "javascript", label: "JavaScript" },
+            { language: "php", label: "PHP" },
+            { language: "python", label: "Python" },
+            { language: "ruby", label: "Ruby" },
+            { language: "typescript", label: "TypeScript" },
+            { language: "xml", label: "XML" },
+        ],
     },
-    blockToolbar: ['bold', 'italic', '|', 'link', 'insertTable', '|', 'bulletedList', 'numberedList', 'outdent', 'indent'],
+    blockToolbar: [
+        "bold",
+        "italic",
+        "|",
+        "link",
+        "insertTable",
+        "|",
+        "bulletedList",
+        "numberedList",
+        "outdent",
+        "indent",
+    ],
     heading: {
         options: [
             {
-                model: 'paragraph',
-                title: 'Paragraph',
-                class: 'ck-heading_paragraph'
+                model: "paragraph",
+                title: "Paragraph",
+                class: "ck-heading_paragraph",
             },
             {
-                model: 'heading2',
-                view: 'h2',
-                title: 'Heading 2',
-                class: 'ck-heading_heading2'
+                model: "heading2",
+                view: "h2",
+                title: "Heading 2",
+                class: "ck-heading_heading2",
             },
             {
-                model: 'heading3',
-                view: 'h3',
-                title: 'Heading 3',
-                class: 'ck-heading_heading3'
+                model: "heading3",
+                view: "h3",
+                title: "Heading 3",
+                class: "ck-heading_heading3",
             },
             {
-                model: 'heading4',
-                view: 'h4',
-                title: 'Heading 4',
-                class: 'ck-heading_heading4'
+                model: "heading4",
+                view: "h4",
+                title: "Heading 4",
+                class: "ck-heading_heading4",
             },
             {
-                model: 'heading5',
-                view: 'h5',
-                title: 'Heading 5',
-                class: 'ck-heading_heading5'
+                model: "heading5",
+                view: "h5",
+                title: "Heading 5",
+                class: "ck-heading_heading5",
             },
             {
-                model: 'heading6',
-                view: 'h6',
-                title: 'Heading 6',
-                class: 'ck-heading_heading6'
-            }
-        ]
+                model: "heading6",
+                view: "h6",
+                title: "Heading 6",
+                class: "ck-heading_heading6",
+            },
+        ],
     },
     initialData: editorBlock.dataset.initialdata,
     link: {
         addTargetToExternalLinks: true,
-        defaultProtocol: 'https://',
+        defaultProtocol: "https://",
         decorators: {
             toggleDownloadable: {
-                mode: 'manual',
-                label: 'Downloadable',
+                mode: "manual",
+                label: "Downloadable",
                 attributes: {
-                    download: 'file'
-                }
-            }
-        }
+                    download: "file",
+                },
+            },
+        },
     },
     list: {
         properties: {
             styles: true,
             startIndex: true,
-            reversed: true
-        }
+            reversed: true,
+        },
     },
-    placeholder: 'Type or paste your content here!',
+    placeholder: "Type or paste your content here!",
     table: {
-        contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells']
-    }
+        contentToolbar: ["tableColumn", "tableRow", "mergeTableCells"],
+    },
 };
 
-BalloonEditor.create(document.querySelector('#editor'), editorConfig)
-    .then( newEditor => {
+BalloonEditor.create(document.querySelector("#editor"), editorConfig)
+    .then((newEditor) => {
         editor = newEditor;
-    } )
-    .catch( error => {
-        console.error( error );
-    } );
+    })
+    .catch((error) => {
+        console.error(error);
+    });
 
 const form = document.querySelector("form[name='blog_post']");
 /* when form is submitted */
-form.addEventListener('submit', (event) => {
+form.addEventListener("submit", (event) => {
     event.preventDefault();
     /* Add contents of ckeditor to the hidden field to submit with the form. */
     const editorData = editor.getData();
-    document.querySelector('input#editor').value = editorData;
+    document.querySelector("input#editor").value = editorData;
     form.submit();
 });
