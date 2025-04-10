@@ -159,7 +159,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successfully returned an artist",
+                        "description": "Successfully returned an blog post",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -186,45 +186,72 @@
                                             "example": "projects",
                                             "required": true
                                         },
-                                        "last_modified_on": {
-                                            "type": "string",
-                                            "format": "date-time",
-                                            "example": "2025-01-31T10:11:12.000Z",
-                                            "required": true
-                                        },
-                                        "user": {
-                                            "type": "array",
+                                        "links": {
+                                            "type": "Array",
                                             "items": {
+                                                "url": {
+                                                    "type": "string",
+                                                    "example": "http://www.github.com",
+                                                    "required": true
+                                                },
+                                                "icon": {
+                                                    "type": "string",
+                                                    "enum": [
+                                                        "Github",
+                                                        "Codepen",
+                                                        "Behance",
+                                                        "Youtube",
+                                                        "Facebook",
+                                                        "X"
+                                                    ],
+                                                    "example": "Github",
+                                                    "required": true
+                                                },
                                                 "name": {
                                                     "type": "string",
-                                                    "example": "Admin"
-                                                },
-                                                "picture": {
-                                                    "type": "string",
-                                                    "example": "picture_name-12345678.jpg"
+                                                    "example": "Github link"
                                                 }
+                                            }
+                                        }
+                                    },
+                                    "last_modified_on": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2025-01-31T10:11:12.000Z",
+                                        "required": true
+                                    },
+                                    "user": {
+                                        "type": "array",
+                                        "items": {
+                                            "name": {
+                                                "type": "string",
+                                                "example": "Admin"
+                                            },
+                                            "picture": {
+                                                "type": "string",
+                                                "example": "picture_name-12345678.jpg"
                                             }
                                         }
                                     }
                                 }
                             }
                         }
-                    },
-                    "default": {
-                        "description": "Unexpected error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "No route found for \"GET https://www.remcovanmensvoort.nl/api/v1/no-route\""
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 404
-                                        }
+                    }
+                },
+                "default": {
+                    "description": "Unexpected error",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "message": {
+                                        "type": "string",
+                                        "example": "No route found for \"GET https://www.remcovanmensvoort.nl/api/v1/no-route\""
+                                    },
+                                    "statusCode": {
+                                        "type": "integer",
+                                        "example": 404
                                     }
                                 }
                             }

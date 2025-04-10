@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\FileUpload;
 use App\Entity\UserProfile;
+use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -20,7 +22,11 @@ class UserProfileType extends AbstractType
                 'choice_label' => 'name',
                 'multiple' => false,
                 'expanded' => false,
-                'required' => false
+                'required' => false,
+                'query_builder' => function (EntityRepository $er): QueryBuilder {
+                    return $er->createQueryBuilder('u')
+                        ->where('u.background = 0');
+                },
             ]);
     }
 

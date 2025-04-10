@@ -86,6 +86,7 @@ class FileController extends AbstractController
             $fileDatabaseEntry->setName($newFileName);
             $fileDatabaseEntry->setCreatedOn(new DateTime());
             $fileDatabaseEntry->setCreatedBy($this->getUser());
+            $fileDatabaseEntry->setBackground($form->get('loginBackground')->getData());
             $entityManager->persist($fileDatabaseEntry);
             $entityManager->flush();
 

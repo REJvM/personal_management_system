@@ -30,6 +30,11 @@
                 {% embed 'dashboard/shared/_field.html.twig' with { 
                         field: form.category,
                         label: 'Category',
+                } %}{% endembed %}           
+                
+                {% embed 'dashboard/shared/_field.html.twig' with { 
+                        field: form.image,
+                        label: 'Image',
                 } %}{% endembed %}
 
                 {% embed 'dashboard/shared/_field.html.twig' with { 

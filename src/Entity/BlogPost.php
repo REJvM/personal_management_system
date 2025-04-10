@@ -70,6 +70,9 @@ class BlogPost
     #[ORM\OneToMany(targetEntity: BlogPostLink::class, mappedBy: 'blogPost')]
     private Collection $links;
 
+    #[ORM\ManyToOne]
+    private ?FileUpload $image = null;
+
     public function __construct()
     {
         $this->links = new ArrayCollection();
@@ -190,6 +193,18 @@ class BlogPost
                 $link->setBlogPost(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImage(): ?FileUpload
+    {
+        return $this->image;
+    }
+
+    public function setImage(?FileUpload $image): static
+    {
+        $this->image = $image;
 
         return $this;
     }

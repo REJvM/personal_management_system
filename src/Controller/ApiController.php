@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Pagination;
 use App\Entity\User;
 use App\Entity\BlogPost;
+use App\Entity\FileUpload;
 use App\Repository\BlogPostRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -110,8 +111,6 @@ class ApiController extends AbstractController
             $singlePostLinks[] = $linkInfo;
         }
 
-        $user = $blogPost->getCreatedBy();
-
         $parameters = [
             'title' => $blogPost->getTitle(),
             'content' => $blogPost->getContent(),
@@ -120,6 +119,7 @@ class ApiController extends AbstractController
             'last_modified_on' => $lastModifiedOn,
         ];
 
+        $user = $blogPost->getCreatedBy();
         if ($user instanceof User) {
             $userProfile = $user->getUserProfile();
             $parameters['user'] = [];
@@ -127,6 +127,12 @@ class ApiController extends AbstractController
             if ($userProfile->getPicture() !== null) {
                 $parameters['user']['picture'] = $userProfile->getPicture()->getFileName();
             }
+        }
+
+        $image = $blogPost->getImage();
+        if($image instanceof FileUpload)
+        {
+            $parameters['image'] =  $image->getFileName();
         }
 
         return $this->json($parameters);
